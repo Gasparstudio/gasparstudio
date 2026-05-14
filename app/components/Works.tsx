@@ -313,6 +313,27 @@ export default function Works() {
   const trackRef = useRef<HTMLDivElement>(null);
   const isMobileRef = useRef(false);
 
+  const [imgIndices, setImgIndices] = useState<number[]>(projects.map(() => 0));
+
+  useEffect(() => {
+    const cardOrder = projects
+      .map((p, i) => ({ i, len: p.images?.length ?? 0 }))
+      .filter(({ len }) => len > 1)
+      .map(({ i }) => i);
+    if (cardOrder.length === 0) return;
+    let pointer = 0;
+    const interval = setInterval(() => {
+      const cardIdx = cardOrder[pointer];
+      setImgIndices(prev => {
+        const next = [...prev];
+        next[cardIdx] = (next[cardIdx] + 1) % projects[cardIdx].images!.length;
+        return next;
+      });
+      pointer = (pointer + 1) % cardOrder.length;
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
+
   useEffect(() => {
     const checkMobile = () => {
       isMobileRef.current = window.innerWidth < 768;
@@ -471,10 +492,10 @@ export default function Works() {
               paddingRight: 'var(--page-margin)',
             }}
           >
-            {projects.map((project) =>
+            {projects.map((project, i) =>
               project.title === null
                 ? <VoidCard key={project.index} index={project.index} />
-                : <ProjectCard key={project.index} project={project} />
+                : <ProjectCard key={project.index} project={project} imgIndex={imgIndices[i]} />
             )}
           </div>
         </div>
@@ -584,7 +605,7 @@ export default function Works() {
               >
                 {project.title === null
                   ? <VoidCard index={project.index} />
-                  : <ProjectCard project={project} />
+                  : <ProjectCard project={project} imgIndex={imgIndices[projects.indexOf(project)]} />
                 }
               </div>
             ))}

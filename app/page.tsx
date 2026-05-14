@@ -8,6 +8,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ScrollProgress from './components/ScrollProgress';
 import CustomCursor from './components/CustomCursor';
+import BackgroundOrb from './components/BackgroundOrb';
 
 export default function Home() {
   return (
@@ -20,7 +21,10 @@ export default function Home() {
       <Nav />
 
       {/* Main content */}
-      <main>
+      <main style={{ position: 'relative' }}>
+        {/* Background blobs — hero only */}
+        <BackgroundOrb />
+
         {/* 01 · Hero */}
         <Hero />
 

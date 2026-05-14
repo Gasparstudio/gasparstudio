@@ -1,31 +1,55 @@
 ﻿'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const projects = [
   {
     index: '01',
-    title: 'Studio Noir',
+    title: 'Mozzano',
     category: 'Brand Identity',
-    year: '2025',
+    year: '2026',
     gradient: 'linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 40%, #2a1f1a 100%)',
     accentColor: '#F0EDE8',
+    images: [
+      '/works/mozzano/Artboard%201.png',
+      '/works/mozzano/Artboard%203.png',
+      '/works/mozzano/Artboard%206.png',
+      '/works/mozzano/Artboard%207.png',
+      '/works/mozzano/Artboard%208.png',
+      '/works/mozzano/Artboard%209.png',
+      '/works/mozzano/Artboard%204.png',
+      '/works/mozzano/Artboard%205.png',
+    ],
   },
   {
     index: '02',
-    title: 'Volta Energy',
-    category: 'Visual System',
-    year: '2024',
+    title: 'FACE',
+    category: 'Logo Design',
+    year: '2026',
     gradient: 'linear-gradient(135deg, #E8551A 0%, #8B2E08 40%, #1a0d08 100%)',
     accentColor: '#E8551A',
+    images: [
+      '/works/face/Artboard%201-03.png',
+      '/works/face/Artboard%201-05.png',
+      '/works/face/Artboard%201-07.png',
+      '/works/face/Artboard%201-09.png',
+      '/works/face/Artboard%201-11.png',
+      '/works/face/Artboard%201-14.png',
+    ],
   },
   {
     index: '03',
-    title: 'Bloom Organic',
-    category: 'Packaging',
-    year: '2025',
+    title: 'Kámfor',
+    category: 'Brand Identity',
+    year: '2022',
     gradient: 'linear-gradient(135deg, #1a2e1a 0%, #0d1a0d 40%, #2a3a1a 100%)',
     accentColor: '#6BAF6B',
+    images: [
+      '/works/kamfor/1.png',
+      '/works/kamfor/001.png',
+      '/works/kamfor/002.png',
+      '/works/kamfor/003.png',
+    ],
   },
   {
     index: '04',
@@ -46,11 +70,20 @@ const projects = [
 ];
 
 interface ProjectCardProps {
-  project: typeof projects[0];
+  project: typeof projects[0] & { images?: string[] };
 }
 
 function ProjectCard({ project }: ProjectCardProps) {
   const arrowRef = useRef<HTMLSpanElement>(null);
+  const [imgIndex, setImgIndex] = useState(0);
+
+  useEffect(() => {
+    if (!project.images || project.images.length <= 1) return;
+    const interval = setInterval(() => {
+      setImgIndex(i => (i + 1) % project.images!.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [project.images]);
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
@@ -76,43 +109,64 @@ function ProjectCard({ project }: ProjectCardProps) {
       onMouseLeave={handleMouseLeave}
       style={{
         flexShrink: 0,
-        width: 'clamp(300px, 38vw, 520px)',
+        width: 'clamp(280px, 34vw, 480px)',
+        aspectRatio: '4 / 5',
         borderRadius: 'var(--card-radius-lg)',
         overflow: 'hidden',
         border: '1px solid var(--color-border)',
         transition: 'transform 400ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 400ms ease',
         cursor: 'none',
         position: 'relative',
-        height: 'clamp(360px, 45vw, 560px)',
         background: project.gradient,
       }}
       data-cursor-expand
     >
-      {/* Placeholder decorative elements */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '55%',
-          height: '55%',
-          borderRadius: '50%',
-          border: `1px solid ${project.accentColor}22`,
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '28%',
-          height: '28%',
-          borderRadius: '50%',
-          border: `1px solid ${project.accentColor}44`,
-        }}
-      />
+      {/* Images (cycling) or placeholder */}
+      {project.images ? (
+        project.images.map((src, i) => (
+          <img
+            key={src}
+            src={src}
+            alt=""
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              opacity: i === imgIndex ? 1 : 0,
+              transition: 'opacity 600ms ease',
+            }}
+          />
+        ))
+      ) : (
+        <>
+          <div
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '55%',
+              height: '55%',
+              borderRadius: '50%',
+              border: `1px solid ${project.accentColor}22`,
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '28%',
+              height: '28%',
+              borderRadius: '50%',
+              border: `1px solid ${project.accentColor}44`,
+            }}
+          />
+        </>
+      )}
 
       {/* Bottom gradient overlay */}
       <div
@@ -226,28 +280,48 @@ export default function Works() {
 
         if (!track || !section || !sticky) return;
 
-        // Calculate how far we need to scroll horizontally
+        // Scroll all cards into view (last card near right edge)
         const getScrollAmount = () => {
           const trackWidth = track.scrollWidth;
           const viewWidth = sticky.offsetWidth;
           return -(trackWidth - viewWidth + 80);
         };
 
-        const tween = gsapInstance.to(track, {
-          x: getScrollAmount,
-          ease: 'none',
+        // Extra scroll to bring last card to horizontal center
+        const getCenterOffset = () => {
+          const viewWidth = sticky.offsetWidth;
+          const approxCardWidth = Math.min(Math.max(280, viewWidth * 0.34), 480);
+          return Math.max(0, viewWidth / 2 - approxCardWidth / 2 - 80);
+        };
+
+        const startPause = 500;
+        const endPause   = 800;
+        const scrollAmt  = getScrollAmount();
+        const centerOff  = getCenterOffset();
+        const finalX     = scrollAmt - centerOff;
+
+        const tl = gsapInstance.timeline({
           scrollTrigger: {
             trigger: section,
             start: 'top top',
-            end: () => `+=${Math.abs(getScrollAmount())}`,
+            end: () => `+=${Math.abs(getScrollAmount()) + getCenterOffset() + startPause + endPause}`,
             pin: true,
             scrub: 1,
             invalidateOnRefresh: true,
           },
         });
 
+        // Phase 1: belépő pause
+        tl.to(track, { x: 0, duration: startPause, ease: 'none' })
+        // Phase 2: fő vízszintes scroll
+          .to(track, { x: scrollAmt, ease: 'none', duration: Math.abs(scrollAmt) })
+        // Phase 3: utolsó kártya középre
+          .to(track, { x: finalX, ease: 'none', duration: centerOff || 1 })
+        // Phase 4: kilépő pause
+          .to(track, { x: finalX, duration: endPause, ease: 'none' });
+
         return () => {
-          tween.kill();
+          tl.kill();
           (ScrollTrigger as { getAll: () => { kill: () => void }[] }).getAll().forEach((t: { kill: () => void }) => t.kill());
         };
       } catch (err) {

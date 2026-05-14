@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import BackgroundOrb from "./components/BackgroundOrb";
 import "./globals.css";
 
 const sora = localFont({
@@ -46,6 +47,7 @@ export default function RootLayout({
       className={`${sora.variable} ${dmSans.variable}`}
     >
       <body>
+        <BackgroundOrb />
         {children}
       </body>
     </html>

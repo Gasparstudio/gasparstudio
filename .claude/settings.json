@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "powershell",
+            "command": "$f='C:\\Users\\gaspa\\AppData\\Local\\Temp\\claude_task_counter.txt'; $git='C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\TeamFoundation\\Team Explorer\\Git\\cmd\\git.exe'; $n=0; if(Test-Path $f){$n=[int](Get-Content $f -Raw).Trim()}; $n++; if($n -ge 10){$n=0; Push-Location 'D:\\Claude\\gaspar_design'; & $git add -A; & $git diff --cached --quiet; if($LASTEXITCODE -ne 0){$ts=Get-Date -Format 'yyyy-MM-dd HH:mm'; & $git commit -m \"auto: checkpoint $ts\"}; & $git push; Pop-Location}; Set-Content $f $n -Encoding UTF8",
+            "async": true,
+            "statusMessage": "Git checkpoint check..."
+          }
+        ]
+      }
+    ]
+  }
+}

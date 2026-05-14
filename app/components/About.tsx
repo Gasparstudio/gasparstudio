@@ -1,13 +1,21 @@
 ﻿'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const tools = ['Figma', 'Illustrator', 'After Effects', 'Photoshop'];
+
+const stats = [
+  { target: 5, suffix: '+', label: 'Év tapasztalat' },
+  { target: 40, suffix: '+', label: 'Projekt' },
+  { target: 12, suffix: '+', label: 'Ügyfél' },
+];
 
 export default function About() {
   const containerRef = useRef<HTMLElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const [counts, setCounts] = useState(stats.map(() => 0));
 
   useEffect(() => {
     const elements = [leftRef.current, rightRef.current];
@@ -43,6 +51,29 @@ export default function About() {
       observer.observe(el);
     });
 
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const el = statsRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        const duration = 1200;
+        const start = performance.now();
+        const tick = (now: number) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - progress, 3);
+          setCounts(stats.map(s => Math.round(s.target * ease)));
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
@@ -97,97 +128,20 @@ export default function About() {
               aspectRatio: '4 / 5',
               maxWidth: '400px',
               borderRadius: 'var(--card-radius-lg)',
-              background: 'linear-gradient(160deg, var(--color-surface-alt) 0%, var(--color-surface) 100%)',
               border: '1px solid var(--color-border)',
-              position: 'relative',
               overflow: 'hidden',
             }}
           >
-            {/* Decorative geometric shapes */}
-            <div
+            <img
+              src="/works/Void/void1.png"
+              alt=""
               style={{
-                position: 'absolute',
-                top: '30%',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                width: '80px',
-                height: '80px',
-                borderRadius: '50%',
-                border: '1px solid var(--color-border)',
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                display: 'block',
               }}
             />
-            <div
-              style={{
-                position: 'absolute',
-                top: 'calc(30% + 20px)',
-                left: 'calc(50% + 20px)',
-                width: '40px',
-                height: '40px',
-                borderRadius: '8px',
-                background: 'var(--color-accent-muted)',
-                border: '1px solid var(--color-accent)',
-                transform: 'rotate(15deg)',
-              }}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '24px',
-                left: '24px',
-                right: '24px',
-                padding: '16px',
-                borderRadius: 'var(--card-radius)',
-                background: 'rgba(10,10,10,0.7)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid var(--color-border)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '12px',
-              }}
-            >
-              <div
-                style={{
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '50%',
-                  background: 'var(--color-accent)',
-                  flexShrink: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontFamily: 'var(--font-display)',
-                  fontSize: '14px',
-                  color: '#0A0A0A',
-                  fontWeight: 700,
-                }}
-              >
-                G
-              </div>
-              <div>
-                <p
-                  style={{
-                    fontFamily: 'var(--font-body)',
-                    fontSize: '13px',
-                    fontWeight: 600,
-                    color: 'var(--color-text-primary)',
-                    margin: 0,
-                    lineHeight: 1.2,
-                  }}
-                >
-                  Gaspar
-                </p>
-                <p
-                  style={{
-                    fontFamily: 'var(--font-body)',
-                    fontSize: 'var(--text-micro)',
-                    color: 'var(--color-text-secondary)',
-                    margin: '2px 0 0',
-                  }}
-                >
-                  Brand Designer · Budapest
-                </p>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -262,6 +216,7 @@ export default function About() {
 
           {/* Stats row */}
           <div
+            ref={statsRef}
             style={{
               display: 'flex',
               gap: '40px',
@@ -269,11 +224,7 @@ export default function About() {
               borderTop: '1px solid var(--color-border)',
             }}
           >
-            {[
-              { value: '5+', label: 'Év tapasztalat' },
-              { value: '40+', label: 'Projekt' },
-              { value: '12+', label: 'Ügyfél' },
-            ].map((stat) => (
+            {stats.map((stat, i) => (
               <div key={stat.label}>
                 <p
                   style={{
@@ -284,7 +235,7 @@ export default function About() {
                     lineHeight: 1,
                   }}
                 >
-                  {stat.value}
+                  {counts[i]}{stat.suffix}
                 </p>
                 <p
                   style={{

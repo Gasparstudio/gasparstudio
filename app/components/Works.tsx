@@ -535,7 +535,7 @@ export default function Works() {
                 background: 'var(--color-accent)',
               }}
             />
-            03 · Munkák
+            03 · Munkak
           </div>
           <h2
             style={{
@@ -637,7 +637,7 @@ export default function Works() {
                 background: 'var(--color-accent)',
               }}
             />
-            03 · Munkák
+            03 · Munkak
           </div>
           <h2
             style={{

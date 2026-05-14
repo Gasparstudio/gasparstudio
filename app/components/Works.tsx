@@ -39,6 +39,19 @@ const projects = [
   },
   {
     index: '03',
+    title: 'Void',
+    category: 'ERR_0x4F · [REDACTED]',
+    year: '????',
+    gradient: 'linear-gradient(135deg, #0a0a0a 0%, #111111 100%)',
+    accentColor: '#F0EDE8',
+    images: [
+      '/works/Void/void1.png',
+      '/works/Void/void2.png',
+      '/works/Void/001.png',
+    ],
+  },
+  {
+    index: '04',
     title: 'Kámfor',
     category: 'Brand Identity',
     year: '2022',
@@ -49,18 +62,6 @@ const projects = [
       '/works/kamfor/001.png',
       '/works/kamfor/002.png',
       '/works/kamfor/003.png',
-    ],
-  },
-  {
-    index: '04',
-    title: 'Void',
-    category: 'Fashion Brand',
-    year: '2025',
-    gradient: 'linear-gradient(135deg, #0a0a0a 0%, #111111 100%)',
-    accentColor: '#F0EDE8',
-    images: [
-      '/works/Void/enaa.png',
-      '/works/Void/k%C3%A9z.png',
     ],
   },
   {
@@ -137,19 +138,11 @@ function VoidCard({ index }: { index: string }) {
 
 interface ProjectCardProps {
   project: typeof projects[0] & { images?: string[] };
+  imgIndex: number;
 }
 
-function ProjectCard({ project }: ProjectCardProps) {
+function ProjectCard({ project, imgIndex }: ProjectCardProps) {
   const arrowRef = useRef<HTMLSpanElement>(null);
-  const [imgIndex, setImgIndex] = useState(0);
-
-  useEffect(() => {
-    if (!project.images || project.images.length <= 1) return;
-    const interval = setInterval(() => {
-      setImgIndex(i => (i + 1) % project.images!.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [project.images]);
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;

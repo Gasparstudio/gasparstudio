@@ -46,7 +46,7 @@ const projects = [
     accentColor: '#F0EDE8',
     images: [
       '/works/Void/void1.png',
-      '/works/Void/void2.png',
+      '/works/Void/kez2.mp4',
     ],
   },
   {
@@ -135,6 +135,38 @@ function VoidCard({ index }: { index: string }) {
   );
 }
 
+function VideoSlide({ src, visible }: { src: string; visible: boolean }) {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    if (visible) {
+      ref.current.currentTime = 0;
+      ref.current.play();
+    } else {
+      ref.current.pause();
+    }
+  }, [visible]);
+
+  return (
+    <video
+      ref={ref}
+      src={src}
+      muted
+      playsInline
+      style={{
+        position: 'absolute',
+        inset: 0,
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        opacity: visible ? 1 : 0,
+        transition: 'opacity 600ms ease',
+      }}
+    />
+  );
+}
+
 const CTA_WORDS = ['A', 'TE', 'PROJEKTED'];
 
 function CTACard({ wordIndex }: { wordIndex: number }) {
@@ -215,24 +247,26 @@ function ProjectCard({ project, imgIndex }: ProjectCardProps) {
       }}
       data-cursor-expand
     >
-      {/* Images (cycling) or placeholder */}
+      {/* Images/videos (cycling) or placeholder */}
       {project.images ? (
-        project.images.map((src, i) => (
-          <img
-            key={src}
-            src={src}
-            alt=""
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              opacity: i === imgIndex ? 1 : 0,
-              transition: 'opacity 600ms ease',
-            }}
-          />
-        ))
+        project.images.map((src, i) => {
+          const isVideo = src.endsWith('.mp4');
+          const visible = i === imgIndex;
+          const mediaStyle: React.CSSProperties = {
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: visible ? 1 : 0,
+            transition: 'opacity 600ms ease',
+          };
+          return isVideo ? (
+            <VideoSlide key={src} src={src} visible={visible} />
+          ) : (
+            <img key={src} src={src} alt="" style={mediaStyle} />
+          );
+        })
       ) : (
         <>
           <div

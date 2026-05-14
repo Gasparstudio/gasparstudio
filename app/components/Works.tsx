@@ -47,7 +47,6 @@ const projects = [
     images: [
       '/works/Void/void1.png',
       '/works/Void/void2.png',
-      '/works/Void/001.png',
     ],
   },
   {
@@ -66,11 +65,11 @@ const projects = [
   },
   {
     index: '05',
-    title: 'Pulsar Campaign',
-    category: 'Campaign',
-    year: '2025',
-    gradient: 'linear-gradient(135deg, #2a1a3a 0%, #1a0d2a 40%, #3a1a4a 100%)',
-    accentColor: '#9B6BCB',
+    title: '__cta__',
+    category: null,
+    year: null,
+    gradient: '',
+    accentColor: '',
   },
 ];
 
@@ -131,6 +130,42 @@ function VoidCard({ index }: { index: string }) {
         }}
       >
         Hamarosan
+      </span>
+    </div>
+  );
+}
+
+const CTA_WORDS = ['A', 'TE', 'PROJEKTED'];
+
+function CTACard({ wordIndex }: { wordIndex: number }) {
+  const word = CTA_WORDS[wordIndex % CTA_WORDS.length];
+  return (
+    <div
+      style={{
+        flexShrink: 0,
+        width: 'clamp(280px, 34vw, 480px)',
+        aspectRatio: '4 / 5',
+        borderRadius: 'var(--card-radius-lg)',
+        border: '1px solid var(--color-border)',
+        background: 'var(--color-bg)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'none',
+      }}
+    >
+      <span
+        key={word}
+        style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(36px, 5vw, 64px)',
+          fontWeight: 700,
+          color: 'var(--color-text-primary)',
+          letterSpacing: '-0.02em',
+          animation: 'ctaWordIn 0.15s ease forwards',
+        }}
+      >
+        {word}
       </span>
     </div>
   );
@@ -314,22 +349,26 @@ export default function Works() {
   const isMobileRef = useRef(false);
 
   const [imgIndices, setImgIndices] = useState<number[]>(projects.map(() => 0));
+  const [ctaWordIndex, setCtaWordIndex] = useState(0);
 
   useEffect(() => {
-    const cardOrder = projects
-      .map((p, i) => ({ i, len: p.images?.length ?? 0 }))
-      .filter(({ len }) => len > 1)
-      .map(({ i }) => i);
-    if (cardOrder.length === 0) return;
+    const sequence = projects
+      .map((p, i) => ({ i, type: p.title === '__cta__' ? 'cta' : 'img', len: p.images?.length ?? 0 }))
+      .filter(({ type, len }) => type === 'cta' || len > 1);
+    if (sequence.length === 0) return;
     let pointer = 0;
     const interval = setInterval(() => {
-      const cardIdx = cardOrder[pointer];
-      setImgIndices(prev => {
-        const next = [...prev];
-        next[cardIdx] = (next[cardIdx] + 1) % projects[cardIdx].images!.length;
-        return next;
-      });
-      pointer = (pointer + 1) % cardOrder.length;
+      const item = sequence[pointer];
+      if (item.type === 'cta') {
+        setCtaWordIndex(prev => (prev + 1) % CTA_WORDS.length);
+      } else {
+        setImgIndices(prev => {
+          const next = [...prev];
+          next[item.i] = (next[item.i] + 1) % projects[item.i].images!.length;
+          return next;
+        });
+      }
+      pointer = (pointer + 1) % sequence.length;
     }, 500);
     return () => clearInterval(interval);
   }, []);
@@ -492,11 +531,11 @@ export default function Works() {
               paddingRight: 'var(--page-margin)',
             }}
           >
-            {projects.map((project, i) =>
-              project.title === null
-                ? <VoidCard key={project.index} index={project.index} />
-                : <ProjectCard key={project.index} project={project} imgIndex={imgIndices[i]} />
-            )}
+            {projects.map((project, i) => {
+              if (project.title === null) return <VoidCard key={project.index} index={project.index} />;
+              if (project.title === '__cta__') return <CTACard key={project.index} wordIndex={ctaWordIndex} />;
+              return <ProjectCard key={project.index} project={project} imgIndex={imgIndices[i]} />;
+            })}
           </div>
         </div>
 
@@ -605,7 +644,9 @@ export default function Works() {
               >
                 {project.title === null
                   ? <VoidCard index={project.index} />
-                  : <ProjectCard project={project} imgIndex={imgIndices[projects.indexOf(project)]} />
+                  : project.title === '__cta__'
+                    ? <CTACard wordIndex={ctaWordIndex} />
+                    : <ProjectCard project={project} imgIndex={imgIndices[projects.indexOf(project)]} />
                 }
               </div>
             ))}

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useRef } from 'react';
 
@@ -155,7 +155,7 @@ export default function About() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontFamily: 'var(--font-bebas)',
+                  fontFamily: 'var(--font-display)',
                   fontSize: '14px',
                   color: '#0A0A0A',
                   fontWeight: 700,
@@ -166,7 +166,7 @@ export default function About() {
               <div>
                 <p
                   style={{
-                    fontFamily: 'var(--font-dm-sans)',
+                    fontFamily: 'var(--font-body)',
                     fontSize: '13px',
                     fontWeight: 600,
                     color: 'var(--color-text-primary)',
@@ -178,7 +178,7 @@ export default function About() {
                 </p>
                 <p
                   style={{
-                    fontFamily: 'var(--font-jetbrains)',
+                    fontFamily: 'var(--font-body)',
                     fontSize: 'var(--text-micro)',
                     color: 'var(--color-text-secondary)',
                     margin: '2px 0 0',
@@ -202,7 +202,7 @@ export default function About() {
         >
           <h2
             style={{
-              fontFamily: 'var(--font-bebas), var(--font-display)',
+              fontFamily: 'var(--font-display)',
               fontSize: 'var(--text-h2)',
               lineHeight: 'var(--leading-snug)',
               letterSpacing: '-0.01em',
@@ -215,7 +215,7 @@ export default function About() {
 
           <p
             style={{
-              fontFamily: 'var(--font-dm-sans), var(--font-body)',
+              fontFamily: 'var(--font-body)',
               fontSize: 'clamp(15px, 1.5vw, 18px)',
               lineHeight: 'var(--leading-normal)',
               color: 'var(--color-text-secondary)',
@@ -248,7 +248,7 @@ export default function About() {
                     borderRadius: '999px',
                     border: '1px solid var(--color-border)',
                     background: 'var(--color-surface)',
-                    fontFamily: 'var(--font-jetbrains), var(--font-mono)',
+                    fontFamily: 'var(--font-body)',
                     fontSize: 'var(--text-small)',
                     color: 'var(--color-text-secondary)',
                     letterSpacing: '0.02em',
@@ -277,7 +277,7 @@ export default function About() {
               <div key={stat.label}>
                 <p
                   style={{
-                    fontFamily: 'var(--font-bebas)',
+                    fontFamily: 'var(--font-display)',
                     fontSize: 'clamp(28px, 3vw, 40px)',
                     color: 'var(--color-accent)',
                     margin: 0,
@@ -288,7 +288,7 @@ export default function About() {
                 </p>
                 <p
                   style={{
-                    fontFamily: 'var(--font-jetbrains)',
+                    fontFamily: 'var(--font-body)',
                     fontSize: 'var(--text-micro)',
                     color: 'var(--color-text-muted)',
                     margin: '6px 0 0',
@@ -317,3 +317,4 @@ export default function About() {
     </section>
   );
 }
+

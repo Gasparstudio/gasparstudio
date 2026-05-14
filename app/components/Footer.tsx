@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 const socials = [
   { label: 'LI', href: '#', title: 'LinkedIn' },
@@ -26,7 +26,7 @@ export default function Footer() {
       {/* Copyright */}
       <p
         style={{
-          fontFamily: 'var(--font-jetbrains)',
+          fontFamily: 'var(--font-body)',
           fontSize: 'var(--text-micro)',
           color: 'var(--color-text-muted)',
           letterSpacing: '0.06em',
@@ -60,7 +60,7 @@ export default function Footer() {
               alignItems: 'center',
               justifyContent: 'center',
               color: 'var(--color-text-muted)',
-              fontFamily: 'var(--font-bebas)',
+              fontFamily: 'var(--font-display)',
               fontSize: '11px',
               letterSpacing: '0.02em',
               textDecoration: 'none',
@@ -86,3 +86,4 @@ export default function Footer() {
     </footer>
   );
 }
+

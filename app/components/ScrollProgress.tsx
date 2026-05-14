@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect } from 'react';
 
@@ -22,3 +22,4 @@ export default function ScrollProgress() {
 
   return <div id="scroll-progress" style={{ width: '0%' }} />;
 }
+

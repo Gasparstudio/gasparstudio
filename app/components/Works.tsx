@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useRef } from 'react';
 
@@ -80,116 +80,115 @@ function ProjectCard({ project }: ProjectCardProps) {
         borderRadius: 'var(--card-radius-lg)',
         overflow: 'hidden',
         border: '1px solid var(--color-border)',
-        background: 'var(--color-surface)',
         transition: 'transform 400ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 400ms ease',
         cursor: 'none',
-        display: 'flex',
-        flexDirection: 'column',
+        position: 'relative',
+        height: 'clamp(360px, 45vw, 560px)',
+        background: project.gradient,
       }}
       data-cursor-expand
     >
-      {/* Cover gradient */}
+      {/* Placeholder decorative elements */}
       <div
         style={{
-          height: 'clamp(260px, 35vw, 400px)',
-          background: project.gradient,
-          position: 'relative',
-          overflow: 'hidden',
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '55%',
+          height: '55%',
+          borderRadius: '50%',
+          border: `1px solid ${project.accentColor}22`,
         }}
-      >
-        {/* Decorative elements */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '60%',
-            height: '60%',
-            borderRadius: '50%',
-            border: `1px solid ${project.accentColor}22`,
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '30%',
-            height: '30%',
-            borderRadius: '50%',
-            border: `1px solid ${project.accentColor}44`,
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(to bottom, transparent 60%, rgba(17,17,17,0.8) 100%)',
-          }}
-        />
-      </div>
+      />
+      <div
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '28%',
+          height: '28%',
+          borderRadius: '50%',
+          border: `1px solid ${project.accentColor}44`,
+        }}
+      />
 
-      {/* Card footer */}
+      {/* Bottom gradient overlay */}
       <div
         style={{
-          padding: '20px 24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          borderTop: '1px solid var(--color-border)',
-          flex: 1,
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.75) 100%)',
+        }}
+      />
+
+      {/* Index — top left */}
+      <span
+        style={{
+          position: 'absolute',
+          top: '20px',
+          left: '24px',
+          fontFamily: 'var(--font-body)',
+          fontSize: 'var(--text-micro)',
+          fontWeight: 500,
+          color: 'rgba(255,255,255,0.5)',
+          letterSpacing: '0.1em',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <span
-            style={{
-              fontFamily: 'var(--font-jetbrains), var(--font-mono)',
-              fontSize: 'var(--text-micro)',
-              color: 'var(--color-text-muted)',
-              letterSpacing: '0.08em',
-            }}
-          >
-            {project.index}
-          </span>
-          <div>
-            <h3
-              style={{
-                fontFamily: 'var(--font-dm-sans), var(--font-body)',
-                fontSize: 'clamp(15px, 1.5vw, 18px)',
-                fontWeight: 600,
-                color: 'var(--color-text-primary)',
-                margin: 0,
-                lineHeight: 1.2,
-              }}
-            >
-              {project.title}
-            </h3>
-            <p
-              style={{
-                fontFamily: 'var(--font-jetbrains), var(--font-mono)',
-                fontSize: 'var(--text-micro)',
-                color: 'var(--color-text-muted)',
-                margin: '4px 0 0',
-                letterSpacing: '0.04em',
-              }}
-            >
-              {project.category} · {project.year}
-            </p>
-          </div>
-        </div>
-        <span
-          ref={arrowRef}
+        {project.index}
+      </span>
+
+      {/* Arrow — top right */}
+      <span
+        ref={arrowRef}
+        style={{
+          position: 'absolute',
+          top: '20px',
+          right: '24px',
+          fontSize: '18px',
+          color: 'rgba(255,255,255,0.7)',
+          transition: 'transform 300ms cubic-bezier(0.16, 1, 0.3, 1)',
+          display: 'block',
+        }}
+      >
+        →
+      </span>
+
+      {/* Text — bottom left */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '24px',
+          left: '24px',
+          right: '24px',
+        }}
+      >
+        <h3
           style={{
-            fontSize: '18px',
-            color: 'var(--color-accent)',
-            transition: 'transform 300ms cubic-bezier(0.16, 1, 0.3, 1)',
-            display: 'block',
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(22px, 2.5vw, 30px)',
+            fontWeight: 650,
+            color: '#ffffff',
+            margin: '0 0 6px',
+            lineHeight: 1.1,
+            letterSpacing: '-0.02em',
           }}
         >
-          →
-        </span>
+          {project.title}
+        </h3>
+        <p
+          style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: 'var(--text-small)',
+            fontWeight: 400,
+            color: 'rgba(255,255,255,0.6)',
+            margin: 0,
+            letterSpacing: '0.02em',
+          }}
+        >
+          {project.category} · {project.year}
+        </p>
       </div>
     </div>
   );
@@ -313,7 +312,7 @@ export default function Works() {
           </div>
           <h2
             style={{
-              fontFamily: 'var(--font-bebas), var(--font-display)',
+              fontFamily: 'var(--font-display)',
               fontSize: 'var(--text-h2)',
               lineHeight: 'var(--leading-tight)',
               color: 'var(--color-text-primary)',
@@ -359,7 +358,7 @@ export default function Works() {
         >
           <span
             style={{
-              fontFamily: 'var(--font-jetbrains), var(--font-mono)',
+              fontFamily: 'var(--font-body)',
               fontSize: 'var(--text-micro)',
               color: 'var(--color-text-muted)',
               letterSpacing: '0.08em',
@@ -413,7 +412,7 @@ export default function Works() {
           </div>
           <h2
             style={{
-              fontFamily: 'var(--font-bebas), var(--font-display)',
+              fontFamily: 'var(--font-display)',
               fontSize: 'var(--text-h2)',
               lineHeight: 'var(--leading-tight)',
               color: 'var(--color-text-primary)',
@@ -457,3 +456,4 @@ export default function Works() {
     </section>
   );
 }
+

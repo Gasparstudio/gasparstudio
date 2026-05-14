@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useRef } from 'react';
 
@@ -89,7 +89,7 @@ export default function Contact() {
         <div>
           <p
             style={{
-              fontFamily: 'var(--font-jetbrains)',
+              fontFamily: 'var(--font-body)',
               fontSize: 'var(--text-small)',
               color: 'var(--color-text-secondary)',
               letterSpacing: '0.12em',
@@ -105,7 +105,7 @@ export default function Contact() {
             href="mailto:hello@gaspar.design"
             style={{
               display: 'block',
-              fontFamily: 'var(--font-bebas)',
+              fontFamily: 'var(--font-display)',
               fontSize: 'clamp(32px, 7vw, 100px)',
               lineHeight: 0.9,
               letterSpacing: '-0.02em',
@@ -127,7 +127,7 @@ export default function Contact() {
         {/* Description */}
         <p
           style={{
-            fontFamily: 'var(--font-dm-sans)',
+            fontFamily: 'var(--font-body)',
             fontSize: 'clamp(15px, 1.5vw, 18px)',
             color: 'var(--color-text-secondary)',
             maxWidth: '480px',
@@ -178,7 +178,7 @@ export default function Contact() {
                 background: 'var(--color-surface)',
                 textDecoration: 'none',
                 color: 'var(--color-text-secondary)',
-                fontFamily: 'var(--font-dm-sans)',
+                fontFamily: 'var(--font-body)',
                 fontSize: 'var(--text-small)',
                 fontWeight: 500,
                 transition: 'all 200ms ease',
@@ -205,7 +205,7 @@ export default function Contact() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontFamily: 'var(--font-bebas)',
+                  fontFamily: 'var(--font-display)',
                   fontSize: '10px',
                   letterSpacing: '0.02em',
                   flexShrink: 0,
@@ -237,3 +237,4 @@ export default function Contact() {
     </section>
   );
 }
+

@@ -1,9 +1,9 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState, useRef } from 'react';
 
 const navLinks = [
-  { label: 'Munkák', href: '#works' },
+  { label: 'Munkak', href: '#works' },
   { label: 'Rólam', href: '#about' },
   { label: 'Kapcsolat', href: '#contact' },
 ];
@@ -76,7 +76,7 @@ export default function Nav() {
           {/* Logo mark */}
           <span
             style={{
-              fontFamily: 'var(--font-bebas), var(--font-display)',
+              fontFamily: 'var(--font-display)',
               fontSize: '16px',
               color: 'var(--color-text-primary)',
               letterSpacing: '0.08em',
@@ -106,7 +106,7 @@ export default function Nav() {
                   background: 'transparent',
                   border: 'none',
                   color: 'var(--color-text-secondary)',
-                  fontFamily: 'var(--font-dm-sans), var(--font-body)',
+                  fontFamily: 'var(--font-body)',
                   fontSize: '13px',
                   fontWeight: 500,
                   padding: '8px 14px',
@@ -219,7 +219,7 @@ export default function Nav() {
             style={{
               background: 'transparent',
               border: 'none',
-              fontFamily: 'var(--font-bebas), var(--font-display)',
+              fontFamily: 'var(--font-display)',
               fontSize: 'clamp(48px, 12vw, 80px)',
               color: 'var(--color-text-primary)',
               letterSpacing: '0.05em',
@@ -251,3 +251,4 @@ export default function Nav() {
     </>
   );
 }
+

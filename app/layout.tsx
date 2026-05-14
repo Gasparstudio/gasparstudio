@@ -1,23 +1,25 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, DM_Sans, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const bebasNeue = Bebas_Neue({
-  weight: "400",
-  variable: "--font-bebas",
-  subsets: ["latin"],
+const sora = localFont({
+  src: "../public/fonts/Sora/Sora-VariableFont_wght.ttf",
+  variable: "--font-sora",
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+const dmSans = localFont({
+  src: [
+    {
+      path: "../public/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/DM_Sans/DMSans-Italic-VariableFont_opsz,wght.ttf",
+      style: "italic",
+    },
+  ],
   variable: "--font-dm-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains",
-  subsets: ["latin"],
   display: "swap",
 });
 
@@ -41,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="hu"
-      className={`${bebasNeue.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
+      className={`${sora.variable} ${dmSans.variable}`}
     >
       <body>
         {children}

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useRef } from 'react';
 
@@ -104,7 +104,7 @@ export default function ValueProp() {
       >
         <p
           style={{
-            fontFamily: 'var(--font-dm-sans), var(--font-body)',
+            fontFamily: 'var(--font-body)',
             fontSize: 'clamp(22px, 3.5vw, 42px)',
             lineHeight: 1.35,
             letterSpacing: '-0.02em',
@@ -132,3 +132,4 @@ export default function ValueProp() {
     </section>
   );
 }
+

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useRef } from 'react';
 
@@ -94,7 +94,7 @@ export default function Hero() {
         />
         <span
           style={{
-            fontFamily: 'var(--font-jetbrains), var(--font-mono)',
+            fontFamily: 'var(--font-body)',
             fontSize: 'var(--text-micro)',
             color: 'var(--color-text-secondary)',
             letterSpacing: '0.08em',
@@ -113,7 +113,7 @@ export default function Hero() {
           <h1
             className="font-display text-hero"
             style={{
-              fontFamily: 'var(--font-bebas), var(--font-display)',
+              fontFamily: 'var(--font-display)',
               fontSize: 'var(--text-hero)',
               lineHeight: 'var(--leading-tight)',
               letterSpacing: 'var(--tracking-tight)',
@@ -131,7 +131,7 @@ export default function Hero() {
           <h1
             className="font-display text-hero"
             style={{
-              fontFamily: 'var(--font-bebas), var(--font-display)',
+              fontFamily: 'var(--font-display)',
               fontSize: 'var(--text-hero)',
               lineHeight: 'var(--leading-tight)',
               letterSpacing: 'var(--tracking-tight)',
@@ -157,7 +157,7 @@ export default function Hero() {
         <p
           ref={taglineRef}
           style={{
-            fontFamily: 'var(--font-dm-sans), var(--font-body)',
+            fontFamily: 'var(--font-body)',
             fontSize: 'clamp(16px, 2vw, 22px)',
             color: 'var(--color-text-secondary)',
             maxWidth: '400px',
@@ -208,3 +208,4 @@ export default function Hero() {
     </section>
   );
 }
+

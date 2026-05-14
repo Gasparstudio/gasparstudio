@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useRef } from 'react';
 
@@ -6,7 +6,7 @@ const TEXT =
   'Brand design nem csak logót jelent. Olyan vizuális rendszereket épít, amelyek az első pillantásra elmondják, kik vagytok — és miért számítotok.';
 
 export default function ValueProp() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const wordsRef = useRef<HTMLSpanElement[]>([]);
 
   const words = TEXT.split(' ');
@@ -15,121 +15,98 @@ export default function ValueProp() {
     const wordEls = wordsRef.current.filter(Boolean);
     if (!wordEls.length) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: '0px 0px -5% 0px',
-        threshold: 0,
-      }
-    );
-
-    // Stagger: use scroll position to reveal words progressively
     const handleScroll = () => {
-      const container = containerRef.current;
-      if (!container) return;
+      const wrapper = wrapperRef.current;
+      if (!wrapper) return;
 
-      const rect = container.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+      const rect = wrapper.getBoundingClientRect();
+      const scrollRange = wrapper.offsetHeight - window.innerHeight;
+      const progress = Math.max(0, Math.min(1, -rect.top / scrollRange));
 
-      // How far into the section we are (0 = top of section enters viewport, 1 = bottom leaves)
-      const progress = Math.max(
-        0,
-        Math.min(1, (windowHeight - rect.top) / (windowHeight + rect.height))
-      );
-
-      const revealCount = Math.floor(progress * wordEls.length * 1.4);
+      const revealCount = Math.floor(progress * wordEls.length);
 
       wordEls.forEach((el, i) => {
-        if (i < revealCount) {
-          el.classList.add('revealed');
-        }
+        el.style.color = i < revealCount
+          ? 'var(--color-text-primary)'
+          : 'var(--color-text-muted)';
       });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      observer.disconnect();
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <section
-      id="value-prop"
-      style={{
-        paddingTop: 'var(--section-padding-v)',
-        paddingBottom: 'var(--section-padding-v)',
-        paddingLeft: 'var(--page-margin)',
-        paddingRight: 'var(--page-margin)',
-        maxWidth: 'var(--max-width)',
-        margin: '0 auto',
-      }}
-    >
-      {/* Section label */}
-      <div
-        className="section-label"
+    <div ref={wrapperRef} style={{ height: '300vh' }}>
+      <section
+        id="value-prop"
         style={{
-          marginBottom: '48px',
+          position: 'sticky',
+          top: 0,
+          height: '100vh',
           display: 'flex',
-          alignItems: 'center',
-          gap: '12px',
+          flexDirection: 'column',
+          justifyContent: 'center',
         }}
       >
-        <span
+        <div
           style={{
-            display: 'block',
-            width: '32px',
-            height: '1px',
-            background: 'var(--color-accent)',
-          }}
-        />
-        02 · Miért én
-      </div>
-
-      {/* Word-by-word reveal text */}
-      <div
-        ref={containerRef}
-        style={{
-          maxWidth: '900px',
-        }}
-      >
-        <p
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 'clamp(22px, 3.5vw, 42px)',
-            lineHeight: 1.35,
-            letterSpacing: '-0.02em',
-            color: 'var(--color-text-primary)',
+            maxWidth: 'var(--max-width)',
+            margin: '0 auto',
+            paddingLeft: 'var(--page-margin)',
+            paddingRight: 'var(--page-margin)',
+            width: '100%',
           }}
         >
-          {words.map((word, i) => (
-            <span key={i}>
-              <span
-                ref={(el) => {
-                  if (el) wordsRef.current[i] = el;
-                }}
-                className="word-reveal-word"
-                style={{
-                  transitionDelay: `${i * 20}ms`,
-                }}
-              >
-                {word}
-              </span>
-              {i < words.length - 1 ? ' ' : ''}
-            </span>
-          ))}
-        </p>
-      </div>
-    </section>
+          <div
+            className="section-label"
+            style={{
+              marginBottom: '48px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+            }}
+          >
+            <span
+              style={{
+                display: 'block',
+                width: '32px',
+                height: '1px',
+                background: 'var(--color-accent)',
+              }}
+            />
+            02 · Miért én
+          </div>
+
+          <div style={{ maxWidth: '900px' }}>
+            <p
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 'clamp(22px, 3.5vw, 42px)',
+                lineHeight: 1.35,
+                letterSpacing: '-0.02em',
+              }}
+            >
+              {words.map((word, i) => (
+                <span key={i}>
+                  <span
+                    ref={(el) => { if (el) wordsRef.current[i] = el; }}
+                    style={{
+                      color: 'var(--color-text-muted)',
+                      transition: 'color 150ms ease',
+                    }}
+                  >
+                    {word}
+                  </span>
+                  {i < words.length - 1 ? ' ' : ''}
+                </span>
+              ))}
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
-

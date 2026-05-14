@@ -53,11 +53,15 @@ const projects = [
   },
   {
     index: '04',
-    title: 'Apex Motion',
-    category: 'Motion Brand',
-    year: '2024',
-    gradient: 'linear-gradient(135deg, #1a1a3a 0%, #0d0d2a 40%, #1a2a4a 100%)',
-    accentColor: '#4A7FCB',
+    title: 'Void',
+    category: 'Fashion Brand',
+    year: '2025',
+    gradient: 'linear-gradient(135deg, #0a0a0a 0%, #111111 100%)',
+    accentColor: '#F0EDE8',
+    images: [
+      '/works/Void/enaa.png',
+      '/works/Void/k%C3%A9z.png',
+    ],
   },
   {
     index: '05',
@@ -68,6 +72,68 @@ const projects = [
     accentColor: '#9B6BCB',
   },
 ];
+
+function VoidCard({ index }: { index: string }) {
+  return (
+    <div
+      style={{
+        flexShrink: 0,
+        width: 'clamp(280px, 34vw, 480px)',
+        aspectRatio: '4 / 5',
+        borderRadius: 'var(--card-radius-lg)',
+        border: '1px dashed var(--color-border)',
+        background: 'var(--color-bg)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '12px',
+        position: 'relative',
+      }}
+    >
+      <span
+        style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: 'var(--text-micro)',
+          fontWeight: 500,
+          color: 'var(--color-text-muted)',
+          letterSpacing: '0.1em',
+          position: 'absolute',
+          top: '20px',
+          left: '24px',
+        }}
+      >
+        {index}
+      </span>
+      <div
+        style={{
+          width: '32px',
+          height: '32px',
+          borderRadius: '50%',
+          border: '1px solid var(--color-border)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'var(--color-text-muted)',
+          fontSize: '18px',
+          lineHeight: 1,
+        }}
+      >
+        +
+      </div>
+      <span
+        style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: 'var(--text-small)',
+          color: 'var(--color-text-muted)',
+          letterSpacing: '0.06em',
+        }}
+      >
+        Hamarosan
+      </span>
+    </div>
+  );
+}
 
 interface ProjectCardProps {
   project: typeof projects[0] & { images?: string[] };
@@ -412,9 +478,11 @@ export default function Works() {
               paddingRight: 'var(--page-margin)',
             }}
           >
-            {projects.map((project) => (
-              <ProjectCard key={project.index} project={project} />
-            ))}
+            {projects.map((project) =>
+              project.title === null
+                ? <VoidCard key={project.index} index={project.index} />
+                : <ProjectCard key={project.index} project={project} />
+            )}
           </div>
         </div>
 
@@ -521,7 +589,10 @@ export default function Works() {
                   scrollSnapAlign: 'start',
                 }}
               >
-                <ProjectCard project={project} />
+                {project.title === null
+                  ? <VoidCard index={project.index} />
+                  : <ProjectCard project={project} />
+                }
               </div>
             ))}
           </div>

@@ -9,8 +9,8 @@
   --color-text-primary:   #F0EDE8;
   --color-text-secondary: #888888;
   --color-text-muted:     #444444;
-  --color-accent:       #E8551A;
-  --color-accent-muted: rgba(232, 85, 26, 0.12);
+  --color-accent:       #2BC4A8;
+  --color-accent-muted: rgba(43, 196, 168, 0.12);
 
   --font-display: var(--font-sora), 'Sora', sans-serif;
   --font-body: var(--font-dm-sans), 'DM Sans', sans-serif;
@@ -196,8 +196,8 @@ body {
 }
 
 .btn-primary:hover {
-  background: #d44a14;
-  border-color: #d44a14;
+  background: #22a88e;
+  border-color: #22a88e;
 }
 
 /* — Ghost — */

@@ -73,6 +73,7 @@ export default function RolamPage() {
   const curtainRef         = useRef<HTMLDivElement>(null);
   const cardRefs           = useRef<(HTMLDivElement | null)[]>([]);
   const dotRefs            = useRef<(HTMLDivElement | null)[]>([]);
+  const yearRefs           = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -95,10 +96,10 @@ export default function RolamPage() {
       const curtain = curtainRef.current;
       if (!section || !curtain) return;
 
-      // Cards: initially offset (curtain covers them so opacity doesn't matter)
+      // Cards start hidden independently — curtain won't cover them
       cardRefs.current.forEach((el, i) => {
         if (!el) return;
-        gsap.set(el, { y: i % 2 === 0 ? -28 : 28 });
+        gsap.set(el, { opacity: 0, scale: 0.72, y: i % 2 === 0 ? -14 : 14 });
       });
 
       const tl = gsap.timeline();
@@ -125,9 +126,11 @@ export default function RolamPage() {
         }
         if (card) {
           tl.to(card, {
+            opacity: 1,
+            scale: 1,
             y: 0,
-            duration: 0.1,
-            ease: 'power3.out',
+            duration: 0.16,
+            ease: 'back.out(2.6)',
           }, pos + 0.03);
         }
       });
@@ -382,12 +385,15 @@ export default function RolamPage() {
               })}
             </div>
 
-            {/* Curtain overlay — covers ONLY the track */}
+            {/* Curtain — only covers the center line + dot strip */}
             <div
               ref={curtainRef}
               style={{
                 position: 'absolute',
-                inset: 0,
+                top: 'calc(50% - 56px)',
+                left: 0,
+                right: 0,
+                height: '112px',
                 background: 'var(--color-bg)',
                 transformOrigin: 'right center',
                 zIndex: 5,

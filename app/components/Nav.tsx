@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const navLinks = [
   { label: 'Munkák', href: '/works', isPage: true },
-  { label: 'Rólam', href: '#about', isPage: false },
+  { label: 'Rólam', href: '/rolam', isPage: true },
   { label: 'Kapcsolat', href: '#contact', isPage: false },
 ];
 

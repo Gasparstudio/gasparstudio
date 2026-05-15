@@ -1,11 +1,12 @@
 ﻿'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import Link from 'next/link';
 
 const navLinks = [
-  { label: 'Munkak', href: '#works' },
-  { label: 'Rólam', href: '#about' },
-  { label: 'Kapcsolat', href: '#contact' },
+  { label: 'Munkák', href: '/works', isPage: true },
+  { label: 'Rólam', href: '#about', isPage: false },
+  { label: 'Kapcsolat', href: '#contact', isPage: false },
 ];
 
 export default function Nav() {
@@ -98,34 +99,63 @@ export default function Nav() {
 
           {/* Nav links — hidden on mobile */}
           <div className="hidden md:flex" style={{ alignItems: 'center', gap: '4px' }}>
-            {navLinks.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => handleNavClick(link.href)}
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  color: 'var(--color-text-secondary)',
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '13px',
-                  fontWeight: 500,
-                  padding: '8px 14px',
-                  borderRadius: '999px',
-                  cursor: 'none',
-                  transition: 'color 200ms ease, background 200ms ease',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLButtonElement).style.color = 'var(--color-text-primary)';
-                  (e.target as HTMLButtonElement).style.background = 'rgba(255,255,255,0.06)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLButtonElement).style.color = 'var(--color-text-secondary)';
-                  (e.target as HTMLButtonElement).style.background = 'transparent';
-                }}
-              >
-                {link.label}
-              </button>
-            ))}
+            {navLinks.map((link) =>
+              link.isPage ? (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  style={{
+                    color: 'var(--color-text-secondary)',
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '13px',
+                    fontWeight: 500,
+                    padding: '8px 14px',
+                    borderRadius: '999px',
+                    cursor: 'none',
+                    textDecoration: 'none',
+                    transition: 'color 200ms ease, background 200ms ease',
+                    display: 'inline-block',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--color-text-primary)';
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--color-text-secondary)';
+                    e.currentTarget.style.background = 'transparent';
+                  }}
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <button
+                  key={link.href}
+                  onClick={() => handleNavClick(link.href)}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    color: 'var(--color-text-secondary)',
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '13px',
+                    fontWeight: 500,
+                    padding: '8px 14px',
+                    borderRadius: '999px',
+                    cursor: 'none',
+                    transition: 'color 200ms ease, background 200ms ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.target as HTMLButtonElement).style.color = 'var(--color-text-primary)';
+                    (e.target as HTMLButtonElement).style.background = 'rgba(255,255,255,0.06)';
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.target as HTMLButtonElement).style.color = 'var(--color-text-secondary)';
+                    (e.target as HTMLButtonElement).style.background = 'transparent';
+                  }}
+                >
+                  {link.label}
+                </button>
+              )
+            )}
           </div>
 
           {/* CTA Button */}
@@ -212,33 +242,57 @@ export default function Nav() {
           transition: 'opacity 400ms cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
-        {navLinks.map((link, i) => (
-          <button
-            key={link.href}
-            onClick={() => handleNavClick(link.href)}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(48px, 12vw, 80px)',
-              color: 'var(--color-text-primary)',
-              letterSpacing: '0.05em',
-              cursor: 'pointer',
-              transition: 'color 200ms ease',
-              transform: menuOpen ? 'translateY(0)' : 'translateY(20px)',
-              transitionDelay: `${i * 60}ms`,
-              lineHeight: 1.1,
-            }}
-            onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.color = 'var(--color-accent)';
-            }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLButtonElement).style.color = 'var(--color-text-primary)';
-            }}
-          >
-            {link.label}
-          </button>
-        ))}
+        {navLinks.map((link, i) =>
+          link.isPage ? (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(48px, 12vw, 80px)',
+                color: 'var(--color-text-primary)',
+                letterSpacing: '0.05em',
+                textDecoration: 'none',
+                transition: 'color 200ms ease',
+                transform: menuOpen ? 'translateY(0)' : 'translateY(20px)',
+                transitionDelay: `${i * 60}ms`,
+                lineHeight: 1.1,
+                display: 'block',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-accent)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-primary)'; }}
+            >
+              {link.label}
+            </Link>
+          ) : (
+            <button
+              key={link.href}
+              onClick={() => handleNavClick(link.href)}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(48px, 12vw, 80px)',
+                color: 'var(--color-text-primary)',
+                letterSpacing: '0.05em',
+                cursor: 'pointer',
+                transition: 'color 200ms ease',
+                transform: menuOpen ? 'translateY(0)' : 'translateY(20px)',
+                transitionDelay: `${i * 60}ms`,
+                lineHeight: 1.1,
+              }}
+              onMouseEnter={(e) => {
+                (e.target as HTMLButtonElement).style.color = 'var(--color-accent)';
+              }}
+              onMouseLeave={(e) => {
+                (e.target as HTMLButtonElement).style.color = 'var(--color-text-primary)';
+              }}
+            >
+              {link.label}
+            </button>
+          )
+        )}
         <a
           href="#contact"
           onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}

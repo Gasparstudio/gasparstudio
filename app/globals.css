@@ -9,8 +9,9 @@
   --color-text-primary:   #F0EDE8;
   --color-text-secondary: #888888;
   --color-text-muted:     #444444;
-  --color-accent:       #2BC4A8;
-  --color-accent-muted: rgba(43, 196, 168, 0.12);
+  --color-accent:       #9B6DFF;
+  --color-accent-muted: rgba(155, 109, 255, 0.12);
+  --color-accent-gradient: linear-gradient(135deg, #FF7043 0%, #9B6DFF 100%);
 
   --font-display: var(--font-sora), 'Sora', sans-serif;
   --font-body: var(--font-dm-sans), 'DM Sans', sans-serif;
@@ -84,7 +85,7 @@ body {
   top: 0;
   left: 0;
   height: 2px;
-  background: var(--color-accent);
+  background: var(--color-accent-gradient);
   z-index: 9999;
   transform-origin: left;
   transition: width 0.05s linear;
@@ -190,14 +191,14 @@ body {
 
 /* — Primary — */
 .btn-primary {
-  background: var(--color-accent);
+  background: var(--color-accent-gradient);
   color: #fff;
-  border: 1px solid var(--color-accent);
+  border: none;
 }
 
 .btn-primary:hover {
-  background: #22a88e;
-  border-color: #22a88e;
+  background: linear-gradient(135deg, #ff8a65 0%, #b07fff 100%);
+  border: none;
 }
 
 /* — Ghost — */

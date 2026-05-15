@@ -26,8 +26,8 @@ const projects = [
     title: 'FACE',
     category: 'Logo Design',
     year: '2026',
-    gradient: 'linear-gradient(135deg, #E8551A 0%, #8B2E08 40%, #1a0d08 100%)',
-    accentColor: '#E8551A',
+    gradient: 'linear-gradient(135deg, #FF7043 0%, #9B6DFF 60%, #12091f 100%)',
+    accentColor: '#9B6DFF',
     images: [
       '/works/face/Artboard%201-03.png',
       '/works/face/Artboard%201-05.png',

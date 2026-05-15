@@ -1,75 +1,20 @@
 ﻿'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { projects as realProjects } from '../data/projects';
 
 const projects = [
+  ...realProjects,
   {
-    index: '01',
-    title: 'Mozzano',
-    category: 'Brand Identity',
-    year: '2026',
-    gradient: 'linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 40%, #2a1f1a 100%)',
-    accentColor: '#F0EDE8',
-    images: [
-      '/works/mozzano/Artboard%201.png',
-      '/works/mozzano/Artboard%203.png',
-      '/works/mozzano/Artboard%206.png',
-      '/works/mozzano/Artboard%207.png',
-      '/works/mozzano/Artboard%208.png',
-      '/works/mozzano/Artboard%209.png',
-      '/works/mozzano/Artboard%204.png',
-      '/works/mozzano/Artboard%205.png',
-    ],
-  },
-  {
-    index: '02',
-    title: 'FACE',
-    category: 'Logo Design',
-    year: '2026',
-    gradient: 'linear-gradient(135deg, #FF7043 0%, #9B6DFF 60%, #12091f 100%)',
-    accentColor: '#9B6DFF',
-    images: [
-      '/works/face/Artboard%201-03.png',
-      '/works/face/Artboard%201-05.png',
-      '/works/face/Artboard%201-07.png',
-      '/works/face/Artboard%201-09.png',
-      '/works/face/Artboard%201-11.png',
-      '/works/face/Artboard%201-14.png',
-    ],
-  },
-  {
-    index: '03',
-    title: 'Void',
-    category: 'ERR_0x4F · [REDACTED]',
-    year: '????',
-    gradient: 'linear-gradient(135deg, #0a0a0a 0%, #111111 100%)',
-    accentColor: '#F0EDE8',
-    images: [
-      '/works/Void/void1.png',
-      '/works/Void/kez2.mp4',
-    ],
-  },
-  {
-    index: '04',
-    title: 'Kámfor',
-    category: 'Brand Identity',
-    year: '2022',
-    gradient: 'linear-gradient(135deg, #1a2e1a 0%, #0d1a0d 40%, #2a3a1a 100%)',
-    accentColor: '#6BAF6B',
-    images: [
-      '/works/kamfor/1.png',
-      '/works/kamfor/001.png',
-      '/works/kamfor/002.png',
-      '/works/kamfor/003.png',
-    ],
-  },
-  {
-    index: '05',
+    index: String(realProjects.length + 1).padStart(2, '0'),
     title: '__cta__',
-    category: null,
-    year: null,
+    category: null as string | null,
+    year: null as string | null,
     gradient: '',
     accentColor: '',
+    images: [] as string[],
+    slug: '__cta__',
   },
 ];
 
@@ -537,18 +482,27 @@ export default function Works() {
             />
             03 · Munkak
           </div>
-          <h2
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'var(--text-h2)',
-              lineHeight: 'var(--leading-tight)',
-              color: 'var(--color-text-primary)',
-              letterSpacing: '-0.01em',
-              margin: 0,
-            }}
-          >
-            Válogatott projektek
-          </h2>
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '24px', flexWrap: 'wrap' }}>
+            <h2
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'var(--text-h2)',
+                lineHeight: 'var(--leading-tight)',
+                color: 'var(--color-text-primary)',
+                letterSpacing: '-0.01em',
+                margin: 0,
+              }}
+            >
+              Válogatott projektek
+            </h2>
+            <Link
+              href="/works"
+              className="btn-text"
+              style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-small)', marginBottom: '6px', whiteSpace: 'nowrap' }}
+            >
+              Összes munka →
+            </Link>
+          </div>
         </div>
 
         {/* Horizontal scroll track */}
@@ -639,17 +593,26 @@ export default function Works() {
             />
             03 · Munkak
           </div>
-          <h2
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'var(--text-h2)',
-              lineHeight: 'var(--leading-tight)',
-              color: 'var(--color-text-primary)',
-              margin: 0,
-            }}
-          >
-            Válogatott projektek
-          </h2>
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '16px', flexWrap: 'wrap' }}>
+            <h2
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'var(--text-h2)',
+                lineHeight: 'var(--leading-tight)',
+                color: 'var(--color-text-primary)',
+                margin: 0,
+              }}
+            >
+              Válogatott projektek
+            </h2>
+            <Link
+              href="/works"
+              className="btn-text"
+              style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-small)', marginBottom: '4px', whiteSpace: 'nowrap' }}
+            >
+              Összes munka →
+            </Link>
+          </div>
         </div>
 
         <div

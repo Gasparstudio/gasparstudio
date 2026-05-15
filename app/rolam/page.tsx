@@ -96,10 +96,14 @@ export default function RolamPage() {
       const curtain = curtainRef.current;
       if (!section || !curtain) return;
 
-      // Cards start hidden independently — curtain won't cover them
+      // Cards and year labels start hidden — curtain only covers the line
       cardRefs.current.forEach((el, i) => {
         if (!el) return;
         gsap.set(el, { opacity: 0, scale: 0.72, y: i % 2 === 0 ? -14 : 14 });
+      });
+      yearRefs.current.forEach((el) => {
+        if (!el) return;
+        gsap.set(el, { opacity: 0, y: 10 });
       });
 
       const tl = gsap.timeline();
@@ -111,11 +115,12 @@ export default function RolamPage() {
         duration: 1,
       }, 0);
 
-      // Cards slide into place as curtain passes them
+      // Reveal each column: dot → year label → card (bouncy)
       timeline.forEach((_, i) => {
-        const pos = 0.04 + (i / timeline.length) * 0.88;
+        const pos  = 0.04 + (i / timeline.length) * 0.88;
         const card = cardRefs.current[i];
         const dot  = dotRefs.current[i];
+        const year = yearRefs.current[i];
 
         if (dot) {
           tl.fromTo(dot,
@@ -124,14 +129,22 @@ export default function RolamPage() {
             pos,
           );
         }
+        if (year) {
+          tl.to(year, {
+            opacity: 1,
+            y: 0,
+            duration: 0.10,
+            ease: 'power2.out',
+          }, pos + 0.02);
+        }
         if (card) {
           tl.to(card, {
             opacity: 1,
             scale: 1,
             y: 0,
-            duration: 0.16,
+            duration: 0.18,
             ease: 'back.out(2.6)',
-          }, pos + 0.03);
+          }, pos + 0.04);
         }
       });
 
@@ -305,12 +318,16 @@ export default function RolamPage() {
                           </p>
                         </div>
                       ) : (
-                        <span style={{
-                          fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2.5vw, 32px)',
-                          fontWeight: 700, letterSpacing: '-0.03em',
-                          background: 'var(--color-accent-gradient)',
-                          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-                        }}>
+                        <span
+                          ref={(el) => { yearRefs.current[i] = el; }}
+                          style={{
+                            fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2.5vw, 32px)',
+                            fontWeight: 700, letterSpacing: '-0.03em',
+                            background: 'var(--color-accent-gradient)',
+                            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+                            display: 'block',
+                          }}
+                        >
                           {event.year}
                         </span>
                       )}
@@ -370,12 +387,16 @@ export default function RolamPage() {
                           </p>
                         </div>
                       ) : (
-                        <span style={{
-                          fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2.5vw, 32px)',
-                          fontWeight: 700, letterSpacing: '-0.03em',
-                          background: 'var(--color-accent-gradient)',
-                          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-                        }}>
+                        <span
+                          ref={(el) => { yearRefs.current[i] = el; }}
+                          style={{
+                            fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2.5vw, 32px)',
+                            fontWeight: 700, letterSpacing: '-0.03em',
+                            background: 'var(--color-accent-gradient)',
+                            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+                            display: 'block',
+                          }}
+                        >
                           {event.year}
                         </span>
                       )}
@@ -385,15 +406,15 @@ export default function RolamPage() {
               })}
             </div>
 
-            {/* Curtain — only covers the center line + dot strip */}
+            {/* Curtain — csak a vonal + pont sávját fedi (±20px a középtől) */}
             <div
               ref={curtainRef}
               style={{
                 position: 'absolute',
-                top: 'calc(50% - 56px)',
+                top: 'calc(50% - 20px)',
                 left: 0,
                 right: 0,
-                height: '112px',
+                height: '40px',
                 background: 'var(--color-bg)',
                 transformOrigin: 'right center',
                 zIndex: 5,

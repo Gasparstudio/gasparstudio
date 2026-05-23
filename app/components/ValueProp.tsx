@@ -1,15 +1,14 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-
-const TEXT =
-  'Brand design nem csak logót jelent. Olyan vizuális rendszereket épít, amelyek az első pillantásra elmondják, kik vagytok — és miért számítotok.';
+import { useLang } from '../context/LanguageContext';
 
 export default function ValueProp() {
+  const { t } = useLang();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const wordsRef = useRef<HTMLSpanElement[]>([]);
 
-  const words = TEXT.split(' ');
+  const words = t('vp.text').split(' ');
 
   useEffect(() => {
     const wordEls = wordsRef.current.filter(Boolean);
@@ -77,7 +76,7 @@ export default function ValueProp() {
                 background: 'var(--color-accent)',
               }}
             />
-            02 · Miért én
+            {t('vp.label')}
           </div>
 
           <div style={{ maxWidth: '900px' }}>

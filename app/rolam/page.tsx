@@ -234,16 +234,6 @@ export default function RolamPage() {
           {/* Timeline track */}
           <div style={{ padding: '0 var(--page-margin)', position: 'relative', flexShrink: 0 }}>
 
-            {/* Horizontal center line */}
-            <div style={{
-              position: 'absolute',
-              left: 'var(--page-margin)',
-              right: 'var(--page-margin)',
-              top: '50%',
-              height: '1px',
-              background: `linear-gradient(to right, var(--color-border), var(--color-border))`,
-              transform: 'translateY(-50%)',
-            }} />
             {/* Gradient line overlay */}
             <div style={{
               position: 'absolute',
@@ -431,25 +421,14 @@ export default function RolamPage() {
             <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-micro)', color: 'var(--color-text-muted)', letterSpacing: '0.08em' }}>
               Scroll →
             </span>
-            <div style={{ width: '40px', height: '1px', background: 'var(--color-border)' }} />
           </div>
         </section>
 
         {/* ══ TIMELINE — Mobile (vertical, IntersectionObserver) ═ */}
         <MobileTimeline />
 
-        {/* Divider */}
-        <div className="page-container">
-          <div style={{ height: '1px', background: 'var(--color-border)' }} />
-        </div>
-
         {/* ══ BIO ════════════════════════════════════════════════ */}
         <BioSection />
-
-        {/* Divider */}
-        <div className="page-container">
-          <div style={{ height: '1px', background: 'var(--color-border)' }} />
-        </div>
 
         {/* ══ CTA ════════════════════════════════════════════════ */}
         <section
@@ -474,7 +453,6 @@ export default function RolamPage() {
       </main>
 
       <footer style={{
-        borderTop: '1px solid var(--color-border)',
         padding: 'clamp(28px, 4vw, 40px) var(--page-margin)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px',
       }}>
@@ -562,7 +540,7 @@ function BioSection() {
           </p>
 
           {/* Stats */}
-          <div data-reveal data-delay="220" style={{ display: 'flex', gap: 'clamp(24px, 4vw, 48px)', paddingTop: '24px', borderTop: '1px solid var(--color-border)', flexWrap: 'wrap' }}>
+          <div data-reveal data-delay="220" style={{ display: 'flex', gap: 'clamp(24px, 4vw, 48px)', paddingTop: '24px', flexWrap: 'wrap' }}>
             {stats.map((s) => (
               <div key={s.label}>
                 <p style={{
@@ -618,11 +596,6 @@ function MobileTimeline() {
       </div>
 
       <div style={{ padding: '0 var(--page-margin)', position: 'relative' }}>
-        {/* Vertical line */}
-        <div style={{
-          position: 'absolute', left: 'calc(var(--page-margin) + 6px)',
-          top: 0, bottom: 0, width: '1px', background: 'var(--color-border)',
-        }} />
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
           {timeline.map((event, i) => (

@@ -1,6 +1,7 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useRef } from 'react';
+import { useLang } from '../context/LanguageContext';
 
 const socials = [
   { label: 'LinkedIn', href: '#', icon: 'in' },
@@ -8,8 +9,9 @@ const socials = [
 ];
 
 export default function Contact() {
+  const { t } = useLang();
   const containerRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const contentRef   = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = contentRef.current;
@@ -72,7 +74,7 @@ export default function Contact() {
             background: 'var(--color-accent)',
           }}
         />
-        05 · Kapcsolat
+        {t('contact.label')}
       </div>
 
       <div
@@ -97,31 +99,23 @@ export default function Contact() {
               marginBottom: '24px',
             }}
           >
-            Van egy projektjük?
+            {t('contact.question')}
           </p>
 
-          {/* Big email */}
-          <a
-            href="mailto:hello@gaspar.design"
+          {/* Big email placeholder — fill in later */}
+          <p
             style={{
               display: 'block',
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(32px, 7vw, 100px)',
+              fontSize: 'clamp(28px, 5vw, 72px)',
               lineHeight: 0.9,
               letterSpacing: '-0.02em',
-              color: 'var(--color-text-primary)',
-              textDecoration: 'none',
-              transition: 'color 300ms ease',
-            }}
-            onMouseEnter={(e) => {
-              (e.target as HTMLAnchorElement).style.color = 'var(--color-accent)';
-            }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLAnchorElement).style.color = 'var(--color-text-primary)';
+              color: 'var(--color-text-muted)',
+              margin: 0,
             }}
           >
             hello@gaspar.design
-          </a>
+          </p>
         </div>
 
         {/* Description */}
@@ -134,27 +128,9 @@ export default function Contact() {
             lineHeight: 'var(--leading-normal)',
           }}
         >
-          Legyen szó brand identitásról, vizuális rendszerről vagy kampányról — írj, és nézzük meg együtt, mit lehet alkotni.
+          {t('contact.desc')}
         </p>
 
-        {/* CTA Button */}
-        <a
-          href="mailto:hello@gaspar.design"
-          className="btn btn-primary"
-          style={{ fontSize: '16px', padding: '18px 40px' }}
-        >
-          Írj nekem →
-        </a>
-
-        {/* Divider */}
-        <div
-          style={{
-            width: '100%',
-            maxWidth: '480px',
-            height: '1px',
-            background: 'var(--color-border)',
-          }}
-        />
 
         {/* Social links */}
         <div
@@ -237,4 +213,3 @@ export default function Contact() {
     </section>
   );
 }
-

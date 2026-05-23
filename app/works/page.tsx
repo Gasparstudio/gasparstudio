@@ -517,17 +517,6 @@ export default function WorksPage() {
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="page-container">
-          <div
-            style={{
-              height: '1px',
-              background: 'var(--color-border)',
-              marginBottom: 'clamp(32px, 5vw, 56px)',
-            }}
-          />
-        </div>
-
         {/* Search + Filter */}
         <div
           className="page-container"
@@ -641,7 +630,6 @@ export default function WorksPage() {
       {/* Footer */}
       <footer
         style={{
-          borderTop: '1px solid var(--color-border)',
           padding: 'clamp(28px, 4vw, 40px) var(--page-margin)',
           display: 'flex',
           alignItems: 'center',

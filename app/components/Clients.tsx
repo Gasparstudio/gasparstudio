@@ -1,5 +1,7 @@
 'use client';
 
+import { useLang } from '../context/LanguageContext';
+
 const logos: { src: string; alt: string; large?: boolean }[] = [
   { src: '/partners/Kamfor_logo_logotipia_white_png.png', alt: 'Kámfor' },
   { src: '/partners/se.png', alt: 'SE', large: true },
@@ -8,23 +10,62 @@ const logos: { src: string; alt: string; large?: boolean }[] = [
 ];
 
 export default function Clients() {
+  const { t } = useLang();
   const track = [...logos, ...logos, ...logos, ...logos];
 
   return (
     <section
       style={{
-        paddingTop: 'clamp(16px, 2vw, 24px)',
-        paddingBottom: 'clamp(16px, 2vw, 24px)',
+        paddingTop: 'clamp(32px, 4vw, 48px)',
+        paddingBottom: 'clamp(32px, 4vw, 48px)',
         overflow: 'hidden',
         position: 'relative',
       }}
     >
+      {/* Section label */}
+      <div
+        style={{
+          textAlign: 'center',
+          marginBottom: 'clamp(20px, 3vw, 32px)',
+        }}
+      >
+        <span
+          className="section-label"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '12px',
+          }}
+        >
+          <span
+            style={{
+              display: 'block',
+              width: '32px',
+              height: '1px',
+              background: 'var(--color-accent)',
+            }}
+          />
+          {t('clients.label')}
+          <span
+            style={{
+              display: 'block',
+              width: '32px',
+              height: '1px',
+              background: 'var(--color-accent)',
+            }}
+          />
+        </span>
+      </div>
+
       {/* Fade edges */}
       <div
         aria-hidden="true"
         style={{
           position: 'absolute',
-          inset: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          top: 'clamp(70px, 10vw, 96px)',
           background: 'linear-gradient(to right, var(--color-bg) 0%, transparent 12%, transparent 88%, var(--color-bg) 100%)',
           zIndex: 1,
           pointerEvents: 'none',

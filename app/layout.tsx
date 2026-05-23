@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { LanguageProvider } from "./context/LanguageContext";
+import PageTransition from "./components/PageTransition";
 
 const sora = localFont({
   src: "../public/fonts/Sora/Sora-VariableFont_wght.ttf",
@@ -46,7 +48,11 @@ export default function RootLayout({
       className={`${sora.variable} ${dmSans.variable}`}
     >
       <body>
-        {children}
+        <LanguageProvider>
+          <PageTransition>
+            {children}
+          </PageTransition>
+        </LanguageProvider>
       </body>
     </html>
   );

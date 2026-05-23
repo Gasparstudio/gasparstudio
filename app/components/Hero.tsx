@@ -1,15 +1,57 @@
-﻿'use client';
+'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { projects } from '../data/projects';
+import { useLang } from '../context/LanguageContext';
+
+// All non-video images across every project
+const allImages = projects.flatMap((p) =>
+  (p.images ?? []).filter((src) => !src.endsWith('.mp4'))
+);
+
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 export default function Hero() {
-  const containerRef = useRef<HTMLElement>(null);
-  const line1Ref = useRef<HTMLDivElement>(null);
-  const line2Ref = useRef<HTMLDivElement>(null);
-  const taglineRef = useRef<HTMLParagraphElement>(null);
-  const buttonsRef = useRef<HTMLDivElement>(null);
-  const badgeRef = useRef<HTMLDivElement>(null);
+  const { t } = useLang();
 
+  const containerRef = useRef<HTMLElement>(null);
+  const line1Ref     = useRef<HTMLDivElement>(null);
+  const line2Ref     = useRef<HTMLDivElement>(null);
+  const taglineRef   = useRef<HTMLParagraphElement>(null);
+  const buttonsRef   = useRef<HTMLDivElement>(null);
+  const badgeRef     = useRef<HTMLDivElement>(null);
+
+  // Background image state
+  const [queue]       = useState<string[]>(() => shuffle(allImages));
+  const [current, setCurrent] = useState(0);
+  const [prev, setPrev]       = useState<number | null>(null);
+  const [transitioning, setTransitioning] = useState(false);
+
+  // Cycle images
+  useEffect(() => {
+    if (queue.length < 2) return;
+    const id = setInterval(() => {
+      setTransitioning(true);
+      setPrev(current);
+      const next = (current + 1) % queue.length;
+      setCurrent(next);
+      setTimeout(() => {
+        setPrev(null);
+        setTransitioning(false);
+      }, 1400);
+    }, 3800);
+    return () => clearInterval(id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [current, queue]);
+
+  // Hero enter animation
   useEffect(() => {
     const elements = [
       { el: line1Ref.current, delay: 0.1 },
@@ -19,7 +61,6 @@ export default function Hero() {
       { el: badgeRef.current, delay: 0.75 },
     ];
 
-    // Set initial state
     elements.forEach(({ el }) => {
       if (!el) return;
       el.style.opacity = '0';
@@ -27,7 +68,6 @@ export default function Hero() {
       el.style.transition = 'none';
     });
 
-    // Animate in sequence
     elements.forEach(({ el, delay }) => {
       if (!el) return;
       setTimeout(() => {
@@ -38,14 +78,9 @@ export default function Hero() {
     });
   }, []);
 
-  const scrollToWorks = (e: React.MouseEvent) => {
+  const scrollTo = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
-    document.querySelector('#works')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const scrollToContact = (e: React.MouseEvent) => {
-    e.preventDefault();
-    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+    document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -53,20 +88,101 @@ export default function Hero() {
       ref={containerRef}
       id="hero"
       style={{
-        minHeight: '100svh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-        paddingBottom: 'clamp(60px, 8vw, 120px)',
-        paddingLeft: 'var(--page-margin)',
-        paddingRight: 'var(--page-margin)',
-        maxWidth: 'var(--max-width)',
-        margin: '0 auto',
-        width: '100%',
         position: 'relative',
+        overflow: 'hidden',
+        minHeight: '100svh',
       }}
     >
-      {/* Status badge — top right */}
+      {/* ── Background images (constrained to hero only) ──── */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 0,
+          overflow: 'hidden',
+          pointerEvents: 'none',
+        }}
+      >
+        {/* Previous image — fades out + slight shrink */}
+        {prev !== null && (
+          <img
+            key={`prev-${queue[prev]}`}
+            src={queue[prev]}
+            alt=""
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              filter: 'blur(14px)',
+              opacity: transitioning ? 0 : 0.8,
+              transform: transitioning ? 'scale(0.96)' : 'scale(1)',
+              transition: 'opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1), transform 1200ms cubic-bezier(0.16, 1, 0.3, 1)',
+            }}
+          />
+        )}
+
+        {/* Current image — fades in + slight zoom-in */}
+        <img
+          key={`curr-${queue[current]}`}
+          src={queue[current]}
+          alt=""
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            filter: 'blur(14px)',
+            opacity: transitioning ? 0.8 : 0.8,
+            transform: transitioning ? 'scale(1.06)' : 'scale(1.0)',
+            transition: 'opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1), transform 7000ms cubic-bezier(0.16, 1, 0.3, 1)',
+          }}
+        />
+
+        {/* Dark vignette so the hero text stays readable */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background:
+              'radial-gradient(ellipse at center, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.88) 100%)',
+          }}
+        />
+        {/* Bottom fade — fully opaque at the very bottom */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '50%',
+            background: 'linear-gradient(to bottom, transparent 0%, var(--color-bg) 100%)',
+          }}
+        />
+      </div>
+
+      {/* ── Content wrapper (max-width + padding) ──────────── */}
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          minHeight: '100svh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+          paddingBottom: 'clamp(60px, 8vw, 120px)',
+          paddingLeft: 'var(--page-margin)',
+          paddingRight: 'var(--page-margin)',
+          maxWidth: 'var(--max-width)',
+          margin: '0 auto',
+          width: '100%',
+        }}
+      >
+
+      {/* ── Status badge ────────────────────────────────────── */}
       <div
         ref={badgeRef}
         style={{
@@ -100,16 +216,13 @@ export default function Hero() {
             letterSpacing: '0.08em',
           }}
         >
-          Elérhető projektre
+          {t('hero.badge')}
         </span>
       </div>
 
-      {/* Main heading */}
+      {/* ── Main heading ────────────────────────────────────── */}
       <div style={{ marginBottom: 'clamp(32px, 4vw, 56px)' }}>
-        <div
-          ref={line1Ref}
-          style={{ overflow: 'hidden' }}
-        >
+        <div ref={line1Ref} style={{ overflow: 'hidden' }}>
           <h1
             className="font-display text-hero"
             style={{
@@ -124,10 +237,7 @@ export default function Hero() {
             Brand Designer.
           </h1>
         </div>
-        <div
-          ref={line2Ref}
-          style={{ overflow: 'hidden' }}
-        >
+        <div ref={line2Ref} style={{ overflow: 'hidden' }}>
           <h1
             className="font-display text-hero"
             style={{
@@ -144,7 +254,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Bottom row: tagline + buttons */}
+      {/* ── Bottom row ──────────────────────────────────────── */}
       <div
         style={{
           display: 'flex',
@@ -165,47 +275,23 @@ export default function Hero() {
             letterSpacing: '-0.01em',
           }}
         >
-          Brands that feel before they speak.
+          {t('hero.tagline')}
         </p>
 
         <div
           ref={buttonsRef}
-          style={{
-            display: 'flex',
-            gap: '12px',
-            flexWrap: 'wrap',
-          }}
+          style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}
         >
-          <a
-            href="#works"
-            onClick={scrollToWorks}
-            className="btn btn-ghost"
-          >
-            Munkáim ↓
+          <a href="#works" onClick={scrollTo('#works')} className="btn btn-ghost">
+            {t('hero.works')}
           </a>
-          <a
-            href="#contact"
-            onClick={scrollToContact}
-            className="btn btn-primary"
-          >
-            Írj nekem →
+          <a href="#contact" onClick={scrollTo('#contact')} className="btn btn-primary">
+            {t('hero.cta')}
           </a>
         </div>
       </div>
 
-      {/* Scroll indicator line */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '0',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '1px',
-          height: 'clamp(40px, 6vw, 80px)',
-          background: 'linear-gradient(to bottom, transparent, var(--color-border))',
-        }}
-      />
+      </div>{/* end content wrapper */}
     </section>
   );
 }
-

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { projects as realProjects } from '../data/projects';
+import { useLang } from '../context/LanguageContext';
 
 const projects = [
   ...realProjects,
@@ -17,6 +18,22 @@ const projects = [
     slug: '__cta__',
   },
 ];
+
+function WaitingText() {
+  const { t } = useLang();
+  return (
+    <span
+      style={{
+        fontFamily: 'var(--font-body)',
+        fontSize: 'var(--text-small)',
+        color: 'var(--color-text-muted)',
+        letterSpacing: '0.06em',
+      }}
+    >
+      {t('works.soon')}
+    </span>
+  );
+}
 
 function VoidCard({ index }: { index: string }) {
   return (
@@ -66,16 +83,7 @@ function VoidCard({ index }: { index: string }) {
       >
         +
       </div>
-      <span
-        style={{
-          fontFamily: 'var(--font-body)',
-          fontSize: 'var(--text-small)',
-          color: 'var(--color-text-muted)',
-          letterSpacing: '0.06em',
-        }}
-      >
-        Hamarosan
-      </span>
+      <WaitingText />
     </div>
   );
 }
@@ -175,9 +183,10 @@ function ProjectCard({ project, imgIndex }: ProjectCardProps) {
   };
 
   return (
-    <div
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+    <Link
+      href={`/works/${project.slug}`}
+      onMouseEnter={handleMouseEnter as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+      onMouseLeave={handleMouseLeave as unknown as React.MouseEventHandler<HTMLAnchorElement>}
       style={{
         flexShrink: 0,
         width: 'clamp(280px, 34vw, 480px)',
@@ -189,6 +198,8 @@ function ProjectCard({ project, imgIndex }: ProjectCardProps) {
         cursor: 'none',
         position: 'relative',
         background: project.gradient,
+        display: 'block',
+        textDecoration: 'none',
       }}
       data-cursor-expand
     >
@@ -317,11 +328,12 @@ function ProjectCard({ project, imgIndex }: ProjectCardProps) {
           {project.category} · {project.year}
         </p>
       </div>
-    </div>
+    </Link>
   );
 }
 
 export default function Works() {
+  const { t } = useLang();
   const sectionRef = useRef<HTMLElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -352,75 +364,84 @@ export default function Works() {
     return () => clearInterval(interval);
   }, []);
 
+  // Set section height so CSS sticky has room to scroll
   useEffect(() => {
-    const checkMobile = () => {
+    const update = () => {
       isMobileRef.current = window.innerWidth < 768;
+      const track = trackRef.current;
+      const sticky = stickyRef.current;
+      const section = sectionRef.current;
+      if (!track || !sticky || !section || isMobileRef.current) {
+        if (section) section.style.height = '';
+        return;
+      }
+      const trackW = track.scrollWidth;
+      const viewW = sticky.offsetWidth;
+      const scrollDist = Math.max(0, trackW - viewW + 80);
+      // section height = viewport + full scroll distance (+ padding for start/end pauses)
+      section.style.height = `${window.innerHeight + scrollDist + 800}px`;
     };
-    checkMobile();
-    window.addEventListener('resize', checkMobile, { passive: true });
 
-    let gsapInstance: typeof import('gsap')['gsap'] | null = null;
-    let scrollTriggerInstance: unknown = null;
+    update();
+    window.addEventListener('resize', update, { passive: true });
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  // GSAP scrub — no pin, CSS sticky handles the viewport lock
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    let killed = false;
 
     const initGsap = async () => {
       try {
-        const gsapModule = await import('gsap');
+        const { gsap } = await import('gsap');
         const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-        gsapInstance = gsapModule.gsap;
-        gsapInstance.registerPlugin(ScrollTrigger);
-        scrollTriggerInstance = ScrollTrigger;
+        if (killed) return;
+        gsap.registerPlugin(ScrollTrigger);
 
         if (isMobileRef.current) return;
 
         const track = trackRef.current;
         const section = sectionRef.current;
         const sticky = stickyRef.current;
-
         if (!track || !section || !sticky) return;
 
-        // Scroll all cards into view (last card near right edge)
         const getScrollAmount = () => {
-          const trackWidth = track.scrollWidth;
-          const viewWidth = sticky.offsetWidth;
-          return -(trackWidth - viewWidth + 80);
+          const trackW = track.scrollWidth;
+          const viewW = sticky.offsetWidth;
+          return -(trackW - viewW + 80);
         };
 
-        // Extra scroll to bring last card to horizontal center
         const getCenterOffset = () => {
-          const viewWidth = sticky.offsetWidth;
-          const approxCardWidth = Math.min(Math.max(280, viewWidth * 0.34), 480);
-          return Math.max(0, viewWidth / 2 - approxCardWidth / 2 - 80);
+          const viewW = sticky.offsetWidth;
+          const approxCard = Math.min(Math.max(280, viewW * 0.34), 480);
+          return Math.max(0, viewW / 2 - approxCard / 2 - 80);
         };
 
-        const startPause = 500;
-        const endPause   = 800;
-        const scrollAmt  = getScrollAmount();
-        const centerOff  = getCenterOffset();
-        const finalX     = scrollAmt - centerOff;
+        const scrollAmt = getScrollAmount();
+        const centerOff = getCenterOffset();
+        const finalX    = scrollAmt - centerOff;
 
-        const tl = gsapInstance.timeline({
+        // Timeline duration units map 1:1 to the scroll distance set above
+        const tl = gsap.timeline({
           scrollTrigger: {
             trigger: section,
             start: 'top top',
-            end: () => `+=${Math.abs(getScrollAmount()) + getCenterOffset() + startPause + endPause}`,
-            pin: true,
+            end: 'bottom bottom',
             scrub: 1,
             invalidateOnRefresh: true,
           },
         });
 
-        // Phase 1: belépő pause
-        tl.to(track, { x: 0, duration: startPause, ease: 'none' })
-        // Phase 2: fő vízszintes scroll
-          .to(track, { x: scrollAmt, ease: 'none', duration: Math.abs(scrollAmt) })
-        // Phase 3: utolsó kártya középre
-          .to(track, { x: finalX, ease: 'none', duration: centerOff || 1 })
-        // Phase 4: kilépő pause
-          .to(track, { x: finalX, duration: endPause, ease: 'none' });
+        tl.to(track, { x: 0,       duration: 400,                     ease: 'none' })
+          .to(track, { x: scrollAmt, duration: Math.abs(scrollAmt),    ease: 'none' })
+          .to(track, { x: finalX,   duration: Math.max(centerOff, 1),  ease: 'none' })
+          .to(track, { x: finalX,   duration: 400,                     ease: 'none' });
 
         return () => {
           tl.kill();
-          (ScrollTrigger as { getAll: () => { kill: () => void }[] }).getAll().forEach((t: { kill: () => void }) => t.kill());
+          (ScrollTrigger as { getAll: () => { kill: () => void }[] })
+            .getAll().forEach((t: { kill: () => void }) => t.kill());
         };
       } catch (err) {
         console.warn('GSAP load failed:', err);
@@ -428,9 +449,8 @@ export default function Works() {
     };
 
     const cleanup = initGsap();
-
     return () => {
-      window.removeEventListener('resize', checkMobile);
+      killed = true;
       cleanup?.then((fn) => fn?.());
     };
   }, []);
@@ -447,7 +467,8 @@ export default function Works() {
         ref={stickyRef}
         className="hidden md:flex"
         style={{
-          position: 'relative',
+          position: 'sticky',
+          top: 0,
           height: '100svh',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -480,7 +501,7 @@ export default function Works() {
                 background: 'var(--color-accent)',
               }}
             />
-            03 · Munkak
+            {t('works.label')}
           </div>
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '24px', flexWrap: 'wrap' }}>
             <h2
@@ -493,14 +514,14 @@ export default function Works() {
                 margin: 0,
               }}
             >
-              Válogatott projektek
+              {t('works.heading')}
             </h2>
             <Link
               href="/works"
               className="btn-text"
               style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-small)', marginBottom: '6px', whiteSpace: 'nowrap' }}
             >
-              Összes munka →
+              {t('works.all')}
             </Link>
           </div>
         </div>
@@ -547,15 +568,8 @@ export default function Works() {
               letterSpacing: '0.08em',
             }}
           >
-            Scroll →
+            {t('works.scroll')}
           </span>
-          <div
-            style={{
-              width: '40px',
-              height: '1px',
-              background: 'var(--color-border)',
-            }}
-          />
         </div>
       </div>
 
@@ -591,7 +605,7 @@ export default function Works() {
                 background: 'var(--color-accent)',
               }}
             />
-            03 · Munkak
+            {t('works.label')}
           </div>
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '16px', flexWrap: 'wrap' }}>
             <h2
@@ -603,14 +617,14 @@ export default function Works() {
                 margin: 0,
               }}
             >
-              Válogatott projektek
+              {t('works.heading')}
             </h2>
             <Link
               href="/works"
               className="btn-text"
               style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-small)', marginBottom: '4px', whiteSpace: 'nowrap' }}
             >
-              Összes munka →
+              {t('works.all')}
             </Link>
           </div>
         </div>

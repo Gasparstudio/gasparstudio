@@ -1,21 +1,23 @@
 ﻿'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useLang } from '../context/LanguageContext';
 
 const tools = ['Figma', 'Illustrator', 'After Effects', 'Photoshop'];
 
-const stats = [
-  { target: 5, suffix: '+', label: 'Év tapasztalat' },
-  { target: 40, suffix: '+', label: 'Projekt' },
-  { target: 12, suffix: '+', label: 'Ügyfél' },
+const statsConfig = [
+  { target: 5,  suffix: '+', labelKey: 'about.stat.exp' as const },
+  { target: 40, suffix: '+', labelKey: 'about.stat.projects' as const },
+  { target: 12, suffix: '+', labelKey: 'about.stat.clients' as const },
 ];
 
 export default function About() {
+  const { t } = useLang();
   const containerRef = useRef<HTMLElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
-  const [counts, setCounts] = useState(stats.map(() => 0));
+  const [counts, setCounts] = useState(statsConfig.map(() => 0));
 
   useEffect(() => {
     const elements = [leftRef.current, rightRef.current];
@@ -66,7 +68,7 @@ export default function About() {
         const tick = (now: number) => {
           const progress = Math.min((now - start) / duration, 1);
           const ease = 1 - Math.pow(1 - progress, 3);
-          setCounts(stats.map(s => Math.round(s.target * ease)));
+          setCounts(statsConfig.map(s => Math.round(s.target * ease)));
           if (progress < 1) requestAnimationFrame(tick);
         };
         requestAnimationFrame(tick);
@@ -108,7 +110,7 @@ export default function About() {
             background: 'var(--color-accent)',
           }}
         />
-        04 · Rólam
+        {t('about.label')}
       </div>
 
       {/* 2-column layout */}
@@ -164,7 +166,7 @@ export default function About() {
               margin: 0,
             }}
           >
-            Identitások, amelyek hatnak.
+            {t('about.heading')}
           </h2>
 
           <p
@@ -176,7 +178,7 @@ export default function About() {
               margin: 0,
             }}
           >
-            Brand designerként abban hiszek, hogy egy erős vizuális identitás nem díszítés — hanem stratégia. Budapest-alapú, globálisan gondolkodó.
+            {t('about.body')}
           </p>
 
           {/* Tools */}
@@ -185,7 +187,7 @@ export default function About() {
               className="section-label"
               style={{ marginBottom: '16px' }}
             >
-              Eszközök
+              {t('about.tools')}
             </p>
             <div
               style={{
@@ -221,11 +223,11 @@ export default function About() {
               display: 'flex',
               gap: '40px',
               paddingTop: '24px',
-              borderTop: '1px solid var(--color-border)',
+              paddingTop: '24px',
             }}
           >
-            {stats.map((stat, i) => (
-              <div key={stat.label}>
+            {statsConfig.map((stat, i) => (
+              <div key={stat.labelKey}>
                 <p
                   style={{
                     fontFamily: 'var(--font-display)',
@@ -247,7 +249,7 @@ export default function About() {
                     textTransform: 'uppercase',
                   }}
                 >
-                  {stat.label}
+                  {t(stat.labelKey)}
                 </p>
               </div>
             ))}
@@ -260,7 +262,7 @@ export default function About() {
               className="btn btn-ghost"
               style={{ display: 'inline-flex' }}
             >
-              CV letöltése ↓
+              {t('about.cv')}
             </a>
           </div>
         </div>

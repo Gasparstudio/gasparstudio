@@ -1,16 +1,18 @@
 ﻿'use client';
 
+import { useLang } from '../context/LanguageContext';
+
 const socials = [
   { label: 'LI', href: '#', title: 'LinkedIn' },
   { label: 'Be', href: '#', title: 'Behance' },
 ];
 
 export default function Footer() {
+  const { t } = useLang();
   return (
     <footer
       style={{
-        borderTop: '1px solid var(--color-border)',
-        paddingTop: '28px',
+          paddingTop: '28px',
         paddingBottom: '28px',
         paddingLeft: 'var(--page-margin)',
         paddingRight: 'var(--page-margin)',
@@ -34,7 +36,7 @@ export default function Footer() {
           margin: 0,
         }}
       >
-        © 2026 GASPAR · Brand Designer · Budapest
+        {t('footer.copy')}
       </p>
 
       {/* Social icons */}

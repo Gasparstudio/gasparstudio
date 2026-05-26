@@ -3,12 +3,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLang } from '../context/LanguageContext';
 
-const tools = ['Figma', 'Illustrator', 'After Effects', 'Photoshop'];
+const tools = ['Photoshop', 'Illustrator', 'InDesign', 'Figma', 'AI képgenerálás', 'Claude Code'];
 
 const statsConfig = [
-  { target: 5,  suffix: '+', labelKey: 'about.stat.exp' as const },
-  { target: 40, suffix: '+', labelKey: 'about.stat.projects' as const },
-  { target: 12, suffix: '+', labelKey: 'about.stat.clients' as const },
+  { target: 8,  suffix: '+', labelKey: 'about.stat.exp' as const },
+  { target: 50, suffix: '+', labelKey: 'about.stat.projects' as const },
+  { target: 25, suffix: '+', labelKey: 'about.stat.clients' as const },
 ];
 
 export default function About() {
@@ -92,27 +92,6 @@ export default function About() {
         margin: '0 auto',
       }}
     >
-      {/* Section label */}
-      <div
-        className="section-label"
-        style={{
-          marginBottom: '64px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '12px',
-        }}
-      >
-        <span
-          style={{
-            display: 'block',
-            width: '32px',
-            height: '1px',
-            background: 'var(--color-accent)',
-          }}
-        />
-        {t('about.label')}
-      </div>
-
       {/* 2-column layout */}
       <div
         style={{

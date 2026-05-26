@@ -4,8 +4,8 @@ import { useEffect, useRef } from 'react';
 import { useLang } from '../context/LanguageContext';
 
 const socials = [
-  { label: 'LinkedIn', href: '#', icon: 'in' },
-  { label: 'Behance', href: '#', icon: 'Be' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/gáspár-bálint-042721195/', icon: 'in' },
+  { label: 'Behance', href: 'https://www.behance.net/gasparbalint', icon: 'Be' },
 ];
 
 export default function Contact() {
@@ -56,27 +56,6 @@ export default function Contact() {
         position: 'relative',
       }}
     >
-      {/* Section label */}
-      <div
-        className="section-label"
-        style={{
-          marginBottom: '64px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '12px',
-        }}
-      >
-        <span
-          style={{
-            display: 'block',
-            width: '32px',
-            height: '1px',
-            background: 'var(--color-accent)',
-          }}
-        />
-        {t('contact.label')}
-      </div>
-
       <div
         ref={contentRef}
         style={{

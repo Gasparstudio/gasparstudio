@@ -3,21 +3,28 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { projects as realProjects } from '../data/projects';
+import type { Project } from '../data/projects';
 import { useLang } from '../context/LanguageContext';
 
-const projects = [
-  ...realProjects,
-  {
-    index: String(realProjects.length + 1).padStart(2, '0'),
-    title: '__cta__',
-    category: null as string | null,
-    year: null as string | null,
-    gradient: '',
-    accentColor: '',
-    images: [] as string[],
-    slug: '__cta__',
-  },
-];
+function shuffleArr<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const ctaCard = {
+  index: String(realProjects.length + 1).padStart(2, '0'),
+  title: '__cta__',
+  category: null as string | null,
+  year: null as string | null,
+  gradient: '',
+  accentColor: '',
+  images: [] as string[],
+  slug: '__cta__',
+};
 
 function WaitingText() {
   const { t } = useLang();
@@ -156,8 +163,90 @@ function CTACard({ wordIndex }: { wordIndex: number }) {
   );
 }
 
+function LogofolioCard({ project }: { project: { index: string; title: string; category: string | null; year: string | null; images: string[] } }) {
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    const imgs = project.images;
+    if (!imgs || imgs.length < 2) return;
+    const id = setInterval(() => {
+      setIdx(prev => (prev + 1) % imgs.length);
+    }, 1000);
+    return () => clearInterval(id);
+  }, [project.images]);
+
+  return (
+    <div
+      style={{
+        flexShrink: 0,
+        width: 'clamp(280px, 34vw, 480px)',
+        aspectRatio: '4 / 5',
+        borderRadius: 'var(--card-radius-lg)',
+        overflow: 'hidden',
+        border: '1px solid var(--color-border)',
+        position: 'relative',
+        background: '#000000',
+      }}
+    >
+      {project.images.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          alt=""
+          style={{
+            position: 'absolute',
+            top: '22%',
+            left: '18%',
+            width: '63%',
+            height: '50%',
+            objectFit: 'contain',
+            opacity: i === idx ? 1 : 0,
+            transition: 'opacity 500ms ease',
+          }}
+        />
+      ))}
+
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.85) 100%)' }} />
+
+      <span style={{
+        position: 'absolute', top: '20px', left: '24px',
+        fontFamily: 'var(--font-body)', fontSize: 'var(--text-micro)',
+        fontWeight: 500, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em',
+      }}>
+        {project.index}
+      </span>
+
+      <div style={{ position: 'absolute', bottom: '24px', left: '24px', right: '24px' }}>
+        <h3 style={{
+          fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2.5vw, 30px)',
+          fontWeight: 650, color: '#ffffff', margin: '0 0 6px',
+          lineHeight: 1.1, letterSpacing: '-0.02em',
+        }}>
+          {project.title}
+        </h3>
+        <p style={{
+          fontFamily: 'var(--font-body)', fontSize: 'var(--text-small)',
+          fontWeight: 400, color: 'rgba(255,255,255,0.6)', margin: 0,
+          letterSpacing: '0.02em',
+        }}>
+          {project.category} · {project.year}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 interface ProjectCardProps {
-  project: typeof projects[0] & { images?: string[] };
+  project: {
+    slug: string;
+    index: string;
+    title: string;
+    category: string | null;
+    year: string | null;
+    gradient: string;
+    accentColor: string;
+    images: string[];
+  };
   imgIndex: number;
 }
 
@@ -205,7 +294,7 @@ function ProjectCard({ project, imgIndex }: ProjectCardProps) {
     >
       {/* Images/videos (cycling) or placeholder */}
       {project.images ? (
-        project.images.map((src, i) => {
+        project.images.map((src: string, i: number) => {
           const isVideo = src.endsWith('.mp4');
           const visible = i === imgIndex;
           const mediaStyle: React.CSSProperties = {
@@ -260,22 +349,6 @@ function ProjectCard({ project, imgIndex }: ProjectCardProps) {
           background: 'linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.75) 100%)',
         }}
       />
-
-      {/* Index — top left */}
-      <span
-        style={{
-          position: 'absolute',
-          top: '20px',
-          left: '24px',
-          fontFamily: 'var(--font-body)',
-          fontSize: 'var(--text-micro)',
-          fontWeight: 500,
-          color: 'rgba(255,255,255,0.5)',
-          letterSpacing: '0.1em',
-        }}
-      >
-        {project.index}
-      </span>
 
       {/* Arrow — top right */}
       <span
@@ -339,7 +412,8 @@ export default function Works() {
   const trackRef = useRef<HTMLDivElement>(null);
   const isMobileRef = useRef(false);
 
-  const [imgIndices, setImgIndices] = useState<number[]>(projects.map(() => 0));
+  const [projects] = useState(() => [...shuffleArr(realProjects), ctaCard]);
+  const [imgIndices, setImgIndices] = useState<number[]>(() => projects.map(() => 0));
   const [ctaWordIndex, setCtaWordIndex] = useState(0);
 
   useEffect(() => {
@@ -484,25 +558,6 @@ export default function Works() {
             flexShrink: 0,
           }}
         >
-          <div
-            className="section-label"
-            style={{
-              marginBottom: '16px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-            }}
-          >
-            <span
-              style={{
-                display: 'block',
-                width: '32px',
-                height: '1px',
-                background: 'var(--color-accent)',
-              }}
-            />
-            {t('works.label')}
-          </div>
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '24px', flexWrap: 'wrap' }}>
             <h2
               style={{
@@ -543,6 +598,7 @@ export default function Works() {
             {projects.map((project, i) => {
               if (project.title === null) return <VoidCard key={project.index} index={project.index} />;
               if (project.title === '__cta__') return <CTACard key={project.index} wordIndex={ctaWordIndex} />;
+              if (project.slug === 'logofolio') return <LogofolioCard key={project.index} project={project} />;
               return <ProjectCard key={project.index} project={project} imgIndex={imgIndices[i]} />;
             })}
           </div>
@@ -588,25 +644,6 @@ export default function Works() {
             marginBottom: '40px',
           }}
         >
-          <div
-            className="section-label"
-            style={{
-              marginBottom: '16px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-            }}
-          >
-            <span
-              style={{
-                display: 'block',
-                width: '32px',
-                height: '1px',
-                background: 'var(--color-accent)',
-              }}
-            />
-            {t('works.label')}
-          </div>
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '16px', flexWrap: 'wrap' }}>
             <h2
               style={{
@@ -657,7 +694,9 @@ export default function Works() {
                   ? <VoidCard index={project.index} />
                   : project.title === '__cta__'
                     ? <CTACard wordIndex={ctaWordIndex} />
-                    : <ProjectCard project={project} imgIndex={imgIndices[projects.indexOf(project)]} />
+                    : project.slug === 'logofolio'
+                      ? <LogofolioCard project={project} />
+                      : <ProjectCard project={project} imgIndex={imgIndices[projects.indexOf(project)]} />
                 }
               </div>
             ))}

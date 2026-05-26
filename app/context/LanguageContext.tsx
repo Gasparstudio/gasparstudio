@@ -21,7 +21,13 @@ const translations = {
 
     // ValueProp
     'vp.label': '02 · Miért én',
-    'vp.text':  'Brand design nem csak logót jelent. Olyan vizuális rendszereket épít, amelyek az első pillantásra elmondják, kik vagytok — és miért számítotok.',
+    'vp.text':  'Nyolc éve csinálom ezt és egy tanulságot biztosan levontam. A legjobb márkák nem csak jól néznek ki, hanem azonnal érzést keltenek. Nálam az egész brand összeáll, és egyből látszik kik vagytok.',
+    'vp.stat1.value': '8+',
+    'vp.stat1.label': 'Év tapasztalat',
+    'vp.stat2.value': '50+',
+    'vp.stat2.label': 'Elvégzett projekt',
+    'vp.stat3.value': '25+',
+    'vp.stat3.label': 'Elégedett ügyfél',
 
     // Works
     'works.label':   '03 · Munkák',
@@ -35,8 +41,8 @@ const translations = {
 
     // About
     'about.label':   '04 · Rólam',
-    'about.heading': 'Identitások, amelyek hatnak.',
-    'about.body':    'Brand designerként abban hiszek, hogy egy erős vizuális identitás nem díszítés — hanem stratégia. Budapest-alapú, globálisan gondolkodó.',
+    'about.heading': 'Ahol a brand összeáll.',
+    'about.body':    'Grafikusként végeztem, aztán nyomdán és ügynökségnél is megfordultam. Ma olyan brandeknek dolgozom mint a Simon\'s Burger, a Smashy és a Travis Tenders. Nem csak egy logót kapsz tőlem, hanem egy egész képet a brandedről.',
     'about.tools':   'Eszközök',
     'about.cv':      'CV letöltése ↓',
     'about.stat.exp':      'Év tapasztalat',
@@ -46,7 +52,7 @@ const translations = {
     // Contact
     'contact.label':    '05 · Kapcsolat',
     'contact.question': 'Van egy projekted?',
-    'contact.desc':     'Legyen szó brand identitásról, vizuális rendszerről vagy kampányról — írj, és nézzük meg együtt, mit lehet alkotni.',
+    'contact.desc':     'Velem a munka egyszerű és közös. Segítek együtt gondolkodni. Legyen szó brand identitásról, logóról vagy komplett vizuális rendszerről, nézzük meg mit hozhatunk ki a márkádból.',
     'contact.cta':      'Írj nekem →',
 
     // Footer
@@ -94,7 +100,13 @@ const translations = {
 
     // ValueProp
     'vp.label': '02 · Why me',
-    'vp.text':  'Brand design is more than a logo. It builds visual systems that communicate who you are at first glance — and why you matter.',
+    'vp.text':  'Eight years in brand design taught me one thing. The best brands don\'t just look good, they make people feel something. Your whole brand comes together with me, and it hits from the very first glance.',
+    'vp.stat1.value': '8+',
+    'vp.stat1.label': 'Years experience',
+    'vp.stat2.value': '50+',
+    'vp.stat2.label': 'Completed projects',
+    'vp.stat3.value': '25+',
+    'vp.stat3.label': 'Happy clients',
 
     // Works
     'works.label':   '03 · Works',
@@ -108,8 +120,8 @@ const translations = {
 
     // About
     'about.label':   '04 · About',
-    'about.heading': 'Identities that resonate.',
-    'about.body':    'As a brand designer, I believe a strong visual identity is not decoration — it is strategy. Budapest-based, globally minded.',
+    'about.heading': 'Where it all comes together.',
+    'about.body':    'I studied graphic design, then worked in print and at an agency. Now I work with brands like Simon\'s Burger, Smashy and Travis Tenders. You don\'t just get a logo from me, you get the full picture of what your brand looks like in real life.',
     'about.tools':   'Tools',
     'about.cv':      'Download CV ↓',
     'about.stat.exp':      'Years experience',
@@ -119,7 +131,7 @@ const translations = {
     // Contact
     'contact.label':    '05 · Contact',
     'contact.question': 'Got a project?',
-    'contact.desc':     'Whether it\'s a brand identity, visual system or campaign — reach out and let\'s see what we can create together.',
+    'contact.desc':     'Working with me is easy and collaborative. I help you think it through. Whether it\'s a brand identity, logo, or complete visual system, let\'s find what\'s best for your brand.',
     'contact.cta':      'Get in touch →',
 
     // Footer

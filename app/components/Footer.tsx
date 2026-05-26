@@ -3,8 +3,8 @@
 import { useLang } from '../context/LanguageContext';
 
 const socials = [
-  { label: 'LI', href: '#', title: 'LinkedIn' },
-  { label: 'Be', href: '#', title: 'Behance' },
+  { label: 'LI', href: 'https://www.linkedin.com/in/gáspár-bálint-042721195/', title: 'LinkedIn' },
+  { label: 'Be', href: 'https://www.behance.net/gasparbalint', title: 'Behance' },
 ];
 
 export default function Footer() {

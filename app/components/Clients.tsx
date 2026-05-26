@@ -2,11 +2,15 @@
 
 import { useLang } from '../context/LanguageContext';
 
-const logos: { src: string; alt: string; large?: boolean }[] = [
+const logos: { src: string; alt: string; large?: boolean; dark?: boolean }[] = [
   { src: '/partners/Kamfor_logo_logotipia_white_png.png', alt: 'Kámfor' },
   { src: '/partners/se.png', alt: 'SE', large: true },
   { src: '/partners/Simon_s_Burger_all_CMYK_simon_s_burger_green.webp', alt: "Simon's Burger" },
   { src: '/partners/smashy .png', alt: 'Smashy' },
+  { src: '/partners/kanvas_logo_white.png', alt: 'Kanvas' },
+  { src: '/partners/buddys.png', alt: "Buddy's", dark: true },
+  { src: '/partners/trav.png', alt: "Travis' Tenders", dark: true },
+  { src: '/partners/sarkanyvolgy_2-02.png', alt: 'Sárkány Völgy Mese Fesztivál', dark: true },
 ];
 
 export default function Clients() {
@@ -91,7 +95,8 @@ export default function Clients() {
               height: logo.large ? 'clamp(56px, 6.5vw, 88px)' : 'clamp(28px, 3vw, 44px)',
               width: 'auto',
               objectFit: 'contain',
-              filter: 'brightness(0) invert(1)',
+              filter: logo.dark ? 'invert(1)' : 'brightness(0) invert(1)',
+              mixBlendMode: logo.dark ? 'screen' : 'normal',
               opacity: 0.35,
               transition: 'opacity 300ms ease',
               userSelect: 'none',

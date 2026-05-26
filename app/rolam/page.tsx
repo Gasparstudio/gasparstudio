@@ -222,10 +222,6 @@ export default function RolamPage() {
         >
           {/* Section header */}
           <div style={{ padding: '0 var(--page-margin)', marginBottom: 'clamp(36px, 5vw, 56px)', flexShrink: 0 }}>
-            <div className="section-label" style={{ marginBottom: '14px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <span style={{ display: 'block', width: '32px', height: '1px', background: 'var(--color-accent)' }} />
-              04 · Rólam
-            </div>
             <h1 className="text-h2" style={{ margin: 0, color: 'var(--color-text-primary)' }}>
               Mérföldkövek
             </h1>
@@ -586,10 +582,6 @@ function MobileTimeline() {
       style={{ paddingTop: 'clamp(64px, 10vw, 96px)', paddingBottom: 'clamp(48px, 8vw, 80px)' }}
     >
       <div className="page-container" style={{ marginBottom: '48px' }}>
-        <div className="section-label" style={{ marginBottom: '14px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <span style={{ display: 'block', width: '32px', height: '1px', background: 'var(--color-accent)' }} />
-          04 · Rólam
-        </div>
         <h1 className="text-h2" style={{ margin: 0, color: 'var(--color-text-primary)' }}>
           Mérföldkövek
         </h1>

@@ -1,10 +1,12 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { projects, Project } from '../data/projects';
 import CustomCursor from '../components/CustomCursor';
 import ScrollProgress from '../components/ScrollProgress';
+import Footer from '../components/Footer';
 
 const ALL = 'Összes';
 
@@ -277,11 +279,26 @@ function Lightbox({ project, onClose }: { project: Project; onClose: () => void 
   );
 }
 
+// ─── Video Slide ──────────────────────────────────────────────
+function VideoSlide({ src, visible }: { src: string; visible: boolean }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    if (visible) { ref.current.currentTime = 0; ref.current.play(); }
+    else ref.current.pause();
+  }, [visible]);
+  return (
+    <video ref={ref} src={src} muted playsInline style={{
+      position: 'absolute', inset: 0, width: '100%', height: '100%',
+      objectFit: 'cover', opacity: visible ? 1 : 0, transition: 'opacity 600ms ease',
+    }} />
+  );
+}
+
 // ─── Project Card ─────────────────────────────────────────────
-function ProjectCard({ project, onClick }: { project: Project; onClick: () => void }) {
+function ProjectCard({ project, onClick, imgIndex }: { project: Project; onClick: () => void; imgIndex: number }) {
   const [hovered, setHovered] = useState(false);
-  const first = project.images?.[0];
-  const isVideo = first?.endsWith('.mp4');
+  const isLogofolio = project.slug === 'logofolio';
 
   return (
     <div
@@ -302,19 +319,29 @@ function ProjectCard({ project, onClick }: { project: Project; onClick: () => vo
         boxShadow: hovered ? '0 24px 64px rgba(0,0,0,0.6)' : 'none',
       }}
     >
-      {first && !isVideo && (
-        <img
-          src={first}
-          alt={project.title}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-          }}
-        />
-      )}
+      {project.images?.map((src, i) => {
+        const isVideo = src.endsWith('.mp4');
+        const visible = i === imgIndex;
+        return isVideo ? (
+          <VideoSlide key={src} src={src} visible={visible} />
+        ) : (
+          <img
+            key={src}
+            src={src}
+            alt=""
+            style={{
+              position: 'absolute',
+              top:    isLogofolio ? '22%'  : 0,
+              left:   isLogofolio ? '18%'  : 0,
+              width:  isLogofolio ? '63%'  : '100%',
+              height: isLogofolio ? '56%'  : '100%',
+              objectFit: isLogofolio ? 'contain' : 'cover',
+              opacity: visible ? 1 : 0,
+              transition: 'opacity 600ms ease',
+            }}
+          />
+        );
+      })}
 
       <div
         style={{
@@ -323,21 +350,6 @@ function ProjectCard({ project, onClick }: { project: Project; onClick: () => vo
           background: 'linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.82) 100%)',
         }}
       />
-
-      <span
-        style={{
-          position: 'absolute',
-          top: '20px',
-          left: '24px',
-          fontFamily: 'var(--font-body)',
-          fontSize: 'var(--text-micro)',
-          fontWeight: 500,
-          color: 'rgba(255,255,255,0.45)',
-          letterSpacing: '0.1em',
-        }}
-      >
-        {project.index}
-      </span>
 
       <span
         style={{
@@ -383,16 +395,34 @@ function ProjectCard({ project, onClick }: { project: Project; onClick: () => vo
 }
 
 // ─── Page ─────────────────────────────────────────────────────
+const SUBPAGES = new Set(['face', 'void', 'mozzano']);
+
 export default function WorksPage() {
+  const router = useRouter();
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState(ALL);
   const [lightbox, setLightbox] = useState<Project | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [imgIndices, setImgIndices] = useState<number[]>(() => projects.map(() => 0));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const sequence = projects
+      .map((p, i) => ({ i, len: p.images?.length ?? 0 }))
+      .filter(({ len }) => len > 1);
+    if (sequence.length === 0) return;
+    let pointer = 0;
+    const id = setInterval(() => {
+      const { i, len } = sequence[pointer];
+      setImgIndices(prev => { const next = [...prev]; next[i] = (next[i] + 1) % len; return next; });
+      pointer = (pointer + 1) % sequence.length;
+    }, 500);
+    return () => clearInterval(id);
   }, []);
 
   const filtered = projects.filter((p) => {
@@ -475,20 +505,6 @@ export default function WorksPage() {
           className="page-container"
           style={{ paddingTop: 'clamp(48px, 8vw, 96px)', paddingBottom: 'clamp(40px, 6vw, 64px)' }}
         >
-          <div
-            className="section-label"
-            style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}
-          >
-            <span
-              style={{
-                display: 'block',
-                width: '32px',
-                height: '1px',
-                background: 'var(--color-accent)',
-              }}
-            />
-            Portfólió
-          </div>
           <div
             style={{
               display: 'flex',
@@ -619,7 +635,12 @@ export default function WorksPage() {
                 <ProjectCard
                   key={project.slug}
                   project={project}
-                  onClick={() => setLightbox(project)}
+                  imgIndex={imgIndices[projects.indexOf(project)]}
+                  onClick={() =>
+                    SUBPAGES.has(project.slug)
+                      ? router.push(`/works/${project.slug}`)
+                      : setLightbox(project)
+                  }
                 />
               ))}
             </div>
@@ -627,39 +648,7 @@ export default function WorksPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer
-        style={{
-          padding: 'clamp(28px, 4vw, 40px) var(--page-margin)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '12px',
-        }}
-      >
-        <Link
-          href="/"
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: '14px',
-            letterSpacing: '0.08em',
-            color: 'var(--color-text-primary)',
-            textDecoration: 'none',
-          }}
-        >
-          GASPAR
-        </Link>
-        <span
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 'var(--text-small)',
-            color: 'var(--color-text-muted)',
-          }}
-        >
-          © 2026
-        </span>
-      </footer>
+      <Footer />
 
       {/* Lightbox */}
       {lightbox && <Lightbox project={lightbox} onClose={() => setLightbox(null)} />}

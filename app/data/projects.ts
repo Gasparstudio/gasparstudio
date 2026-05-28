@@ -83,7 +83,7 @@ export const projects: Project[] = [
     title: 'Logofolio',
     category: 'Logo Design',
     year: '2022–2026',
-    gradient: 'linear-gradient(135deg, #0a0a0a 0%, #111111 100%)',
+    gradient: '#000000',
     accentColor: '#888888',
     images: [
       '/works/logofolio/logos_tight/poker-nomix.png',

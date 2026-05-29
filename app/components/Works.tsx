@@ -176,7 +176,8 @@ function LogofolioCard({ project }: { project: { index: string; title: string; c
   }, [project.images]);
 
   return (
-    <div
+    <Link
+      href="/works/logofolio"
       style={{
         flexShrink: 0,
         width: 'clamp(280px, 34vw, 480px)',
@@ -186,7 +187,11 @@ function LogofolioCard({ project }: { project: { index: string; title: string; c
         border: '1px solid var(--color-border)',
         position: 'relative',
         background: '#000000',
+        display: 'block',
+        textDecoration: 'none',
+        cursor: 'none',
       }}
+      data-cursor-expand
     >
       {project.images.map((src, i) => (
         <img
@@ -232,7 +237,7 @@ function LogofolioCard({ project }: { project: { index: string; title: string; c
           {project.category} · {project.year}
         </p>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -247,11 +252,19 @@ interface ProjectCardProps {
     accentColor: string;
     images: string[];
   };
-  imgIndex: number;
 }
 
-function ProjectCard({ project, imgIndex }: ProjectCardProps) {
+function ProjectCard({ project }: ProjectCardProps) {
   const arrowRef = useRef<HTMLSpanElement>(null);
+  const [imgIndex, setImgIndex] = useState(0);
+
+  useEffect(() => {
+    if (!project.images || project.images.length <= 1) return;
+    const id = setInterval(() => {
+      setImgIndex(prev => (prev + 1) % project.images.length);
+    }, 1800);
+    return () => clearInterval(id);
+  }, [project.images]);
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
@@ -414,28 +427,12 @@ export default function Works() {
 
   const [projects, setProjects] = useState(() => [...realProjects, ctaCard]);
   useEffect(() => { setProjects([...shuffleArr(realProjects), ctaCard]); }, []);
-  const [imgIndices, setImgIndices] = useState<number[]>(() => projects.map(() => 0));
   const [ctaWordIndex, setCtaWordIndex] = useState(0);
 
   useEffect(() => {
-    const sequence = projects
-      .map((p, i) => ({ i, type: p.title === '__cta__' ? 'cta' : 'img', len: p.images?.length ?? 0 }))
-      .filter(({ type, len }) => type === 'cta' || len > 1);
-    if (sequence.length === 0) return;
-    let pointer = 0;
     const interval = setInterval(() => {
-      const item = sequence[pointer];
-      if (item.type === 'cta') {
-        setCtaWordIndex(prev => (prev + 1) % CTA_WORDS.length);
-      } else {
-        setImgIndices(prev => {
-          const next = [...prev];
-          next[item.i] = (next[item.i] + 1) % projects[item.i].images!.length;
-          return next;
-        });
-      }
-      pointer = (pointer + 1) % sequence.length;
-    }, 500);
+      setCtaWordIndex(prev => (prev + 1) % CTA_WORDS.length);
+    }, 1800);
     return () => clearInterval(interval);
   }, []);
 
@@ -600,7 +597,7 @@ export default function Works() {
               if (project.title === null) return <VoidCard key={project.index} index={project.index} />;
               if (project.title === '__cta__') return <CTACard key={project.index} wordIndex={ctaWordIndex} />;
               if (project.slug === 'logofolio') return <LogofolioCard key={project.index} project={project} />;
-              return <ProjectCard key={project.index} project={project} imgIndex={imgIndices[i]} />;
+              return <ProjectCard key={project.index} project={project} />;
             })}
           </div>
         </div>
@@ -697,7 +694,7 @@ export default function Works() {
                     ? <CTACard wordIndex={ctaWordIndex} />
                     : project.slug === 'logofolio'
                       ? <LogofolioCard project={project} />
-                      : <ProjectCard project={project} imgIndex={imgIndices[projects.indexOf(project)]} />
+                      : <ProjectCard project={project} />
                 }
               </div>
             ))}

@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { LanguageProvider } from "./context/LanguageContext";
 import PageTransition from "./components/PageTransition";
+import LangPill from "./components/LangPill";
 
 const sora = localFont({
   src: "../public/fonts/Sora/Sora-VariableFont_wght.ttf",
@@ -49,6 +50,7 @@ export default function RootLayout({
     >
       <body>
         <LanguageProvider>
+          <LangPill />
           <PageTransition>
             {children}
           </PageTransition>

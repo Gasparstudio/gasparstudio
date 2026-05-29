@@ -141,31 +141,6 @@ export default function Hero() {
           width: '100%',
         }}
       >
-        {/* Badge */}
-        <div
-          ref={badgeRef}
-          style={{
-            position: 'absolute',
-            top: '40px',
-            right: 'var(--page-margin)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '8px 16px',
-            borderRadius: '999px',
-            border: '1px solid var(--color-border)',
-            background: 'var(--color-surface)',
-          }}
-        >
-          <span
-            className="pulse-dot"
-            style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#4ADE80', flexShrink: 0 }}
-          />
-          <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-micro)', color: 'var(--color-text-secondary)', letterSpacing: '0.08em' }}>
-            {t('hero.badge')}
-          </span>
-        </div>
-
         {/* Left: text */}
         <div style={{ flex: '1 1 auto' }}>
           <div ref={line1Ref} style={{ overflow: 'hidden' }}>

@@ -37,6 +37,139 @@ const FONTS = `
   }
 `;
 
+const POLAROIDS = [
+  { src: '/works/mozzano/Artboard%201.png', rotate: '-5deg',  delay: 0   },
+  { src: '/works/mozzano/Artboard%208.png', rotate: '2.5deg', delay: 80  },
+  { src: '/works/mozzano/dobozos.png',       rotate: '-2deg',  delay: 160 },
+];
+
+const SOCIAL_IMGS = [
+  '/works/mozzano/Artboard%203.png',
+  '/works/mozzano/Artboard%206.png',
+  '/works/mozzano/Artboard%207.png',
+];
+
+function SocialStatement() {
+  const [idx, setIdx] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setVisible(false);
+      setTimeout(() => {
+        setIdx(p => (p + 1) % SOCIAL_IMGS.length);
+        setVisible(true);
+      }, 350);
+    }, 2200);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div style={{
+      display: 'grid', gridTemplateColumns: '1fr 3fr', gap: 'clamp(32px, 5vw, 80px)',
+      alignItems: 'center', padding: 'clamp(56px, 10vw, 130px) 0',
+      borderTop: '1px solid rgba(17,17,17,0.07)',
+    }}>
+      {/* Left — cycling image frame */}
+      <div style={{
+        borderRadius: '20px',
+        overflow: 'hidden',
+        boxShadow: '0 12px 48px rgba(0,0,0,0.10)',
+        aspectRatio: '4 / 5',
+        background: '#f0ede8',
+      }}>
+        <img
+          src={SOCIAL_IMGS[idx]}
+          alt=""
+          style={{
+            width: '100%', height: '100%',
+            objectFit: 'cover', display: 'block',
+            opacity: visible ? 1 : 0,
+            transition: 'opacity 350ms ease',
+          }}
+        />
+      </div>
+
+      {/* Right — text */}
+      <div>
+        <h2 style={{
+          fontFamily: 'CabinetGrotesk, var(--font-display)',
+          fontSize: 'clamp(32px, 5.5vw, 86px)',
+          fontWeight: 800, color: '#111',
+          letterSpacing: '-0.04em', lineHeight: 1.05,
+          margin: '0 0 16px', maxWidth: '14ch',
+        }}>
+          Még nem uraltuk le az egész internetet.
+        </h2>
+        <p style={{
+          fontFamily: 'CabinetGrotesk, var(--font-display)',
+          fontSize: 'clamp(32px, 5.5vw, 86px)',
+          fontWeight: 800, color: WARM,
+          letterSpacing: '-0.04em', lineHeight: 1.05,
+          margin: 0,
+        }}>
+          MÉG.
+        </p>
+      </div>
+
+    </div>
+  );
+}
+
+function PolaroidSection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setInView(true); obs.disconnect(); } },
+      { threshold: 0.25 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} style={{
+      display: 'flex', justifyContent: 'center', alignItems: 'flex-end',
+      margin: 'clamp(56px, 9vw, 120px) 0',
+    }}>
+      {POLAROIDS.map((p, i) => (
+        <div key={i} style={{
+          background: '#fff',
+          padding: 'clamp(10px, 1.8vw, 22px) clamp(10px, 1.8vw, 22px) clamp(24px, 4vw, 44px)',
+          boxShadow: '0 8px 40px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.08)',
+          width: 'clamp(180px, 26vw, 320px)',
+          flexShrink: 0,
+          cursor: 'none',
+          marginLeft: i > 0 ? 'clamp(-60px, -8vw, -100px)' : 0,
+          zIndex: i,
+          transform: inView
+            ? `rotate(${p.rotate})`
+            : `rotate(${p.rotate}) translateY(60px)`,
+          opacity: inView ? 1 : 0,
+          transition: `transform 900ms cubic-bezier(0.16, 1, 0.3, 1) ${p.delay}ms, opacity 400ms ease ${p.delay}ms`,
+        }}
+          onMouseEnter={e => {
+            e.currentTarget.style.transform = 'rotate(0deg) scale(1.05)';
+            e.currentTarget.style.zIndex = '10';
+            e.currentTarget.style.transition = 'transform 300ms cubic-bezier(0.16,1,0.3,1)';
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.transform = `rotate(${p.rotate})`;
+            e.currentTarget.style.zIndex = String(i);
+            e.currentTarget.style.transition = 'transform 300ms cubic-bezier(0.16,1,0.3,1)';
+          }}
+        >
+          <img src={p.src} alt="" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function MozzanoPage() {
   const [scrolled,    setScrolled]    = useState(false);
   const [activeSlice, setActiveSlice] = useState(0);
@@ -56,29 +189,44 @@ export default function MozzanoPage() {
 
   useEffect(() => {
     const onWheel = (e: WheelEvent) => {
-      if (!heroRef.current || e.deltaY <= 0) return;
+      if (!heroRef.current) return;
       const rect = heroRef.current.getBoundingClientRect();
-      // Hero nem látszik teljesen
       if (rect.top > 10 || rect.bottom < window.innerHeight - 10) return;
-      // Mind a 4 szelet megvolt → engedjük tovább
-      if (stepRef.current >= N - 1) {
+
+      const goingDown = e.deltaY > 0;
+      const goingUp = e.deltaY < 0;
+
+      // Lefelé: ha még nem értünk a végére
+      if (goingDown && stepRef.current < N - 1) {
+        e.preventDefault();
+        if (cooldownRef.current) return;
+        const newStep = stepRef.current + 1;
+        stepRef.current = newStep;
+        if (pizzaRef.current) pizzaRef.current.style.transform = `rotate(${newStep * 90}deg)`;
+        setActiveSlice(newStep);
+        cooldownRef.current = true;
+        setTimeout(() => { cooldownRef.current = false; }, 520);
+        return;
+      }
+
+      // Lefelé: az utolsó lépésnél engedjük tovább
+      if (goingDown && stepRef.current >= N - 1) {
         stepRef.current = N;
         return;
       }
 
-      e.preventDefault();
-      if (cooldownRef.current) return;
-
-      const newStep = stepRef.current + 1;
-      stepRef.current = newStep;
-
-      if (pizzaRef.current) {
-        pizzaRef.current.style.transform = `rotate(${newStep * 90}deg)`;
+      // Felfelé: ha van visszafelé lépés (beleértve a "befejezett" N állapotot is)
+      if (goingUp && stepRef.current > 0) {
+        e.preventDefault();
+        if (cooldownRef.current) return;
+        // N állapotból visszalépünk N-1-re
+        const newStep = Math.min(stepRef.current, N - 1) - 1;
+        stepRef.current = newStep;
+        if (pizzaRef.current) pizzaRef.current.style.transform = `rotate(${newStep * 90}deg)`;
+        setActiveSlice(newStep);
+        cooldownRef.current = true;
+        setTimeout(() => { cooldownRef.current = false; }, 520);
       }
-      setActiveSlice(newStep);
-
-      cooldownRef.current = true;
-      setTimeout(() => { cooldownRef.current = false; }, 870);
     };
 
     window.addEventListener('wheel', onWheel, { passive: false });
@@ -124,14 +272,15 @@ export default function MozzanoPage() {
         <div style={{
           height: '100vh', background: BG,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          overflow: 'hidden',
+          overflow: 'hidden', position: 'relative',
         }}>
 
-          {/* LEFT — Logo */}
+          {/* LEFT — Logo (absolute so pizza rotation can't affect its position) */}
           <div style={{
-            alignSelf: 'flex-start',
-            marginTop: 'clamp(120px, 22vh, 220px)',
-            flexShrink: 0, zIndex: 2,
+            position: 'absolute',
+            top: 'clamp(100px, 20vh, 200px)',
+            left: 'var(--page-margin)',
+            zIndex: 2,
           }}>
             <img
               src="/works/mozzano/mozzano_logo.png"
@@ -158,10 +307,10 @@ export default function MozzanoPage() {
 
           {/* RIGHT — Slice info */}
           <div style={{
-            alignSelf: 'flex-end',
-            marginBottom: 'clamp(120px, 22vh, 220px)',
-            marginLeft: '20px',
-            flexShrink: 0, zIndex: 2,
+            position: 'absolute',
+            bottom: 'clamp(100px, 20vh, 200px)',
+            right: 'var(--page-margin)',
+            zIndex: 2,
             maxWidth: '260px',
             textAlign: 'left',
           }}>
@@ -213,24 +362,40 @@ export default function MozzanoPage() {
       <section style={{ background: BG, padding: '0 clamp(20px, 4vw, 56px)' }}>
 
         {/* 01 — Logo */}
-        <div style={{ paddingTop: 'clamp(56px, 8vw, 100px)', paddingBottom: '32px' }}>
-          <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: '11px', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: WARM, margin: '0 0 10px' }}>01 — Logo</p>
-          <h2 style={{ fontFamily: 'CabinetGrotesk, var(--font-display)', fontSize: 'clamp(28px, 4.5vw, 64px)', fontWeight: 800, color: '#111', letterSpacing: '-0.04em', lineHeight: 0.95, margin: '0 0 10px' }}>
-            Ez csak egy logó.
-          </h2>
-          <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: 'clamp(13px, 1.2vw, 16px)', color: 'rgba(17,17,17,0.4)', margin: 0 }}>
-            Jól néz ki, és ennyi.
-          </p>
+        <div style={{
+          display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(32px, 5vw, 80px)',
+          alignItems: 'center', paddingTop: 'clamp(56px, 8vw, 100px)',
+        }}>
+          <div>
+            <h2 style={{ fontFamily: 'CabinetGrotesk, var(--font-display)', fontSize: 'clamp(28px, 4.5vw, 64px)', fontWeight: 800, color: '#111', letterSpacing: '-0.04em', lineHeight: 0.95, margin: '0 0 14px' }}>
+              Ez csak egy logó.
+            </h2>
+            <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: 'clamp(13px, 1.2vw, 16px)', color: 'rgba(17,17,17,0.4)', margin: 0 }}>
+              Jól néz ki, és ennyi.
+            </p>
+          </div>
+          <img src="/works/mozzano/mozzano_logo.png" alt="Mozzano logo"
+            style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'contain' }} />
         </div>
-        <img src="/works/mozzano/Artboard%201.png" alt=""
-          style={{ width: '90%', display: 'block', height: 'auto', borderRadius: '20px', transform: 'rotate(-1deg)', boxShadow: '0 12px 48px rgba(0,0,0,0.08)' }} />
+
+        {/* Polaroidok */}
+        <PolaroidSection />
+
+        {/* Social statement */}
+        <SocialStatement />
+
+        {/* Separator — hosszu_mozzano */}
+        <img
+          src="/works/mozzano/hosszu_mozzano.gif"
+          alt=""
+          style={{ width: '100%', display: 'block', height: 'auto' }}
+        />
 
         {/* 02 — Szín */}
         <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: '20px', alignItems: 'center', margin: 'clamp(48px, 7vw, 90px) 0' }}>
           <img src="/works/mozzano/Artboard%203.png" alt=""
             style={{ width: '100%', display: 'block', height: 'auto', borderRadius: '18px', transform: 'rotate(0.8deg)', boxShadow: '0 8px 36px rgba(0,0,0,0.07)' }} />
           <div style={{ padding: '0 clamp(16px, 3vw, 40px)' }}>
-            <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: '11px', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: WARM, margin: '0 0 12px' }}>02 — Szín</p>
             <h2 style={{ fontFamily: 'CabinetGrotesk, var(--font-display)', fontSize: 'clamp(22px, 2.8vw, 44px)', fontWeight: 800, color: '#111', letterSpacing: '-0.04em', lineHeight: 0.95, margin: '0 0 12px' }}>
               Meleg.<br />Nyers.
             </h2>
@@ -243,7 +408,6 @@ export default function MozzanoPage() {
         {/* 03 — Betűtípus */}
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 3fr', gap: '20px', alignItems: 'center', margin: 'clamp(48px, 7vw, 90px) 0' }}>
           <div style={{ padding: '0 clamp(16px, 3vw, 40px)' }}>
-            <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: '11px', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: WARM, margin: '0 0 12px' }}>03 — Betűtípus</p>
             <h2 style={{ fontFamily: 'CabinetGrotesk, var(--font-display)', fontSize: 'clamp(22px, 2.8vw, 44px)', fontWeight: 800, color: '#111', letterSpacing: '-0.04em', lineHeight: 0.95, margin: '0 0 12px' }}>
               Cabinet<br />Grotesk.
             </h2>
@@ -261,7 +425,6 @@ export default function MozzanoPage() {
 
         {/* 04 — Identitás */}
         <div style={{ paddingTop: 'clamp(56px, 8vw, 100px)', paddingBottom: '32px' }}>
-          <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: '11px', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: WARM, margin: '0 0 10px' }}>04 — Identitás</p>
           <h2 style={{ fontFamily: 'CabinetGrotesk, var(--font-display)', fontSize: 'clamp(28px, 4.5vw, 64px)', fontWeight: 800, color: '#111', letterSpacing: '-0.04em', lineHeight: 0.95, margin: '0 0 10px', maxWidth: '680px' }}>
             Minden felületen ugyanolyan magabiztos.
           </h2>
@@ -278,7 +441,6 @@ export default function MozzanoPage() {
 
         {/* 05 — Mockupok */}
         <div style={{ paddingTop: 'clamp(56px, 8vw, 100px)', paddingBottom: '32px' }}>
-          <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: '11px', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: WARM, margin: '0 0 10px' }}>05 — Mockupok</p>
           <h2 style={{ fontFamily: 'CabinetGrotesk, var(--font-display)', fontSize: 'clamp(28px, 4.5vw, 64px)', fontWeight: 800, color: '#111', letterSpacing: '-0.04em', lineHeight: 0.95, margin: '0 0 10px' }}>
             A végeredmény.
           </h2>

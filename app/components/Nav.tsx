@@ -187,40 +187,6 @@ export default function Nav() {
               )}
             </div>
 
-            {/* Language toggle */}
-            <button
-              onClick={toggle}
-              className="hidden md:flex"
-              style={{
-                background: 'transparent',
-                border: '1px solid rgba(255,255,255,0.14)',
-                borderRadius: '999px',
-                padding: '6px 12px',
-                color: 'var(--color-text-secondary)',
-                fontFamily: 'var(--font-body)',
-                fontSize: '11px',
-                fontWeight: 600,
-                letterSpacing: '0.08em',
-                cursor: 'none',
-                transition: 'all 200ms ease',
-                alignItems: 'center',
-                gap: '4px',
-                userSelect: 'none',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-accent)';
-                e.currentTarget.style.color = 'var(--color-accent)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.14)';
-                e.currentTarget.style.color = 'var(--color-text-secondary)';
-              }}
-            >
-              <span style={{ opacity: lang === 'hu' ? 1 : 0.4, transition: 'opacity 200ms' }}>HU</span>
-              <span style={{ opacity: 0.3, margin: '0 1px' }}>/</span>
-              <span style={{ opacity: lang === 'en' ? 1 : 0.4, transition: 'opacity 200ms' }}>EN</span>
-            </button>
-
             {/* CTA button */}
             <a
               href="#contact"

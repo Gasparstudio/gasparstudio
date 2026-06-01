@@ -7,7 +7,7 @@ import CustomCursor from '../components/CustomCursor';
 const PM = 'var(--page-margin)';
 
 const LOGO_PACKAGES = [
-  { id: 'logo-s', label: 'Alap',     price: 65000,  detail: '1 koncepció · 2 revízió' },
+  { id: 'logo-s', label: 'Alap',     price: 64000,  detail: '1 koncepció · 2 revízió' },
   { id: 'logo-m', label: 'Standard', price: 140000, detail: '3 koncepció · korlátlan revízió · mini brand guide' },
 ];
 

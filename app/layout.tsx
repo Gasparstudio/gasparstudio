@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "./context/LanguageContext";
 import PageTransition from "./components/PageTransition";
 import LangPill from "./components/LangPill";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 const sora = localFont({
   src: "../public/fonts/Sora/Sora-VariableFont_wght.ttf",
@@ -46,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="hu"
-      className={`${sora.variable} ${dmSans.variable}`}
+      className={`${sora.variable} ${dmSans.variable} ${inter.variable}`}
     >
       <body>
         <LanguageProvider>

@@ -7,6 +7,8 @@ export interface Project {
   gradient: string;
   accentColor: string;
   images: string[];
+  logo?: string;
+  flashColor?: string;
 }
 
 // Új projekt hozzáadásához:
@@ -21,6 +23,7 @@ export const projects: Project[] = [
     year: '2026',
     gradient: 'linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 40%, #2a1f1a 100%)',
     accentColor: '#F0EDE8',
+    flashColor: '#FF8C00',
     images: [
       '/works/mozzano/Artboard%201.png',
       '/works/mozzano/Artboard%203.png',
@@ -40,6 +43,7 @@ export const projects: Project[] = [
     year: '2026',
     gradient: 'linear-gradient(135deg, #FF7043 0%, #9B6DFF 60%, #12091f 100%)',
     accentColor: '#9B6DFF',
+    flashColor: '#9B6DFF',
     images: [
       '/works/face/Artboard%201-03.png',
       '/works/face/Artboard%201-05.png',
@@ -57,6 +61,7 @@ export const projects: Project[] = [
     year: '????',
     gradient: 'linear-gradient(135deg, #0a0a0a 0%, #111111 100%)',
     accentColor: '#F0EDE8',
+    flashColor: '#E8F04D',
     images: [
       '/works/Void/void1.png',
       '/works/Void/kez2.mp4',
@@ -70,6 +75,7 @@ export const projects: Project[] = [
     year: '2022',
     gradient: 'linear-gradient(135deg, #1a2e1a 0%, #0d1a0d 40%, #2a3a1a 100%)',
     accentColor: '#6BAF6B',
+    flashColor: '#E53935',
     images: [
       '/works/kamfor/1.png',
       '/works/kamfor/001.png',
@@ -78,8 +84,24 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: 'logofolio',
+    slug: 'simons-burger',
     index: '05',
+    title: "Simon's Burger",
+    category: 'Brand Redesign',
+    year: '2025',
+    gradient: 'linear-gradient(135deg, #1a0a00 0%, #2d1200 40%, #3d1a00 100%)',
+    accentColor: '#E8631A',
+    flashColor: '#0da64f',
+    images: [
+      "/works/Simon's%20Burger/_DSC5942.jpg",
+      "/works/Simon's%20Burger/_DSC6041.jpg",
+      "/works/Simon's%20Burger/_DSC6340.jpg",
+    ],
+    logo: '/partners/Simon_s_Burger_all_CMYK_simon_s_burger_green.webp',
+  },
+  {
+    slug: 'logofolio',
+    index: '06',
     title: 'Logofolio',
     category: 'Logo Design',
     year: '2022–2026',

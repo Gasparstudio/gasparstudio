@@ -95,7 +95,7 @@ function VoidCard({ index }: { index: string }) {
   );
 }
 
-function VideoSlide({ src, visible }: { src: string; visible: boolean }) {
+function VideoSlide({ src, visible, grayscale }: { src: string; visible: boolean; grayscale: boolean }) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -121,7 +121,8 @@ function VideoSlide({ src, visible }: { src: string; visible: boolean }) {
         height: '100%',
         objectFit: 'cover',
         opacity: visible ? 1 : 0,
-        transition: 'opacity 600ms ease',
+        filter: grayscale ? 'grayscale(1)' : 'grayscale(0)',
+        transition: 'opacity 600ms ease, filter 500ms ease',
       }}
     />
   );
@@ -165,6 +166,7 @@ function CTACard({ wordIndex }: { wordIndex: number }) {
 
 function LogofolioCard({ project }: { project: { index: string; title: string; category: string | null; year: string | null; images: string[] } }) {
   const [idx, setIdx] = useState(0);
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     const imgs = project.images;
@@ -178,6 +180,8 @@ function LogofolioCard({ project }: { project: { index: string; title: string; c
   return (
     <Link
       href="/works/logofolio"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
         flexShrink: 0,
         width: 'clamp(280px, 34vw, 480px)',
@@ -206,7 +210,8 @@ function LogofolioCard({ project }: { project: { index: string; title: string; c
             height: '50%',
             objectFit: 'contain',
             opacity: i === idx ? 1 : 0,
-            transition: 'opacity 500ms ease',
+            filter: hovered ? 'grayscale(0)' : 'grayscale(1)',
+            transition: 'opacity 500ms ease, filter 500ms ease',
           }}
         />
       ))}
@@ -251,13 +256,15 @@ interface ProjectCardProps {
     gradient: string;
     accentColor: string;
     images: string[];
+    logo?: string;
+    flashColor?: string;
   };
 }
 
 function ProjectCard({ project }: ProjectCardProps) {
   const arrowRef = useRef<HTMLSpanElement>(null);
   const [imgIndex, setImgIndex] = useState(0);
-
+  const [hovered, setHovered] = useState(false);
   useEffect(() => {
     if (!project.images || project.images.length <= 1) return;
     const id = setInterval(() => {
@@ -267,6 +274,7 @@ function ProjectCard({ project }: ProjectCardProps) {
   }, [project.images]);
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    setHovered(true);
     const card = e.currentTarget;
     card.style.transform = 'scale(1.02)';
     card.style.boxShadow = '0 24px 64px rgba(0,0,0,0.6)';
@@ -276,6 +284,7 @@ function ProjectCard({ project }: ProjectCardProps) {
   };
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+    setHovered(false);
     const card = e.currentTarget;
     card.style.transform = 'scale(1)';
     card.style.boxShadow = 'none';
@@ -305,6 +314,11 @@ function ProjectCard({ project }: ProjectCardProps) {
       }}
       data-cursor-expand
     >
+      {/* Black underlay — prevents gradient from flashing through during crossfade */}
+      {project.images && project.images.length > 0 && (
+        <div style={{ position: 'absolute', inset: 0, background: '#000' }} />
+      )}
+
       {/* Images/videos (cycling) or placeholder */}
       {project.images ? (
         project.images.map((src: string, i: number) => {
@@ -317,10 +331,11 @@ function ProjectCard({ project }: ProjectCardProps) {
             height: '100%',
             objectFit: 'cover',
             opacity: visible ? 1 : 0,
-            transition: 'opacity 600ms ease',
+            filter: hovered ? 'grayscale(0)' : 'grayscale(1)',
+            transition: 'opacity 600ms ease, filter 500ms ease',
           };
           return isVideo ? (
-            <VideoSlide key={src} src={src} visible={visible} />
+            <VideoSlide key={src} src={src} visible={visible} grayscale={!hovered} />
           ) : (
             <img key={src} src={src} alt="" style={mediaStyle} />
           );
@@ -354,6 +369,15 @@ function ProjectCard({ project }: ProjectCardProps) {
         </>
       )}
 
+      {/* Dark overlay */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'rgba(0,0,0,0.15)',
+        }}
+      />
+
       {/* Bottom gradient overlay */}
       <div
         style={{
@@ -362,6 +386,24 @@ function ProjectCard({ project }: ProjectCardProps) {
           background: 'linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.75) 100%)',
         }}
       />
+
+      {/* Center logo */}
+      {project.logo && (
+        <img
+          src={project.logo}
+          alt=""
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '52%',
+            objectFit: 'contain',
+            pointerEvents: 'none',
+            filter: 'brightness(0) invert(1)',
+          }}
+        />
+      )}
 
       {/* Arrow — top right */}
       <span

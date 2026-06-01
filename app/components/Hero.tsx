@@ -155,7 +155,7 @@ export default function Hero() {
                 margin: 0,
               }}
             >
-              Brand Designer.
+              Buzi Bozi
             </h1>
           </div>
           <div ref={line2Ref} style={{ overflow: 'hidden' }}>

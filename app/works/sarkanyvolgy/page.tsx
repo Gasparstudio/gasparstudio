@@ -127,7 +127,7 @@ export default function SarkanyvolgyPage() {
             Sárkány<br />Völgy<br />Mese<br />Fesztivál
           </h1>
           <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: 'clamp(15px,1.5vw,18px)', lineHeight: 1.7, color: `${NAVY}80`, maxWidth: '480px', margin: 0, animation: 'svFadeUp 700ms ease 200ms both' }}>
-            Arculati kézikönyv egy modern mítoszhoz — ahol a sárkányok mesélnek.
+            Arculati kézikönyv egy modern mítoszhoz, ahol a sárkányok mesélnek.
           </p>
         </div>
 
@@ -164,7 +164,7 @@ export default function SarkanyvolgyPage() {
         {/* ── 01 LOGO ──────────────────────────────────────── */}
         <section ref={logoRef as React.RefObject<HTMLElement>} style={{ padding: `clamp(30px,8vw,90px) ${PM}`, borderTop: `1px solid ${NAVY}10` }}>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 'clamp(40px,6vw,72px)', flexWrap: 'wrap', gap: '12px' }}>
-            <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: RED, margin: 0, fontWeight: 600 }}>01 — Logó</p>
+            <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: RED, margin: 0, fontWeight: 600 }}>01 · Logó</p>
             <p style={{ ...CG, fontSize: 'clamp(18px,2.5vw,28px)', fontWeight: 800, color: NAVY, margin: 0, letterSpacing: '-0.02em' }}>Védjegy és variációk</p>
           </div>
 
@@ -211,7 +211,7 @@ export default function SarkanyvolgyPage() {
         {/* ── 02 COLORS ────────────────────────────────────── */}
         <section ref={colRef as React.RefObject<HTMLElement>} style={{ padding: `clamp(30px,8vw,90px) ${PM}`, borderTop: `1px solid ${NAVY}10` }}>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 'clamp(40px,6vw,72px)', flexWrap: 'wrap', gap: '12px' }}>
-            <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: RED, margin: 0, fontWeight: 600 }}>02 — Színpaletta</p>
+            <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: RED, margin: 0, fontWeight: 600 }}>02 · Színpaletta</p>
             <p style={{ ...CG, fontSize: 'clamp(18px,2.5vw,28px)', fontWeight: 800, color: NAVY, margin: 0, letterSpacing: '-0.02em' }}>Három szín, egy világ</p>
           </div>
 
@@ -267,7 +267,7 @@ export default function SarkanyvolgyPage() {
         <section ref={typRef as React.RefObject<HTMLElement>} style={{ borderTop: `1px solid ${NAVY}10` }}>
           <div style={{ padding: `clamp(30px,8vw,90px) ${PM}`, background: NAVY }}>
             <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 'clamp(40px,6vw,72px)', flexWrap: 'wrap', gap: '12px' }}>
-              <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: RED, margin: 0, fontWeight: 600 }}>03 — Tipográfia</p>
+              <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: RED, margin: 0, fontWeight: 600 }}>03 · Tipográfia</p>
               <p style={{ ...CG, fontSize: 'clamp(18px,2.5vw,28px)', fontWeight: 800, color: CREAM, margin: 0, letterSpacing: '-0.02em' }}>Két betűtípus, tiszta hierarchia</p>
             </div>
 
@@ -313,7 +313,7 @@ export default function SarkanyvolgyPage() {
         {/* ── 04 APPLICATIONS ──────────────────────────────── */}
         <section ref={appRef as React.RefObject<HTMLElement>} style={{ padding: `clamp(30px,8vw,90px) ${PM}`, borderTop: `1px solid ${NAVY}10` }}>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 'clamp(40px,6vw,72px)', flexWrap: 'wrap', gap: '12px' }}>
-            <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: RED, margin: 0, fontWeight: 600 }}>04 — Alkalmazás</p>
+            <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: RED, margin: 0, fontWeight: 600 }}>04 · Alkalmazás</p>
             <p style={{ ...CG, fontSize: 'clamp(18px,2.5vw,28px)', fontWeight: 800, color: NAVY, margin: 0, letterSpacing: '-0.02em' }}>A márka működésben</p>
           </div>
 
@@ -334,7 +334,7 @@ export default function SarkanyvolgyPage() {
 
         {/* ── 05 BRIEF ─────────────────────────────────────── */}
         <section ref={briefRef as React.RefObject<HTMLElement>} style={{ padding: `clamp(30px,8vw,90px) ${PM}`, borderTop: `1px solid ${NAVY}10` }}>
-          <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: RED, margin: '0 0 clamp(40px,6vw,72px)', fontWeight: 600 }}>05 — Brief</p>
+          <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: RED, margin: '0 0 clamp(40px,6vw,72px)', fontWeight: 600 }}>05 · Brief</p>
 
           <div style={{ ...anim(briefV), display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'clamp(20px,3vw,40px)', marginBottom: 'clamp(48px,7vw,80px)' }}>
             {[
@@ -352,7 +352,7 @@ export default function SarkanyvolgyPage() {
 
           <div style={{ ...anim(briefV, 150), maxWidth: '640px' }}>
             <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: 'clamp(15px,1.4vw,18px)', lineHeight: 1.75, color: `${NAVY}60`, margin: 0 }}>
-              A Sárkány Völgy Mese Fesztivál egy modern mítosz. Gyökerei a magyar népmesékbe nyúlnak, formanyelve viszont mai: bátor, tiszta, vizuálisan fegyelmezett. A védjegyünk egy stilizált, heraldikus sárkány — szögletes és lágy egyszerre, mint maga a mese.
+              A Sárkány Völgy Mese Fesztivál egy modern mítosz. Gyökerei a magyar népmesékbe nyúlnak, formanyelve viszont mai: bátor, tiszta, vizuálisan fegyelmezett. A védjegyünk egy stilizált, heraldikus sárkány — szögletes és lágy egyszerre. Mint maga a mese.
             </p>
           </div>
         </section>

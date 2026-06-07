@@ -189,8 +189,7 @@ export default function Nav() {
 
             {/* CTA button */}
             <a
-              href="#contact"
-              onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
+              href="/arajanlat"
               className="btn btn-primary hidden md:inline-flex"
               style={{ fontSize: '13px', padding: '10px 20px' }}
             >
@@ -310,8 +309,7 @@ export default function Nav() {
         </button>
 
         <a
-          href="#contact"
-          onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
+          href="/arajanlat"
           className="btn btn-primary"
           style={{ marginTop: '16px', fontSize: '16px', padding: '16px 36px' }}
         >

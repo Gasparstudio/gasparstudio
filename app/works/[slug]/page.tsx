@@ -58,30 +58,33 @@ export default function ProjectPage() {
           transition: 'background 400ms ease, border-color 400ms ease',
         }}
       >
-        <Link
-          href="/works"
-          style={{
-            color: 'var(--color-text-secondary)', fontFamily: 'var(--font-body)',
-            fontSize: 'var(--text-small)', textDecoration: 'none', transition: 'color 200ms ease',
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text-primary)')}
-          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-secondary)')}
-        >
-          ← Munkák
-        </Link>
+        <div style={{ flex: 1 }}>
+          <Link
+            href="/works"
+            style={{
+              color: 'var(--color-text-secondary)', fontFamily: 'var(--font-body)',
+              fontSize: 'var(--text-small)', textDecoration: 'none', transition: 'color 200ms ease',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text-primary)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-secondary)')}
+          >
+            ← Munkák
+          </Link>
+        </div>
         <Link
           href="/"
           style={{
             fontFamily: 'var(--font-display)', fontSize: '15px', letterSpacing: '0.08em',
             color: 'var(--color-text-primary)', textDecoration: 'none',
-            position: 'absolute', left: '50%', transform: 'translateX(-50%)',
           }}
         >
           GASPAR
         </Link>
-        <a href="/#contact" className="btn btn-primary" style={{ fontSize: '13px', padding: '10px 20px' }}>
-          Írj nekem →
-        </a>
+        <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+          <a href="/arajanlat" className="btn btn-primary" style={{ fontSize: '13px', padding: '10px 20px' }}>
+            Írj nekem →
+          </a>
+        </div>
       </nav>
 
       <main style={{ paddingTop: '68px' }}>

@@ -97,7 +97,6 @@ export const projects: Project[] = [
       "/works/Simon's%20Burger/_DSC6041.jpg",
       "/works/Simon's%20Burger/_DSC6340.jpg",
     ],
-    logo: '/partners/Simon_s_Burger_all_CMYK_simon_s_burger_green.webp',
   },
   {
     slug: 'logofolio',

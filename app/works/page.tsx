@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { projects, Project } from '../data/projects';
@@ -20,264 +20,6 @@ const filterCategories = [
     )
   ),
 ];
-
-// ─── Lightbox ────────────────────────────────────────────────
-function Lightbox({ project, onClose }: { project: Project; onClose: () => void }) {
-  const [idx, setIdx] = useState(0);
-  const images = project.images;
-  const total = images.length;
-
-  const prev = useCallback(() => setIdx((i) => (i - 1 + total) % total), [total]);
-  const next = useCallback(() => setIdx((i) => (i + 1) % total), [total]);
-
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowRight') next();
-      if (e.key === 'ArrowLeft') prev();
-    };
-    window.addEventListener('keydown', handler);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      window.removeEventListener('keydown', handler);
-      document.body.style.overflow = '';
-    };
-  }, [onClose, next, prev]);
-
-  const current = images[idx];
-  const isVideo = current.endsWith('.mp4');
-
-  return (
-    <div
-      onClick={onClose}
-      style={{
-        position: 'fixed',
-        inset: 0,
-        background: 'rgba(0,0,0,0.96)',
-        zIndex: 9000,
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      {/* Top bar */}
-      <div
-        onClick={(e) => e.stopPropagation()}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '24px clamp(20px, 4vw, 48px)',
-          flexShrink: 0,
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
-        }}
-      >
-        <div>
-          <h2
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(18px, 2.5vw, 26px)',
-              fontWeight: 650,
-              color: '#fff',
-              margin: 0,
-              letterSpacing: '-0.02em',
-            }}
-          >
-            {project.title}
-          </h2>
-          <p
-            style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 'var(--text-small)',
-              color: 'rgba(255,255,255,0.45)',
-              margin: '4px 0 0',
-            }}
-          >
-            {project.category} · {project.year}
-          </p>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          {total > 1 && (
-            <span
-              style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: 'var(--text-small)',
-                color: 'rgba(255,255,255,0.35)',
-                letterSpacing: '0.06em',
-              }}
-            >
-              {idx + 1} / {total}
-            </span>
-          )}
-          <button
-            onClick={onClose}
-            style={{
-              background: 'rgba(255,255,255,0.07)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: '50%',
-              width: '40px',
-              height: '40px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              color: 'rgba(255,255,255,0.8)',
-              fontSize: '16px',
-              transition: 'background 200ms ease',
-              flexShrink: 0,
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.14)')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.07)')}
-          >
-            ✕
-          </button>
-        </div>
-      </div>
-
-      {/* Main image area */}
-      <div
-        onClick={(e) => e.stopPropagation()}
-        style={{
-          flex: 1,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '24px clamp(48px, 6vw, 80px)',
-          position: 'relative',
-          minHeight: 0,
-        }}
-      >
-        {isVideo ? (
-          <video
-            key={current}
-            src={current}
-            autoPlay
-            muted
-            loop
-            playsInline
-            style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', borderRadius: '12px' }}
-          />
-        ) : (
-          <img
-            key={current}
-            src={current}
-            alt=""
-            style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', borderRadius: '12px' }}
-          />
-        )}
-
-        {total > 1 && (
-          <>
-            <button
-              onClick={prev}
-              style={{
-                position: 'absolute',
-                left: '12px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                background: 'rgba(255,255,255,0.07)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: '50%',
-                width: '48px',
-                height: '48px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                color: '#fff',
-                fontSize: '20px',
-                transition: 'background 200ms ease',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.14)')}
-              onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.07)')}
-            >
-              ←
-            </button>
-            <button
-              onClick={next}
-              style={{
-                position: 'absolute',
-                right: '12px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                background: 'rgba(255,255,255,0.07)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: '50%',
-                width: '48px',
-                height: '48px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                color: '#fff',
-                fontSize: '20px',
-                transition: 'background 200ms ease',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.14)')}
-              onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.07)')}
-            >
-              →
-            </button>
-          </>
-        )}
-      </div>
-
-      {/* Thumbnail strip */}
-      {total > 1 && (
-        <div
-          onClick={(e) => e.stopPropagation()}
-          style={{
-            display: 'flex',
-            gap: '8px',
-            padding: '16px clamp(20px, 4vw, 48px) 24px',
-            overflowX: 'auto',
-            justifyContent: 'center',
-            flexShrink: 0,
-            borderTop: '1px solid rgba(255,255,255,0.06)',
-          }}
-        >
-          {images.map((src, i) => (
-            <button
-              key={src}
-              onClick={() => setIdx(i)}
-              style={{
-                flexShrink: 0,
-                width: '52px',
-                height: '52px',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                border: `2px solid ${i === idx ? 'var(--color-accent)' : 'rgba(255,255,255,0.1)'}`,
-                cursor: 'pointer',
-                padding: 0,
-                background: '#111',
-                transition: 'border-color 200ms ease, opacity 200ms ease',
-                opacity: i === idx ? 1 : 0.55,
-              }}
-            >
-              {src.endsWith('.mp4') ? (
-                <div
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    background: '#1a1a1a',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'rgba(255,255,255,0.5)',
-                    fontSize: '14px',
-                  }}
-                >
-                  ▶
-                </div>
-              ) : (
-                <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              )}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 
 // ─── Video Slide ──────────────────────────────────────────────
 function VideoSlide({ src, visible }: { src: string; visible: boolean }) {
@@ -395,13 +137,10 @@ function ProjectCard({ project, onClick, imgIndex }: { project: Project; onClick
 }
 
 // ─── Page ─────────────────────────────────────────────────────
-const SUBPAGES = new Set(['face', 'void', 'mozzano']);
-
 export default function WorksPage() {
   const router = useRouter();
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState(ALL);
-  const [lightbox, setLightbox] = useState<Project | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [imgIndices, setImgIndices] = useState<number[]>(() => projects.map(() => 0));
 
@@ -446,7 +185,6 @@ export default function WorksPage() {
           zIndex: 1000,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
           padding: '0 var(--page-margin)',
           height: '68px',
           background: scrolled ? 'rgba(10,10,10,0.92)' : 'rgba(10,10,10,0.7)',
@@ -456,23 +194,7 @@ export default function WorksPage() {
           transition: 'background 400ms ease, border-color 400ms ease',
         }}
       >
-        <Link
-          href="/"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            color: 'var(--color-text-secondary)',
-            fontFamily: 'var(--font-body)',
-            fontSize: 'var(--text-small)',
-            textDecoration: 'none',
-            transition: 'color 200ms ease',
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text-primary)')}
-          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-secondary)')}
-        >
-          ← Vissza
-        </Link>
+        <div style={{ flex: 1 }} />
 
         <Link
           href="/"
@@ -482,21 +204,20 @@ export default function WorksPage() {
             letterSpacing: '0.08em',
             color: 'var(--color-text-primary)',
             textDecoration: 'none',
-            position: 'absolute',
-            left: '50%',
-            transform: 'translateX(-50%)',
           }}
         >
           GASPAR
         </Link>
 
-        <a
-          href="/#contact"
-          className="btn btn-primary"
-          style={{ fontSize: '13px', padding: '10px 20px' }}
-        >
-          Írj nekem →
-        </a>
+        <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+          <a
+            href="/arajanlat"
+            className="btn btn-primary"
+            style={{ fontSize: '13px', padding: '10px 20px' }}
+          >
+            Írj nekem →
+          </a>
+        </div>
       </nav>
 
       <main style={{ paddingTop: '68px', minHeight: '100vh' }}>
@@ -538,7 +259,6 @@ export default function WorksPage() {
           className="page-container"
           style={{ marginBottom: 'clamp(36px, 5vw, 60px)' }}
         >
-          {/* Search input */}
           <div style={{ position: 'relative', marginBottom: '20px' }}>
             <span
               style={{
@@ -577,7 +297,6 @@ export default function WorksPage() {
             />
           </div>
 
-          {/* Category pills */}
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
             {filterCategories.map((cat) => {
               const active = cat === activeCategory;
@@ -636,11 +355,7 @@ export default function WorksPage() {
                   key={project.slug}
                   project={project}
                   imgIndex={imgIndices[projects.indexOf(project)]}
-                  onClick={() =>
-                    SUBPAGES.has(project.slug)
-                      ? router.push(`/works/${project.slug}`)
-                      : setLightbox(project)
-                  }
+                  onClick={() => router.push(`/works/${project.slug}`)}
                 />
               ))}
             </div>
@@ -649,9 +364,6 @@ export default function WorksPage() {
       </main>
 
       <Footer />
-
-      {/* Lightbox */}
-      {lightbox && <Lightbox project={lightbox} onClose={() => setLightbox(null)} />}
     </>
   );
 }

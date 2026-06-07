@@ -153,17 +153,21 @@ export default function SimonsBurgerPage() {
         borderBottom: scrolled ? '1px solid rgba(0,0,0,0.07)' : '1px solid transparent',
         transition: 'background 400ms ease, border-color 400ms ease',
       }}>
-        <Link href="/works"
-          style={{ color: 'rgba(0,0,0,0.45)', fontFamily: 'var(--font-inter)', fontSize: '14px', textDecoration: 'none', transition: 'color 200ms' }}
-          onMouseEnter={e => (e.currentTarget.style.color = '#000')}
-          onMouseLeave={e => (e.currentTarget.style.color = 'rgba(0,0,0,0.45)')}>
-          ← Munkák
-        </Link>
+        <div style={{ flex: 1 }}>
+          <Link href="/works"
+            style={{ color: 'rgba(0,0,0,0.45)', fontFamily: 'var(--font-inter)', fontSize: '14px', textDecoration: 'none', transition: 'color 200ms' }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#000')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(0,0,0,0.45)')}>
+            ← Munkák
+          </Link>
+        </div>
         <Link href="/"
-          style={{ fontFamily: 'var(--font-inter)', fontSize: '15px', letterSpacing: '0.08em', color: '#0a0a0a', textDecoration: 'none', position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+          style={{ fontFamily: 'var(--font-inter)', fontSize: '15px', letterSpacing: '0.08em', color: '#0a0a0a', textDecoration: 'none' }}>
           GASPAR
         </Link>
-        <a href="/#contact" className="btn btn-primary" style={{ fontSize: '13px', padding: '10px 20px' }}>Írj nekem →</a>
+        <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+          <a href="/arajanlat" className="btn btn-primary" style={{ fontSize: '13px', padding: '10px 20px' }}>Írj nekem →</a>
+        </div>
       </nav>
 
       <main style={{ paddingTop: '68px', background: '#f8f8f6' }}>

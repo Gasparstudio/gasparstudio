@@ -371,7 +371,7 @@ export default function LogofolioPage() {
       {/* Logo list */}
       <div style={{ paddingLeft: PM, paddingRight: PM, paddingBottom: '120px' }}>
         {LOGOS.map((logo, i) => (
-          <LogoRow key={logo.file} logo={logo} index={i} />
+          <LogoRow key={logo.src} logo={logo} index={i} />
         ))}
       </div>
 

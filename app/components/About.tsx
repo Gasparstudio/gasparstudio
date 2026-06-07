@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLang } from '../context/LanguageContext';
 
-const tools = ['Photoshop', 'Illustrator', 'InDesign', 'Figma', 'AI képgenerálás', 'Claude Code'];
+const tools = ['Photoshop', 'Illustrator', 'InDesign', 'Figma', 'AI képgenerálás'];
 
 const statsConfig = [
   { target: 8,  suffix: '+', labelKey: 'about.stat.exp' as const },
@@ -234,16 +234,6 @@ export default function About() {
             ))}
           </div>
 
-          {/* CV Download */}
-          <div>
-            <a
-              href="#"
-              className="btn btn-ghost"
-              style={{ display: 'inline-flex' }}
-            >
-              {t('about.cv')}
-            </a>
-          </div>
         </div>
       </div>
     </section>

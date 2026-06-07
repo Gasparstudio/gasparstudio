@@ -155,7 +155,7 @@ export default function Hero() {
                 margin: 0,
               }}
             >
-              Buzi Bozi
+              Gáspár Bálint
             </h1>
           </div>
           <div ref={line2Ref} style={{ overflow: 'hidden' }}>
@@ -170,7 +170,7 @@ export default function Hero() {
                 margin: 0,
               }}
             >
-              GASPAR.
+              Brand Designer
             </h1>
           </div>
           <p

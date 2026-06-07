@@ -82,7 +82,8 @@ export default function Contact() {
           </p>
 
           {/* Big email placeholder — fill in later */}
-          <p
+          <a
+            href="mailto:gaspar.balint25@gmail.com"
             style={{
               display: 'block',
               fontFamily: 'var(--font-display)',
@@ -91,10 +92,14 @@ export default function Contact() {
               letterSpacing: '-0.02em',
               color: 'var(--color-text-muted)',
               margin: 0,
+              textDecoration: 'none',
+              transition: 'color 200ms ease',
             }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text-primary)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-muted)')}
           >
-            hello@gaspar.design
-          </p>
+            gaspar.balint25@gmail.com
+          </a>
         </div>
 
         {/* Description */}

@@ -248,23 +248,26 @@ export default function MozzanoPage() {
         borderBottom: `1px solid ${scrolled ? 'rgba(17,17,17,0.1)' : 'transparent'}`,
         transition: 'background 400ms ease, border-color 400ms ease',
       }}>
-        <Link href="/works"
-          style={{ color: 'rgba(17,17,17,0.45)', fontFamily: 'ClashDisplay, var(--font-body)', fontSize: 'var(--text-small)', textDecoration: 'none', transition: 'color 200ms ease' }}
-          onMouseEnter={e => (e.currentTarget.style.color = '#111')}
-          onMouseLeave={e => (e.currentTarget.style.color = 'rgba(17,17,17,0.45)')}
-        >
-          ← Vissza
-        </Link>
+        <div style={{ flex: 1 }}>
+          <Link href="/works"
+            style={{ color: 'rgba(17,17,17,0.45)', fontFamily: 'ClashDisplay, var(--font-body)', fontSize: 'var(--text-small)', textDecoration: 'none', transition: 'color 200ms ease' }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#111')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(17,17,17,0.45)')}
+          >
+            ← Vissza
+          </Link>
+        </div>
         <span style={{
           fontFamily: 'CabinetGrotesk, var(--font-display)', fontSize: '15px',
           fontWeight: 700, letterSpacing: '0.1em', color: '#111',
-          position: 'absolute', left: '50%', transform: 'translateX(-50%)',
         }}>
           MOZZANO
         </span>
-        <a href="/#contact" className="btn btn-primary" style={{ fontSize: '13px', padding: '10px 20px' }}>
-          Írj nekem →
-        </a>
+        <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+          <a href="/arajanlat" className="btn btn-primary" style={{ fontSize: '13px', padding: '10px 20px' }}>
+            Írj nekem →
+          </a>
+        </div>
       </nav>
 
       {/* ── PIZZA HERO — 100vh, scroll-hijacked ── */}
@@ -392,7 +395,7 @@ export default function MozzanoPage() {
         />
 
         {/* 02 — Szín */}
-        <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: '20px', alignItems: 'center', margin: 'clamp(48px, 7vw, 90px) 0' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '20px', alignItems: 'center', margin: 'clamp(48px, 7vw, 90px) 0' }}>
           <img src="/works/mozzano/Artboard%203.png" alt=""
             style={{ width: '100%', display: 'block', height: 'auto', borderRadius: '18px', transform: 'rotate(0.8deg)', boxShadow: '0 8px 36px rgba(0,0,0,0.07)' }} />
           <div style={{ padding: '0 clamp(16px, 3vw, 40px)' }}>
@@ -406,7 +409,7 @@ export default function MozzanoPage() {
         </div>
 
         {/* 03 — Betűtípus */}
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 3fr', gap: '20px', alignItems: 'center', margin: 'clamp(48px, 7vw, 90px) 0' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr', gap: '20px', alignItems: 'center', margin: 'clamp(48px, 7vw, 90px) 0' }}>
           <div style={{ padding: '0 clamp(16px, 3vw, 40px)' }}>
             <h2 style={{ fontFamily: 'CabinetGrotesk, var(--font-display)', fontSize: 'clamp(22px, 2.8vw, 44px)', fontWeight: 800, color: '#111', letterSpacing: '-0.04em', lineHeight: 0.95, margin: '0 0 12px' }}>
               Cabinet<br />Grotesk.
@@ -421,7 +424,7 @@ export default function MozzanoPage() {
 
         {/* 06 — széles kép */}
         <img src="/works/mozzano/Artboard%206.png" alt=""
-          style={{ width: '96%', display: 'block', height: 'auto', borderRadius: '20px', margin: '0 auto', boxShadow: '0 10px 40px rgba(0,0,0,0.07)' }} />
+          style={{ width: '60%', display: 'block', height: 'auto', borderRadius: '20px', margin: '0 auto', boxShadow: '0 10px 40px rgba(0,0,0,0.07)' }} />
 
         {/* 04 — Identitás */}
         <div style={{ paddingTop: 'clamp(56px, 8vw, 100px)', paddingBottom: '32px' }}>
@@ -432,7 +435,7 @@ export default function MozzanoPage() {
             Nem kell magyarázni. Látszik.
           </p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', alignItems: 'end' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', alignItems: 'end', maxWidth: '65%', margin: '0 auto' }}>
           <img src="/works/mozzano/Artboard%208.png" alt=""
             style={{ width: '100%', display: 'block', height: 'auto', borderRadius: '18px', transform: 'rotate(-1.2deg)', boxShadow: '0 8px 36px rgba(0,0,0,0.07)' }} />
           <img src="/works/mozzano/Artboard%209.png" alt=""
@@ -449,9 +452,9 @@ export default function MozzanoPage() {
           </p>
         </div>
         <img src="/works/mozzano/Artboard%204.png" alt=""
-          style={{ width: '100%', display: 'block', height: 'auto', borderRadius: '20px', boxShadow: '0 12px 48px rgba(0,0,0,0.08)', marginBottom: '16px' }} />
+          style={{ width: '65%', display: 'block', height: 'auto', borderRadius: '20px', boxShadow: '0 12px 48px rgba(0,0,0,0.08)', marginBottom: '16px', margin: '0 auto 16px' }} />
         <img src="/works/mozzano/Artboard%205.png" alt=""
-          style={{ width: '94%', display: 'block', height: 'auto', borderRadius: '20px', boxShadow: '0 12px 48px rgba(0,0,0,0.08)', marginLeft: 'auto', marginBottom: 'clamp(56px, 8vw, 100px)' }} />
+          style={{ width: '60%', display: 'block', height: 'auto', borderRadius: '20px', boxShadow: '0 12px 48px rgba(0,0,0,0.08)', marginLeft: 'auto', marginBottom: 'clamp(56px, 8vw, 100px)' }} />
 
       </section>
 

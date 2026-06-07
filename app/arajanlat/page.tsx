@@ -109,6 +109,8 @@ export default function ArajanlatPage() {
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', company: '', note: '' });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState('');
 
   function buildNote() {
     const lines: string[] = [];
@@ -485,7 +487,24 @@ export default function ArajanlatPage() {
               {/* Contact form */}
               {showForm && (
                 <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-                  <form onSubmit={e => { e.preventDefault(); setSent(true); }} style={{ padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <form onSubmit={async (e) => {
+                    e.preventDefault();
+                    setSending(true);
+                    setSendError('');
+                    try {
+                      const res = await fetch('/api/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(form),
+                      });
+                      if (!res.ok) throw new Error();
+                      setSent(true);
+                    } catch {
+                      setSendError('Hiba történt, próbáld újra vagy írj emailt.');
+                    } finally {
+                      setSending(false);
+                    }
+                  }} style={{ padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, color: 'rgba(255,255,255,0.35)', marginBottom: '2px' }}>Kapcsolatfelvétel</div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
                       <input required placeholder="Neved *" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} style={inputStyle}
@@ -505,10 +524,11 @@ export default function ArajanlatPage() {
                       onFocus={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)')}
                       onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
                     />
-                    <button type="submit" className="btn btn-primary" style={{ fontSize: '13px', padding: '12px', cursor: 'none', justifyContent: 'center', width: '100%' }}>
-                      {sent ? 'Elküldve ✓' : 'Ajánlatot kérek →'}
+                    <button type="submit" disabled={sending || sent} className="btn btn-primary" style={{ fontSize: '13px', padding: '12px', cursor: sending ? 'wait' : 'none', justifyContent: 'center', width: '100%', opacity: sending ? 0.6 : 1 }}>
+                      {sent ? 'Elküldve ✓' : sending ? 'Küldés…' : 'Ajánlatot kérek →'}
                     </button>
                     {sent && <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.35)', margin: 0, textAlign: 'center' }}>Köszönöm! Hamarosan jelentkezem.</p>}
+                    {sendError && <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: '#f87171', margin: 0, textAlign: 'center' }}>{sendError}</p>}
                   </form>
                 </div>
               )}

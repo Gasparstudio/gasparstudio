@@ -28,11 +28,11 @@ const ARTBOARDS = [
 ];
 const EASE = 'cubic-bezier(0.16,1,0.3,1)';
 const SECTIONS = [
-  { id: 'logo',    label: 'Logo',     num: '01' },
-  { id: 'colors',  label: 'Colors',   num: '02' },
-  { id: 'type',    label: 'Type',     num: '03' },
-  { id: 'mockups', label: 'Identity', num: '04' },
-  { id: 'brief',   label: 'Brief',    num: '05' },
+  { id: 'logo',    label: 'Logó',       num: '01' },
+  { id: 'colors',  label: 'Színek',     num: '02' },
+  { id: 'type',    label: 'Tipográfia', num: '03' },
+  { id: 'mockups', label: 'Identitás',  num: '04' },
+  { id: 'brief',   label: 'Brief',      num: '05' },
 ] as const;
 const anim = (inView: boolean, delay = 0): React.CSSProperties => ({
   transform: inView ? 'translateY(0)' : 'translateY(48px)',
@@ -99,7 +99,6 @@ export default function FacePage() {
         const top = el.getBoundingClientRect().top;
         if (top <= offset) current = id;
       }
-      // If the last section is visible anywhere in the viewport, activate it
       const lastEl = document.getElementById(ids[ids.length - 1]);
       if (lastEl) {
         const rect = lastEl.getBoundingClientRect();
@@ -124,7 +123,6 @@ export default function FacePage() {
 
   return (
     <>
-      {/* SVG filter — removes white bg from logo, placed outside overflow:hidden sections */}
       <svg style={{ width: 0, height: 0, position: 'absolute' }} aria-hidden>
         <defs>
           <filter id="rmw" colorInterpolationFilters="sRGB">
@@ -144,17 +142,21 @@ export default function FacePage() {
         backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
         transition: 'background 400ms ease',
       }}>
-        <Link href="/works"
-          style={{ color: 'var(--color-text-secondary)', fontFamily: 'var(--font-body)', fontSize: '14px', textDecoration: 'none', transition: 'color 200ms' }}
-          onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-          onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-secondary)')}>
-          ← Munkák
-        </Link>
+        <div style={{ flex: 1 }}>
+          <Link href="/works"
+            style={{ color: 'var(--color-text-secondary)', fontFamily: 'var(--font-body)', fontSize: '14px', textDecoration: 'none', transition: 'color 200ms' }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-secondary)')}>
+            ← Munkák
+          </Link>
+        </div>
         <Link href="/"
-          style={{ fontFamily: 'var(--font-display)', fontSize: '15px', letterSpacing: '0.08em', color: 'var(--color-text-primary)', textDecoration: 'none', position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+          style={{ fontFamily: 'var(--font-display)', fontSize: '15px', letterSpacing: '0.08em', color: 'var(--color-text-primary)', textDecoration: 'none' }}>
           GASPAR
         </Link>
-        <a href="/#contact" className="btn btn-primary" style={{ fontSize: '13px', padding: '10px 20px' }}>Írj nekem →</a>
+        <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+          <a href="/arajanlat" className="btn btn-primary" style={{ fontSize: '13px', padding: '10px 20px' }}>Írj nekem →</a>
+        </div>
       </nav>
 
       <main style={{ paddingTop: '68px', background: '#000' }}>
@@ -170,10 +172,8 @@ export default function FacePage() {
             pointerEvents: 'auto',
             boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
           }}>
-            {/* Left: logo only */}
             <img src="/works/face/face_logo-04_v2-04.png" alt="Face"
               style={{ height: '18px', width: 'auto' }} />
-            {/* Right: section links */}
             <div style={{ display: 'flex', gap: '2px' }}>
               {SECTIONS.map(({ id, label }) => (
                 <button key={id} onClick={() => scrollTo(id)}
@@ -190,17 +190,15 @@ export default function FacePage() {
           </div>
         </div>
 
-        {/* ─── LOGO: CONSTRUCTION + RATIONALE ───────────────────── */}
+        {/* ─── LOGO: KONSTRUKCIÓ + LEÍRÁS ────────────────────────── */}
         <section id="logo" style={{ padding: `0 ${PM} ${SEC}` }}>
           <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto', display: 'grid', gridTemplateColumns: '55fr 45fr', gap: '14px', alignItems: 'stretch' }}>
 
-            {/* Construction grid */}
             <div style={{ borderRadius: '14px', overflow: 'hidden', background: '#000' }}>
-              <img src="/works/face/face_logo_1.png" alt="Logo construction grid"
+              <img src="/works/face/face_logo_1.png" alt="Logó konstrukciós rács"
                 style={{ width: '80%', height: 'auto', display: 'block', margin: '0 auto' }} />
             </div>
 
-            {/* Editorial copy — animated on scroll */}
             <div ref={precRef} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 'clamp(24px, 3vw, 40px)' }}>
               <p style={{
                 fontFamily: 'var(--font-display)', fontSize: 'clamp(20px, 2.2vw, 28px)', fontWeight: 650, letterSpacing: '-0.02em', color: '#fff', lineHeight: 1.25,
@@ -209,7 +207,7 @@ export default function FacePage() {
                 transition: 'transform 1600ms cubic-bezier(0.16,1,0.3,1), opacity 1600ms cubic-bezier(0.16,1,0.3,1)',
                 transitionDelay: '200ms',
               }}>
-                Precision layered with fluidity. Structure that bends without breaking.
+                Pontosság és folyékonyság egyszerre. Struktúra, ami hajlik, de nem törik.
               </p>
               <p style={{
                 marginTop: '12px', fontFamily: 'var(--font-body)', fontSize: '14px', color: 'rgba(255,255,255,0.38)', lineHeight: 1.7,
@@ -218,47 +216,41 @@ export default function FacePage() {
                 transition: 'transform 1600ms cubic-bezier(0.16,1,0.3,1), opacity 1600ms cubic-bezier(0.16,1,0.3,1)',
                 transitionDelay: '380ms',
               }}>
-                The rounded terminals echo the softness of modern interfaces while the strict grid anchors it to the discipline of engineering.
+                A lekerekített végpontok a modern felületek puhaságát idézik, míg a szigorú rácsrendszer az engineering fegyelmét testesíti meg.
               </p>
             </div>
           </div>
         </section>
 
-
-        {/* ─── COLOR SYSTEM ──────────────────────────────────────── */}
+        {/* ─── SZÍNRENDSZER ──────────────────────────────────────── */}
         <section id="colors" style={{ padding: `0 ${PM} ${SEC}` }}>
           <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '10px' }}>
 
-            {/* Face Blue — dominant panel */}
             <div ref={colorBlueRef} style={{ borderRadius: '14px', overflow: 'hidden', background: BLUE, display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 'clamp(220px, 28vw, 400px)' }}>
-              {/* Left: copy */}
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: 'clamp(24px, 3vw, 44px)' }}>
                 <div style={anim(colorBlueInView, 0)}>
                   <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase' }}>Face Blue</div>
                   <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.35)', marginTop: '4px' }}>#1A7BFF</div>
                 </div>
                 <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(16px, 1.8vw, 22px)', fontWeight: 650, color: '#fff', lineHeight: 1.3, letterSpacing: '-0.02em', maxWidth: '340px', ...anim(colorBlueInView, 200) }}>
-                  Not navy, not sky. Face Blue sits at the intersection of authority and energy. The color of systems that work.
+                  Nem tengerészkék, nem égszínkék. A Face Blue tekintély és energia metszéspontján áll. A működő rendszerek színe.
                 </p>
               </div>
-              {/* Right: logo mark */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(24px, 4vw, 56px)' }}>
                 <img src="/works/face/face_logo-02.png" alt="" style={{ width: '55%', height: 'auto', display: 'block', filter: 'brightness(0) invert(1)' }} />
               </div>
             </div>
 
-            {/* Black + White — side by side */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
 
-              {/* Black */}
               <div ref={colorBlackRef} style={{ borderRadius: '14px', overflow: 'hidden', background: '#0a0a0a', display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 'clamp(160px, 18vw, 260px)' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: 'clamp(20px, 2.5vw, 36px)' }}>
                   <div style={anim(colorBlackInView, 0)}>
-                    <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>Black</div>
+                    <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>Fekete</div>
                     <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.18)', marginTop: '4px' }}>#000000</div>
                   </div>
                   <p style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(12px, 1.1vw, 14px)', color: 'rgba(255,255,255,0.35)', lineHeight: 1.6, ...anim(colorBlackInView, 200) }}>
-                    The silence between signals. On black, the mark becomes an object.
+                    A jelek közötti csend. Fekete alapon a logó tárgygyá válik.
                   </p>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(20px, 3vw, 40px)' }}>
@@ -266,15 +258,14 @@ export default function FacePage() {
                 </div>
               </div>
 
-              {/* White */}
               <div ref={colorWhiteRef} style={{ borderRadius: '14px', overflow: 'hidden', background: '#fff', display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 'clamp(160px, 18vw, 260px)' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: 'clamp(20px, 2.5vw, 36px)' }}>
                   <div style={anim(colorWhiteInView, 0)}>
-                    <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.12em', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase' }}>White</div>
+                    <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.12em', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase' }}>Fehér</div>
                     <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(0,0,0,0.25)', marginTop: '4px' }}>#FFFFFF</div>
                   </div>
                   <p style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(12px, 1.1vw, 14px)', color: 'rgba(0,0,0,0.4)', lineHeight: 1.6, ...anim(colorWhiteInView, 200) }}>
-                    Every bold idea starts here. White lets the mark breathe and never competes.
+                    Minden bátor ötlet itt kezdődik. A fehér teret ad a logónak, és nem verseng vele.
                   </p>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(20px, 3vw, 40px)' }}>
@@ -286,14 +277,12 @@ export default function FacePage() {
           </div>
         </section>
 
-        {/* ─── TYPOGRAPHY ────────────────────────────────────────── */}
+        {/* ─── TIPOGRÁFIA ────────────────────────────────────────── */}
         <section id="type" style={{ padding: `0 ${PM} ${SEC}` }}>
           <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto' }}>
 
-            {/* Two-column specimen */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
 
-              {/* Sora — Display */}
               <div style={{ borderRadius: '14px', background: '#0a0a0a', padding: 'clamp(28px, 3vw, 48px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 'clamp(320px, 34vw, 500px)' }}>
                 <div>
                   <div style={{ fontFamily: 'var(--font-body)', fontSize: '10px', letterSpacing: '0.14em', color: BLUE, textTransform: 'uppercase', marginBottom: '20px' }}>Sora</div>
@@ -312,12 +301,11 @@ export default function FacePage() {
                 </div>
               </div>
 
-              {/* DM Sans — Body */}
               <div style={{ borderRadius: '14px', background: '#0a0a0a', padding: 'clamp(28px, 3vw, 48px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 'clamp(320px, 34vw, 500px)' }}>
                 <div>
                   <div style={{ fontFamily: 'var(--font-body)', fontSize: '10px', letterSpacing: '0.14em', color: BLUE, textTransform: 'uppercase', marginBottom: '20px' }}>DM Sans</div>
                   <p style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(18px, 2.2vw, 30px)', fontWeight: 500, color: '#fff', lineHeight: 1.25, letterSpacing: '-0.01em' }}>
-                    System-built.<br />Interface-tested.<br />Human-approved.
+                    Rendszerre tervezve.<br />Felületen tesztelve.<br />Emberi jóváhagyással.
                   </p>
                 </div>
                 <div style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(12px, 1.1vw, 14px)', color: 'rgba(255,255,255,0.22)', lineHeight: 1.8, letterSpacing: '0.02em' }}>
@@ -328,15 +316,14 @@ export default function FacePage() {
               </div>
             </div>
 
-            {/* Type scale */}
             <div style={{ marginTop: '10px', borderRadius: '14px', background: '#0a0a0a', padding: 'clamp(24px, 3vw, 40px)', overflow: 'hidden' }}>
-              <div style={{ fontFamily: 'var(--font-body)', fontSize: '10px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.2)', textTransform: 'uppercase', marginBottom: '20px' }}>Type Scale</div>
+              <div style={{ fontFamily: 'var(--font-body)', fontSize: '10px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.2)', textTransform: 'uppercase', marginBottom: '20px' }}>Betűskála</div>
               {([
-                { label: 'Hero',    size: 'clamp(44px, 6.5vw, 88px)', weight: 800, text: 'Identity',                               font: 'var(--font-display)', tracking: '-0.04em' },
-                { label: 'H1',      size: 'clamp(30px, 4vw, 56px)',   weight: 700, text: 'Brand Design',                           font: 'var(--font-display)', tracking: '-0.03em' },
-                { label: 'H2',      size: 'clamp(20px, 2.6vw, 36px)', weight: 650, text: 'Visual Systems',                         font: 'var(--font-display)', tracking: '-0.02em' },
-                { label: 'Body',    size: '18px',                      weight: 400, text: 'The mark that holds from 16px to 16 metres.', font: 'var(--font-body)', tracking: '0' },
-                { label: 'Caption', size: '11px',                      weight: 400, text: 'FACE · BRAND IDENTITY · 2026',           font: 'var(--font-body)',    tracking: '0.12em' },
+                { label: 'Hero',     size: 'clamp(44px, 6.5vw, 88px)', weight: 800, text: 'Identitás',                                    font: 'var(--font-display)', tracking: '-0.04em' },
+                { label: 'H1',       size: 'clamp(30px, 4vw, 56px)',   weight: 700, text: 'Brand Design',                                  font: 'var(--font-display)', tracking: '-0.03em' },
+                { label: 'H2',       size: 'clamp(20px, 2.6vw, 36px)', weight: 650, text: 'Vizuális Rendszerek',                           font: 'var(--font-display)', tracking: '-0.02em' },
+                { label: 'Body',     size: '18px',                      weight: 400, text: 'A jel, ami 16px-től 16 méterig tartja magát.',  font: 'var(--font-body)',    tracking: '0' },
+                { label: 'Caption',  size: '11px',                      weight: 400, text: 'FACE · BRAND IDENTITÁS · 2026',                font: 'var(--font-body)',    tracking: '0.12em' },
               ] as { label: string; size: string; weight: number; text: string; font: string; tracking: string }[]).map(({ label, size, weight, text, font, tracking }) => (
                 <div key={label} style={{ display: 'flex', alignItems: 'baseline', gap: '16px', padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
                   <span style={{ fontFamily: 'var(--font-body)', fontSize: '10px', color: 'rgba(255,255,255,0.18)', letterSpacing: '0.1em', width: '52px', flexShrink: 0 }}>{label}</span>
@@ -348,17 +335,14 @@ export default function FacePage() {
           </div>
         </section>
 
-        {/* ─── MOCKUPS ───────────────────────────────────────────── */}
+        {/* ─── MOCKUPOK ──────────────────────────────────────────── */}
         <section id="mockups" style={{ padding: `0 ${PM} ${SEC}` }}>
           <div ref={mockupStmtRef} style={{ maxWidth: 'var(--max-width)', margin: '0 auto' }}>
-            {/* Statement */}
             <p style={{ marginTop: '20px', fontFamily: 'var(--font-display)', fontSize: 'clamp(18px, 2vw, 26px)', fontWeight: 650, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.75)', maxWidth: '640px', lineHeight: 1.3, ...anim(mockupStmtInView, 200) }}>
-              A brand isn't real until it lives in the world. Every material, texture, and surface was considered.
+              Egy brand addig nem valódi, amíg nem él a valóságban. Minden anyagot, textúrát és felületet végiggondoltunk.
             </p>
-
           </div>
 
-          {/* Mockup 1 — full width strip */}
           <div style={{ marginTop: '20px', width: '100%', borderRadius: '14px', overflow: 'hidden' }}>
             <img
               src="/works/face/mockup_02_v2.png"
@@ -369,20 +353,18 @@ export default function FacePage() {
 
           <div style={{ maxWidth: 'var(--max-width)', margin: '12px auto 0', width: '100%', display: 'grid', gridTemplateColumns: '2fr 3fr', gap: '12px', alignItems: 'center' }}>
 
-            {/* Copy */}
             <div ref={mockupCopyRef} style={{ padding: 'clamp(16px, 2vw, 32px) 0' }}>
               <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2.8vw, 38px)', fontWeight: 700, letterSpacing: '-0.03em', color: '#fff', lineHeight: 1.15, ...anim(mockupCopyInView, 200) }}>
-                Clean enough to cut<br />through concrete.
+                Elég tiszta, hogy<br />betont is átvágjon.
               </p>
               <p style={{ marginTop: '16px', fontFamily: 'var(--font-body)', fontSize: 'clamp(13px, 1.2vw, 15px)', color: 'rgba(255,255,255,0.38)', lineHeight: 1.75, maxWidth: '72%', ...anim(mockupCopyInView, 380) }}>
-                The identity system was built to scale without friction. From a business card corner to a building façade, the mark carries the same authority. No adaptations, no compromises.
+                Az identitásrendszer súrlódás nélkül skálázódik. Névjegykártya sarkától épülethomlokzatig a logó ugyanolyan magabiztossággal néz ki. Módosítás nélkül, kompromisszum nélkül.
               </p>
               <p style={{ marginTop: '12px', fontFamily: 'var(--font-body)', fontSize: 'clamp(13px, 1.2vw, 15px)', color: 'rgba(255,255,255,0.25)', lineHeight: 1.75, maxWidth: '72%', ...anim(mockupCopyInView, 500) }}>
-                Applied to wayfinding, environmental graphics, and architectural signage, Face blue reads with the same precision it holds at 16 pixels.
+                Tájékoztatótáblákon, környezeti grafikákon és építészeti jelzéseken a Face blue ugyanolyan pontossággal olvasható, mint 16 pixelesen.
               </p>
             </div>
 
-            {/* mockup_01 only */}
             <div style={{ borderRadius: '12px', overflow: 'hidden' }}>
               <img src="/works/face/mockup_01.png" alt="" style={{ width: '100%', height: 'auto', display: 'block' }} />
             </div>
@@ -396,7 +378,6 @@ export default function FacePage() {
             <div style={{ borderRadius: '12px', overflow: 'hidden', aspectRatio: '3/2' }}>
               <img src="/works/face/mockup_06.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
-            {/* 9:16 carousel — same height, narrower */}
             <div style={{ borderRadius: '12px', overflow: 'hidden', aspectRatio: '9/16', position: 'relative' }}>
               {ARTBOARDS.map((src, i) => (
                 <img key={src} src={src} alt="" style={{
@@ -409,7 +390,6 @@ export default function FacePage() {
             </div>
           </div>
 
-          {/* Laptop mockup */}
           <div style={{ maxWidth: 'var(--max-width)', margin: '10px auto 0', width: '100%', borderRadius: '14px', overflow: 'hidden' }}>
             <img src="/works/face/mockup_03.png?v=3" alt="" style={{ width: '100%', height: 'auto', display: 'block' }} />
           </div>
@@ -422,11 +402,11 @@ export default function FacePage() {
 
             <div style={{ maxWidth: '92%' }}>
               {([
-                ['Client',       'Face'],
-                ['Industry',     'Tech / App'],
-                ['Year',         '2026'],
-                ['Scope',        'Brand Identity'],
-                ['Deliverables', 'Logo mark · Color system · Typography · Print · Digital'],
+                ['Ügyfél',      'Face'],
+                ['Iparág',      'Tech / App'],
+                ['Év',          '2026'],
+                ['Hatókör',     'Brand Identity'],
+                ['Átadandók',   'Logó · Színrendszer · Tipográfia · Nyomtatott · Digitális'],
               ] as [string,string][]).map(([label, value], i) => (
                 <div key={label} style={{ padding: '14px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '24px', ...anim(briefInView, i * 100) }}>
                   <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.25)', textTransform: 'uppercase', flexShrink: 0 }}>{label}</span>
@@ -437,20 +417,20 @@ export default function FacePage() {
 
             <div>
               <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2.8vw, 38px)', fontWeight: 700, letterSpacing: '-0.03em', color: '#fff', lineHeight: 1.15, ...anim(briefInView, 200) }}>
-                Face needed more than a logo.<br />They needed a system.
+                A Face-nek többre volt szüksége egy logónál.<br />Szüksége volt egy rendszerre.
               </p>
               <p style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(13px, 1.2vw, 15px)', color: 'rgba(255,255,255,0.38)', lineHeight: 1.55, marginTop: '16px', maxWidth: '72%', ...anim(briefInView, 380) }}>
-                An identity precise enough to signal authority in enterprise, bold enough to cut through the noise of a saturated tech market.
+                Egy identitás, ami elég pontos, hogy tekintélyt jelezzen vállalati környezetben, és elég bátor, hogy átvágjon egy telített technológiai piac zaján.
               </p>
               <p style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(13px, 1.2vw, 15px)', color: 'rgba(255,255,255,0.25)', lineHeight: 1.55, marginTop: '12px', maxWidth: '72%', ...anim(briefInView, 500) }}>
-                The brief: build a mark that holds at 16px and at 16 metres. One that works on a dark interface, a white business card, and an exterior façade equally. Without compromise.
+                A brief: építs egy jelet, ami 16 pixelesnél és 16 méteresnél is tartja magát. Ami sötét felületen, fehér névjegykártyán és épülethomlokzaton egyformán működik. Kompromisszum nélkül.
               </p>
             </div>
 
           </div>
         </section>
 
-        {/* ─── PROJECT NAV ───────────────────────────────────────── */}
+        {/* ─── PROJEKT NAV ───────────────────────────────────────── */}
         <div style={{ padding: `0 ${PM} ${SEC}` }}>
           <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px' }}>
             {prev ? (

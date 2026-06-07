@@ -60,20 +60,6 @@ function VoidCard({ index }: { index: string }) {
         position: 'relative',
       }}
     >
-      <span
-        style={{
-          fontFamily: 'var(--font-body)',
-          fontSize: 'var(--text-micro)',
-          fontWeight: 500,
-          color: 'var(--color-text-muted)',
-          letterSpacing: '0.1em',
-          position: 'absolute',
-          top: '20px',
-          left: '24px',
-        }}
-      >
-        {index}
-      </span>
       <div
         style={{
           width: '32px',
@@ -217,14 +203,6 @@ function LogofolioCard({ project }: { project: { index: string; title: string; c
       ))}
 
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.85) 100%)' }} />
-
-      <span style={{
-        position: 'absolute', top: '20px', left: '24px',
-        fontFamily: 'var(--font-body)', fontSize: 'var(--text-micro)',
-        fontWeight: 500, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em',
-      }}>
-        {project.index}
-      </span>
 
       <div style={{ position: 'absolute', bottom: '24px', left: '24px', right: '24px' }}>
         <h3 style={{

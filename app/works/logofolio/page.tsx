@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import CustomCursor from '../../components/CustomCursor';
 import Footer from '../../components/Footer';
+import Nav from '../../components/Nav';
 
 const PM = 'var(--page-margin)';
 
@@ -285,52 +286,7 @@ export default function LogofolioPage() {
         }
       `}</style>
 
-      {/* Nav */}
-      <nav
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 100,
-          padding: `20px ${PM}`,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          background: scrolled ? 'rgba(0,0,0,0.85)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(12px)' : 'none',
-          transition: 'background 400ms ease, backdrop-filter 400ms ease',
-          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
-        }}
-      >
-        <Link
-          href="/works"
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: '12px',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: 'rgba(255,255,255,0.5)',
-            textDecoration: 'none',
-            transition: 'color 200ms ease',
-          }}
-          onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-          onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}
-        >
-          ← Vissza
-        </Link>
-        <span
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: '11px',
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-            color: 'rgba(255,255,255,0.25)',
-          }}
-        >
-          Logofolio
-        </span>
-      </nav>
+      <Nav />
 
       {/* Header */}
       <div

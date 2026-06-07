@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import CustomCursor from '../../components/CustomCursor';
+import Nav from '../../components/Nav';
 
 const CODE_LINES = [
   '> INITIALIZING_GASPAR.EXE',
@@ -82,12 +83,7 @@ export default function VoidPage() {
         {/* Moving scanline */}
         <div aria-hidden style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '80px', zIndex: 6, pointerEvents: 'none', background: 'linear-gradient(to bottom,transparent,rgba(255,255,255,0.022),transparent)', animation: 'scanMove 7s linear infinite' }} />
 
-        {/* Back */}
-        <div style={{ padding: '28px 32px', position: 'relative', zIndex: 20 }}>
-          <Link href="/" style={{ color: 'rgba(255,255,255,0.3)', fontSize: 12, letterSpacing: '0.1em', textDecoration: 'none', fontFamily: 'monospace' }}>
-            ← /home
-          </Link>
-        </div>
+        <Nav />
 
         {/* Code block */}
         <div style={{ padding: '0 32px 48px', position: 'relative', zIndex: 20 }}>

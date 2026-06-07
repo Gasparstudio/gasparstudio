@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import CustomCursor from '../components/CustomCursor';
+import Nav from '../components/Nav';
 
 const PM = 'var(--page-margin)';
 
@@ -231,16 +232,7 @@ export default function ArajanlatPage() {
     <div style={{ background: '#000', minHeight: '100vh', paddingBottom: '100px' }}>
       <CustomCursor />
 
-      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, padding: `20px ${PM}` }}>
-        <Link href="/" style={{
-          fontFamily: 'var(--font-body)', fontSize: '12px', letterSpacing: '0.1em',
-          textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)',
-          textDecoration: 'none', transition: 'color 200ms ease',
-        }}
-          onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-          onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}
-        >← Vissza</Link>
-      </nav>
+      <Nav />
 
       <div style={{ paddingTop: 'clamp(90px, 12vh, 120px)', paddingLeft: PM, paddingRight: PM }}>
         <div style={{ marginBottom: '40px' }}>

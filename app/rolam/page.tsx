@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import CustomCursor from '../components/CustomCursor';
 import ScrollProgress from '../components/ScrollProgress';
+import Nav from '../components/Nav';
 
 // ─── Szerkeszthető adatok ─────────────────────────────────────
 const bio = {
@@ -176,38 +177,7 @@ export default function RolamPage() {
       <ScrollProgress />
       <CustomCursor />
 
-      {/* ── Nav ────────────────────────────────────────── */}
-      <nav
-        style={{
-          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          padding: '0 var(--page-margin)', height: '68px',
-          background: scrolled ? 'rgba(10,10,10,0.92)' : 'rgba(10,10,10,0.7)',
-          backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: `1px solid ${scrolled ? 'var(--color-border)' : 'transparent'}`,
-          transition: 'background 400ms ease, border-color 400ms ease',
-        }}
-      >
-        <div style={{ flex: 1 }}>
-          <Link href="/"
-            style={{ color: 'var(--color-text-secondary)', fontFamily: 'var(--font-body)', fontSize: 'var(--text-small)', textDecoration: 'none', transition: 'color 200ms ease' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text-primary)')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-secondary)')}
-          >
-            ← Vissza
-          </Link>
-        </div>
-        <Link href="/"
-          style={{ fontFamily: 'var(--font-display)', fontSize: '15px', letterSpacing: '0.08em', color: 'var(--color-text-primary)', textDecoration: 'none' }}
-        >
-          GASPAR
-        </Link>
-        <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-          <a href="/arajanlat" className="btn btn-primary hidden sm:inline-flex" style={{ fontSize: '13px', padding: '10px 20px' }}>
-            Írj nekem →
-          </a>
-        </div>
-      </nav>
+      <Nav />
 
       <main style={{ paddingTop: '68px' }}>
 

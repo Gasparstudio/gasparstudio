@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Footer from '../../components/Footer';
 import CustomCursor from '../../components/CustomCursor';
+import Nav from '../../components/Nav';
 
 const WARM = '#C8442A';
 const BG   = '#ffffff';
@@ -238,37 +239,7 @@ export default function MozzanoPage() {
       <CustomCursor />
       <style>{FONTS}</style>
 
-      {/* Nav */}
-      <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '0 var(--page-margin)', height: '68px',
-        background: scrolled ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.7)',
-        backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-        borderBottom: `1px solid ${scrolled ? 'rgba(17,17,17,0.1)' : 'transparent'}`,
-        transition: 'background 400ms ease, border-color 400ms ease',
-      }}>
-        <div style={{ flex: 1 }}>
-          <Link href="/works"
-            style={{ color: 'rgba(17,17,17,0.45)', fontFamily: 'ClashDisplay, var(--font-body)', fontSize: 'var(--text-small)', textDecoration: 'none', transition: 'color 200ms ease' }}
-            onMouseEnter={e => (e.currentTarget.style.color = '#111')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(17,17,17,0.45)')}
-          >
-            ← Vissza
-          </Link>
-        </div>
-        <span style={{
-          fontFamily: 'CabinetGrotesk, var(--font-display)', fontSize: '15px',
-          fontWeight: 700, letterSpacing: '0.1em', color: '#111',
-        }}>
-          MOZZANO
-        </span>
-        <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-          <a href="/arajanlat" className="btn btn-primary" style={{ fontSize: '13px', padding: '10px 20px' }}>
-            Írj nekem →
-          </a>
-        </div>
-      </nav>
+      <Nav />
 
       {/* ── PIZZA HERO — 100vh, scroll-hijacked ── */}
       <div ref={heroRef} style={{ height: '100vh', background: BG, overflow: 'hidden' }}>
@@ -395,25 +366,29 @@ export default function MozzanoPage() {
         />
 
         {/* Képgrid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 340px), 1fr))',
-          gap: 'clamp(10px, 1.5vw, 16px)',
-          margin: 'clamp(48px, 7vw, 90px) 0',
-        }}>
-          {[
-            '/works/mozzano/Artboard%203.png',
-            '/works/mozzano/Artboard%207.png',
-            '/works/mozzano/Artboard%206.png',
-            '/works/mozzano/Artboard%208.png',
-            '/works/mozzano/Artboard%209.png',
-            '/works/mozzano/Artboard%204.png',
-            '/works/mozzano/Artboard%205.png',
-            '/works/mozzano/dobozos.png',
-          ].map((src) => (
-            <img key={src} src={src} alt=""
-              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '14px', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }} />
-          ))}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(10px, 1.5vw, 14px)', margin: 'clamp(48px, 7vw, 90px) 0' }}>
+
+          {/* Sor 1 — 3 kis kép */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 'clamp(10px, 1.5vw, 14px)' }}>
+            {['/works/mozzano/Artboard%203.png', '/works/mozzano/Artboard%207.png', '/works/mozzano/Artboard%206.png'].map(src => (
+              <img key={src} src={src} alt="" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }} />
+            ))}
+          </div>
+
+          {/* Sor 2 — 2 nagy dobozos kép */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(10px, 1.5vw, 14px)' }}>
+            {['/works/mozzano/Artboard%208.png', '/works/mozzano/Artboard%209.png'].map(src => (
+              <img key={src} src={src} alt="" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }} />
+            ))}
+          </div>
+
+          {/* Sor 3 — 3 kis kép */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 'clamp(10px, 1.5vw, 14px)' }}>
+            {['/works/mozzano/Artboard%204.png', '/works/mozzano/Artboard%205.png', '/works/mozzano/dobozos.png'].map(src => (
+              <img key={src} src={src} alt="" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }} />
+            ))}
+          </div>
+
         </div>
 
       </section>

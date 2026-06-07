@@ -7,6 +7,7 @@ import { projects, Project } from '../data/projects';
 import CustomCursor from '../components/CustomCursor';
 import ScrollProgress from '../components/ScrollProgress';
 import Footer from '../components/Footer';
+import Nav from '../components/Nav';
 
 const ALL = 'Összes';
 
@@ -175,50 +176,7 @@ export default function WorksPage() {
       <ScrollProgress />
       <CustomCursor />
 
-      {/* Nav */}
-      <nav
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 1000,
-          display: 'flex',
-          alignItems: 'center',
-          padding: '0 var(--page-margin)',
-          height: '68px',
-          background: scrolled ? 'rgba(10,10,10,0.92)' : 'rgba(10,10,10,0.7)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: `1px solid ${scrolled ? 'var(--color-border)' : 'transparent'}`,
-          transition: 'background 400ms ease, border-color 400ms ease',
-        }}
-      >
-        <div style={{ flex: 1 }} />
-
-        <Link
-          href="/"
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: '15px',
-            letterSpacing: '0.08em',
-            color: 'var(--color-text-primary)',
-            textDecoration: 'none',
-          }}
-        >
-          GASPAR
-        </Link>
-
-        <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-          <a
-            href="/arajanlat"
-            className="btn btn-primary hidden sm:inline-flex"
-            style={{ fontSize: '13px', padding: '10px 20px' }}
-          >
-            Írj nekem →
-          </a>
-        </div>
-      </nav>
+      <Nav />
 
       <main style={{ paddingTop: '68px', minHeight: '100vh' }}>
         {/* Header */}

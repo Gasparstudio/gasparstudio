@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { projects } from '../../data/projects';
 import CustomCursor from '../../components/CustomCursor';
 import Footer from '../../components/Footer';
+import Nav from '../../components/Nav';
 
 const BLUE = '#1A7BFF';
 const PM = 'var(--page-margin)';
@@ -133,31 +134,7 @@ export default function FacePage() {
       <div style={{ position: 'fixed', top: 0, left: 0, zIndex: 1100, height: '2px', width: `${pct}%`, background: BLUE, transition: 'width 80ms linear', pointerEvents: 'none' }} />
       <CustomCursor />
 
-      {/* Nav */}
-      <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: `0 ${PM}`, height: '68px',
-        background: scrolled ? 'rgba(0,0,0,0.95)' : 'rgba(0,0,0,0.5)',
-        backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-        transition: 'background 400ms ease',
-      }}>
-        <div style={{ flex: 1 }}>
-          <Link href="/works"
-            style={{ color: 'var(--color-text-secondary)', fontFamily: 'var(--font-body)', fontSize: '14px', textDecoration: 'none', transition: 'color 200ms' }}
-            onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-secondary)')}>
-            ← Munkák
-          </Link>
-        </div>
-        <Link href="/"
-          style={{ fontFamily: 'var(--font-display)', fontSize: '15px', letterSpacing: '0.08em', color: 'var(--color-text-primary)', textDecoration: 'none' }}>
-          GASPAR
-        </Link>
-        <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-          <a href="/arajanlat" className="btn btn-primary" style={{ fontSize: '13px', padding: '10px 20px' }}>Írj nekem →</a>
-        </div>
-      </nav>
+      <Nav />
 
       <main style={{ paddingTop: '68px', background: '#000' }}>
 

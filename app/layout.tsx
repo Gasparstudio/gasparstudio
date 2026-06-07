@@ -42,6 +42,14 @@ export const metadata: Metadata = {
     title: "GASPAR · Brand Designer",
     description: "Brands that feel before they speak.",
     type: "website",
+    url: "https://gasparstudio.hu",
+    images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GASPAR · Brand Designer",
+    description: "Brands that feel before they speak.",
+    images: ["/opengraph-image.png"],
   },
 };
 

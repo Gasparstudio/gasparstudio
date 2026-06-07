@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import Footer from '../../components/Footer';
 import CustomCursor from '../../components/CustomCursor';
 import Nav from '../../components/Nav';
@@ -115,7 +116,9 @@ export default function SarkanyvolgyPage() {
 
         {/* Logo top-left */}
         <div style={{ position: 'absolute', top: '88px', left: PM }}>
-          <img src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__color_icon.png" alt="Sárkány Völgy" style={{ height: 'clamp(48px,7vw,72px)', width: 'auto', objectFit: 'contain' }} />
+          <div style={{ height: 'clamp(48px,7vw,72px)', width: 'clamp(48px,7vw,72px)', position: 'relative' }}>
+            <Image src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__color_icon.png" alt="Sárkány Völgy" fill style={{ objectFit: 'contain', mixBlendMode: 'multiply' }} sizes="72px" priority />
+          </div>
         </div>
 
         <div style={{ position: 'relative', zIndex: 1 }}>
@@ -137,11 +140,9 @@ export default function SarkanyvolgyPage() {
 
       {/* ── BRAND STATEMENT ─────────────────────────────────── */}
       <div style={{ background: GREEN, padding: `clamp(14px,5vw,70px) ${PM}`, overflow: 'hidden', position: 'relative' }}>
-        <img
-          src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__white_icon.png"
-          alt=""
-          style={{ position: 'absolute', right: '-2%', top: 0, height: '100%', width: 'auto', objectFit: 'contain', objectPosition: 'right center', opacity: 0.1 }}
-        />
+        <div style={{ position: 'absolute', right: '-2%', top: 0, bottom: 0, width: 'clamp(180px,28vw,380px)', opacity: 0.1, pointerEvents: 'none' }}>
+          <Image src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__white_icon.png" alt="" fill style={{ objectFit: 'contain', objectPosition: 'right center' }} sizes="380px" />
+        </div>
         <p style={{ ...CG, fontSize: 'clamp(36px,7vw,96px)', fontWeight: 900, color: CREAM, lineHeight: 1, letterSpacing: '-0.03em', maxWidth: '18ch', margin: '0 0 32px', position: 'relative', zIndex: 1 }}>
           Egy völgy, ahol a sárkányok mesélnek.
         </p>
@@ -173,7 +174,9 @@ export default function SarkanyvolgyPage() {
             {/* A — Védjegy */}
             <div style={{ background: NAVY, borderRadius: '0', padding: 'clamp(40px,6vw,64px) clamp(32px,4vw,48px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '320px' }}>
               <div style={{ display: 'flex', justifyContent: 'center', flex: 1, alignItems: 'center' }}>
-                <img src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__white_icon.png" alt="Védjegy" style={{ width: '60%', maxWidth: '140px', objectFit: 'contain' }} />
+                <div style={{ width: 'clamp(80px,12vw,140px)', height: 'clamp(80px,12vw,140px)', position: 'relative' }}>
+                  <Image src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__white_icon.png" alt="Védjegy" fill style={{ objectFit: 'contain' }} sizes="140px" priority />
+                </div>
               </div>
               <div style={{ borderTop: `1px solid ${CREAM}15`, paddingTop: '16px', marginTop: '24px' }}>
                 <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: RED, margin: '0 0 4px', fontWeight: 600 }}>A · Védjegy</p>
@@ -184,7 +187,9 @@ export default function SarkanyvolgyPage() {
             {/* B — Vízszintes */}
             <div style={{ background: GREEN, borderRadius: '0', padding: 'clamp(40px,6vw,64px) clamp(32px,4vw,48px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '320px' }}>
               <div style={{ display: 'flex', alignItems: 'center', flex: 1, justifyContent: 'center' }}>
-                <img src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__white_long.png" alt="Vízszintes" style={{ width: '90%', maxWidth: '320px', objectFit: 'contain' }} />
+                <div style={{ width: 'min(90%, 320px)', aspectRatio: '3/1', position: 'relative' }}>
+                  <Image src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__white_long.png" alt="Vízszintes" fill style={{ objectFit: 'contain' }} sizes="320px" priority />
+                </div>
               </div>
               <div style={{ borderTop: `1px solid ${CREAM}15`, paddingTop: '16px', marginTop: '24px' }}>
                 <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: RED, margin: '0 0 4px', fontWeight: 600 }}>B · Vízszintes</p>
@@ -195,7 +200,9 @@ export default function SarkanyvolgyPage() {
             {/* C — Álló */}
             <div style={{ background: CREAM, border: `1px solid ${NAVY}12`, borderRadius: '0', padding: 'clamp(40px,6vw,64px) clamp(32px,4vw,48px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '320px' }}>
               <div style={{ display: 'flex', alignItems: 'center', flex: 1, justifyContent: 'center' }}>
-                <img src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__color.png" alt="Álló" style={{ width: '90%', maxWidth: '320px', objectFit: 'contain' }} />
+                <div style={{ width: 'min(90%, 320px)', aspectRatio: '3/1', position: 'relative' }}>
+                  <Image src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__color.png" alt="Álló" fill style={{ objectFit: 'contain', mixBlendMode: 'multiply' }} sizes="320px" priority />
+                </div>
               </div>
               <div style={{ borderTop: `1px solid ${NAVY}10`, paddingTop: '16px', marginTop: '24px' }}>
                 <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: RED, margin: '0 0 4px', fontWeight: 600 }}>C · Álló</p>
@@ -295,8 +302,8 @@ export default function SarkanyvolgyPage() {
                 { label: 'Nagy főcím · 30pt', text: 'Mesélni jövünk',       style: { ...CG, fontWeight: 900, fontSize: 'clamp(24px,4vw,48px)', color: CREAM, letterSpacing: '-0.03em' } },
                 { label: 'Főcím · 20pt',      text: 'A völgy meghív',       style: { ...CG, fontWeight: 900, fontSize: 'clamp(18px,2.8vw,32px)', color: CREAM, letterSpacing: '-0.02em' } },
                 { label: 'Alcím · 12pt',      text: 'Programjaink, helyszín és időpontok', style: { ...CG, fontWeight: 800, fontSize: 'clamp(14px,1.8vw,20px)', color: CREAM } },
-                { label: 'Body · 9pt',        text: 'A folyószöveg Geist Medium, sortávolság 1.45.', style: { fontFamily: 'system-ui, sans-serif', fontSize: 'clamp(12px,1.2vw,15px)', color: `${CREAM}60`, lineHeight: 1.45 } },
-                { label: 'Caps · 7pt',        text: 'CAPTION · LABEL · METAADAT', style: { fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: RED } },
+                { label: 'Body · 9pt',        text: 'Gyere te is a völgybe, ahol a tűz nem éget, csak mesél. Helyszín: Zirci Arborétum. Időpont: 2026. augusztus.', style: { fontFamily: 'system-ui, sans-serif', fontSize: 'clamp(12px,1.2vw,15px)', color: `${CREAM}60`, lineHeight: 1.45 } },
+                { label: 'Caps · 7pt',        text: 'SÁRKÁNYVÖLGY · 2026 · MESE FESZTIVÁL', style: { fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: RED } },
               ].map(({ label, text, style }) => (
                 <div key={label} style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: '24px', borderBottom: `1px solid ${CREAM}06`, padding: '16px 0', alignItems: 'center' }}>
                   <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', color: `${CREAM}25`, margin: 0, letterSpacing: '0.06em' }}>{label}</p>
@@ -309,23 +316,85 @@ export default function SarkanyvolgyPage() {
 
         {/* ── 04 APPLICATIONS ──────────────────────────────── */}
         <section ref={appRef as React.RefObject<HTMLElement>} style={{ padding: `clamp(30px,8vw,90px) ${PM}`, borderTop: `1px solid ${NAVY}10` }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 'clamp(40px,6vw,72px)', flexWrap: 'wrap', gap: '12px' }}>
+
+          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 'clamp(20px,3vw,32px)', flexWrap: 'wrap', gap: '12px' }}>
             <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: RED, margin: 0, fontWeight: 600 }}>04 · Alkalmazás</p>
-            <p style={{ ...CG, fontSize: 'clamp(18px,2.5vw,28px)', fontWeight: 800, color: NAVY, margin: 0, letterSpacing: '-0.02em' }}>A márka működésben</p>
+            <p style={{ ...CG, fontSize: 'clamp(18px,2.5vw,28px)', fontWeight: 800, color: NAVY, margin: 0, letterSpacing: '-0.02em' }}>A márka a világban</p>
           </div>
 
-          <div style={{ ...anim(appV), display: 'flex', flexDirection: 'column', gap: 'clamp(10px,1.5vw,14px)' }}>
-            {/* Row 1: full width — page 6 */}
-            <img
-              src="/Sarkanyvolgy_logo_2026_v02_Page_8.png"
-              alt="Alkalmazások"
-              style={{ width: '100%', height: 'auto', borderRadius: '0', display: 'block', boxShadow: `0 4px 32px ${NAVY}14` }}
-            />
-            {/* Row 2: two side by side */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(10px,1.5vw,14px)' }}>
-              <img src="/Sarkanyvolgy_logo_2026_v02_Page_5.png" alt="Színpaletta" style={{ width: '100%', height: 'auto', borderRadius: '0', display: 'block', boxShadow: `0 4px 20px ${NAVY}10` }} />
-              <img src="/Sarkanyvolgy_logo_2026_v02_Page_6.png" alt="60-30-10 szabály" style={{ width: '100%', height: 'auto', borderRadius: '0', display: 'block', boxShadow: `0 4px 20px ${NAVY}10` }} />
+          <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: 'clamp(14px,1.4vw,17px)', lineHeight: 1.7, color: `${NAVY}55`, maxWidth: '560px', margin: `0 0 clamp(40px,6vw,64px)` }}>
+            Az alábbi példák bemutatják, hogyan szólal meg a márka különböző felületeken. Minden megjelenés a 60–30–10 szabályt követi, és a logót a védőzóna szabályainak betartásával használja.
+          </p>
+
+          <div style={{ ...anim(appV), display: 'flex', flexDirection: 'column', gap: 'clamp(8px,1.2vw,12px)' }}>
+
+            {/* Sor 1: Zöld plakát (bal) + két kártya (jobb) */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 'clamp(8px,1.2vw,12px)', alignItems: 'stretch' }}>
+
+              {/* Zöld plakátkártya */}
+              <div style={{ background: GREEN, padding: 'clamp(28px,4vw,44px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 'clamp(420px,55vw,580px)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <div style={{ width: 'clamp(36px,5vw,60px)', height: 'clamp(36px,5vw,60px)', position: 'relative' }}>
+                    <Image src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__white_icon.png" alt="" fill style={{ objectFit: 'contain' }} sizes="60px" />
+                  </div>
+                  <span style={{ color: RED, fontSize: 'clamp(18px,2.8vw,32px)', lineHeight: 1 }}>✦</span>
+                </div>
+                <div>
+                  <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: 'clamp(8px,0.8vw,10px)', letterSpacing: '0.16em', textTransform: 'uppercase', color: `${CREAM}50`, margin: `0 0 clamp(10px,1.5vw,16px)` }}>Sárkány Völgy Mese Fesztivál</p>
+                  <p style={{ ...CG, fontWeight: 900, fontSize: 'clamp(28px,5.5vw,72px)', color: CREAM, lineHeight: 0.88, letterSpacing: '-0.03em', margin: 0 }}>
+                    Hetedhét<br />országon<br /><span style={{ color: RED }}>is túl.</span>
+                  </p>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', borderTop: `1px solid ${CREAM}15`, paddingTop: '14px' }}>
+                  <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: 'clamp(7px,0.7vw,9px)', letterSpacing: '0.12em', textTransform: 'uppercase', color: `${CREAM}45`, margin: 0, lineHeight: 1.7 }}>Sárkány Völgy<br />Mese Fesztivál</p>
+                  <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: 'clamp(7px,0.7vw,9px)', letterSpacing: '0.12em', textTransform: 'uppercase', color: `${CREAM}45`, margin: 0, textAlign: 'right', lineHeight: 1.7 }}>Jegyek ·<br />Sarkanyvolgy.hu</p>
+                </div>
+              </div>
+
+              {/* Jobb oszlop: két kártya egymás alatt */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(8px,1.2vw,12px)' }}>
+
+                {/* NAVY: Mese. Tűz. Völgy. */}
+                <div style={{ background: NAVY, padding: 'clamp(24px,3.5vw,40px)', flex: 1, display: 'flex', alignItems: 'flex-end' }}>
+                  <p style={{ ...CG, fontWeight: 900, fontSize: 'clamp(22px,3.8vw,52px)', color: CREAM, margin: 0, letterSpacing: '-0.03em', lineHeight: 0.92 }}>
+                    Mese.<br />Tűz.<br /><span style={{ color: RED }}>Völgy.</span>
+                  </p>
+                </div>
+
+                {/* CREAM: ikon + "Sárkány Völgy" + piros csík */}
+                <div style={{ background: CREAM, border: `1px solid ${NAVY}12`, padding: 'clamp(24px,3.5vw,40px)', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 'clamp(16px,3vw,32px)', background: RED }} />
+                  <div style={{ width: 'clamp(28px,4vw,48px)', height: 'clamp(28px,4vw,48px)', position: 'relative' }}>
+                    <Image src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__color_icon.png" alt="Sárkány Völgy" fill style={{ objectFit: 'contain', mixBlendMode: 'multiply' }} sizes="48px" />
+                  </div>
+                  <div>
+                    <p style={{ ...CG, fontWeight: 800, fontSize: 'clamp(14px,2vw,24px)', color: NAVY, margin: `0 0 6px`, letterSpacing: '-0.01em' }}>Sárkány Völgy</p>
+                    <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: 'clamp(8px,0.7vw,10px)', letterSpacing: '0.14em', textTransform: 'uppercase', color: RED, margin: 0, fontWeight: 600 }}>Mese Fesztivál · 2026</p>
+                  </div>
+                </div>
+
+              </div>
             </div>
+
+            {/* Sor 2: Piros kártya (ikon) + Krém vízjel kártya */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(8px,1.2vw,12px)' }}>
+
+              {/* Piros: fehér ikon középen */}
+              <div style={{ background: RED, padding: 'clamp(36px,5vw,56px)', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 'clamp(140px,18vw,220px)' }}>
+                <div style={{ width: 'clamp(56px,9vw,110px)', height: 'clamp(56px,9vw,110px)', position: 'relative' }}>
+                  <Image src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__white_icon.png" alt="Logó" fill style={{ objectFit: 'contain' }} sizes="110px" />
+                </div>
+              </div>
+
+              {/* Krém: nagy vízjel ikon */}
+              <div style={{ background: CREAM, border: `1px solid ${NAVY}10`, position: 'relative', overflow: 'hidden', minHeight: 'clamp(140px,18vw,220px)' }}>
+                <div style={{ position: 'absolute', right: '-8%', bottom: '-8%', width: '80%', height: '130%', opacity: 0.09 }}>
+                  <Image src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__black_icon.png" alt="" fill style={{ objectFit: 'contain', objectPosition: 'right bottom' }} sizes="400px" />
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </section>
 
@@ -349,7 +418,7 @@ export default function SarkanyvolgyPage() {
 
           <div style={{ ...anim(briefV, 150), maxWidth: '640px' }}>
             <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: 'clamp(15px,1.4vw,18px)', lineHeight: 1.75, color: `${NAVY}60`, margin: 0 }}>
-              A Sárkány Völgy Mese Fesztivál egy modern mítosz. Gyökerei a magyar népmesékbe nyúlnak, formanyelve viszont mai: bátor, tiszta, vizuálisan fegyelmezett. A védjegyünk egy stilizált, heraldikus sárkány — szögletes és lágy egyszerre. Mint maga a mese.
+              A Sárkány Völgy Mese Fesztivál egy modern mítosz. Gyökerei a magyar népmesékbe nyúlnak, formanyelve viszont mai: bátor, tiszta, vizuálisan fegyelmezett. A védjegy egy stilizált, heraldikus sárkány. Szögletes és lágy egyszerre. Mint maga a mese.
             </p>
           </div>
         </section>
@@ -360,7 +429,9 @@ export default function SarkanyvolgyPage() {
         <p style={{ ...CG, fontWeight: 900, fontSize: 'clamp(28px,5vw,64px)', color: CREAM, margin: 0, letterSpacing: '-0.03em', lineHeight: 1 }}>
           Mese.<br />Tűz.<br /><span style={{ color: RED }}>Völgy.</span>
         </p>
-        <img src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__white_icon.png" alt="" style={{ height: 'clamp(80px,12vw,140px)', opacity: 0.25 }} />
+        <div style={{ height: 'clamp(80px,12vw,140px)', width: 'clamp(80px,12vw,140px)', position: 'relative', opacity: 0.25 }}>
+          <Image src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__white_icon.png" alt="" fill style={{ objectFit: 'contain' }} sizes="140px" />
+        </div>
       </div>
 
       <Footer />

@@ -137,9 +137,11 @@ export default function SarkanyvolgyPage() {
 
       {/* ── BRAND STATEMENT ─────────────────────────────────── */}
       <div style={{ background: GREEN, padding: `clamp(14px,5vw,70px) ${PM}`, overflow: 'hidden', position: 'relative' }}>
-        <div style={{ position: 'absolute', right: '-4%', bottom: '-10%', opacity: 0.1 }}>
-          <img src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__white_icon.png" alt="" style={{ width: 'clamp(280px,40vw,560px)' }} />
-        </div>
+        <img
+          src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__white_icon.png"
+          alt=""
+          style={{ position: 'absolute', right: '-2%', top: 0, height: '100%', width: 'auto', objectFit: 'contain', objectPosition: 'right center', opacity: 0.1 }}
+        />
         <p style={{ ...CG, fontSize: 'clamp(36px,7vw,96px)', fontWeight: 900, color: CREAM, lineHeight: 1, letterSpacing: '-0.03em', maxWidth: '18ch', margin: '0 0 32px', position: 'relative', zIndex: 1 }}>
           Egy völgy, ahol a sárkányok mesélnek.
         </p>

@@ -9,6 +9,7 @@ export interface Project {
   images: string[];
   logo?: string;
   flashColor?: string;
+  showOnHome?: boolean;
 }
 
 // Új projekt hozzáadásához:
@@ -76,11 +77,25 @@ export const projects: Project[] = [
     gradient: 'linear-gradient(135deg, #1a2e1a 0%, #0d1a0d 40%, #2a3a1a 100%)',
     accentColor: '#6BAF6B',
     flashColor: '#E53935',
+    showOnHome: false,
     images: [
       '/works/kamfor/1.png',
       '/works/kamfor/001.png',
       '/works/kamfor/002.png',
       '/works/kamfor/003.png',
+    ],
+  },
+  {
+    slug: 'sarkanyvolgy',
+    index: '04',
+    title: 'Sárkányvölgy',
+    category: 'Brand Identity',
+    year: '2023',
+    gradient: 'linear-gradient(135deg, #1a1200 0%, #2d2000 40%, #1a1a00 100%)',
+    accentColor: '#D4A017',
+    flashColor: '#C8441A',
+    images: [
+      '/partners/sarkanyvolgy_2-02.png',
     ],
   },
   {

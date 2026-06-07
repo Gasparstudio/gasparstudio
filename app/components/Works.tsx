@@ -445,8 +445,9 @@ export default function Works() {
   const trackRef = useRef<HTMLDivElement>(null);
   const isMobileRef = useRef(false);
 
-  const [projects, setProjects] = useState(() => [...realProjects, ctaCard]);
-  useEffect(() => { setProjects([...shuffleArr(realProjects), ctaCard]); }, []);
+  const homeProjects = realProjects.filter((p) => p.showOnHome !== false);
+  const [projects, setProjects] = useState(() => [...homeProjects, ctaCard]);
+  useEffect(() => { setProjects([...shuffleArr(homeProjects), ctaCard]); }, []);
   const [ctaWordIndex, setCtaWordIndex] = useState(0);
 
   useEffect(() => {

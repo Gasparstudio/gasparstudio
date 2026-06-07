@@ -28,13 +28,13 @@ const timeline = [
   {
     year: '5 évesen',
     title: 'Eldöntöttem',
-    description: 'Grafikus leszek. Nem tudtam még mi az — de tudtam, hogy az.',
+    description: 'Grafikus leszek. Nem tudtam még mi az, de tudtam, hogy az.',
     tag: 'Kezdet',
   },
   {
     year: '2020–22',
     title: 'Iskola',
-    description: 'Zirc, majd Bodajk — grafika és vizuális kommunikáció szakon.',
+    description: 'Zirc, majd Bodajk. Grafika szakon.',
     tag: 'Tanulmányok',
   },
   {
@@ -46,13 +46,13 @@ const timeline = [
   {
     year: '2022–24',
     title: 'Kámfor, Kanvas…',
-    description: 'Érdekesebb projekteken is dolgoztam — puppet theatre, globális design platform.',
+    description: 'Érdekesebb projekteken is dolgoztam. Puppet theatre, globális design platform.',
     tag: 'Projekt',
   },
   {
     year: 'Ma',
     title: "Simon's Burger, Smashy, Travis Tenders, Buddy's",
-    description: 'Magyarországon ismert nevekkel dolgozom.',
+    description: 'Nagy nevek itthon. Velük dolgozom most.',
     tag: 'Ma',
   },
 ];

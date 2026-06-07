@@ -2,10 +2,14 @@
 
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useLang } from '../context/LanguageContext';
 
 export default function Nav() {
   const { t, lang, toggle } = useLang();
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+  const backHref = pathname.startsWith('/works/') ? '/works' : '/';
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -44,6 +48,28 @@ export default function Nav() {
 
   return (
     <>
+      {/* ── Vissza gomb (csak sub-oldalakon) ─────────────────── */}
+      {!isHome && (
+        <Link
+          href={backHref}
+          style={{
+            position: 'fixed',
+            top: '28px',
+            left: 'var(--page-margin)',
+            zIndex: 1001,
+            color: 'var(--color-text-secondary)',
+            fontFamily: 'var(--font-body)',
+            fontSize: 'var(--text-small)',
+            textDecoration: 'none',
+            transition: 'color 200ms ease',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text-primary)')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-secondary)')}
+        >
+          ← Vissza
+        </Link>
+      )}
+
       {/* ── Floating Pill Nav ─────────────────────────────────── */}
       <nav
         style={{

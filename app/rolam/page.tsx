@@ -12,7 +12,7 @@ const bio = {
   role: 'Brand Designer',
   location: 'Budapest',
   summary:
-    'Brand designerként abban hiszek, hogy egy erős vizuális identitás nem díszítés — hanem stratégia. Budapest-alapú, globálisan gondolkodó.',
+    '14 évesen rajzoltam az első logómat — azóta nem hagytam abba. Nem díszítő vagyok, hanem gondolkodó: minden vonalnak, színnek és betűnek oka van.',
   photo: '/works/Void/void1.png',
 };
 
@@ -24,45 +24,50 @@ const stats = [
 
 const tools = ['Figma', 'Illustrator', 'After Effects', 'Photoshop', 'Lightroom'];
 
-// Töltsd ki a saját állomásaiddal
 const timeline = [
   {
-    year: '2019',
-    title: 'Első lépések',
-    description: 'Megismerkedtem az Adobe Creative Suite-tel. Logók, plakátok, az első kísérletek.',
+    year: '2018',
+    title: 'Az első vonalak',
+    description: '14 évesen kezdtem — logók, plakátok, az Adobe Creative Suite első lépései. Nem hobbi volt, hanem megszállottság.',
     tag: 'Kezdet',
   },
   {
-    year: '2021',
-    title: 'Szabadúszóként',
-    description: 'Az első fizetős projektek. Brand identity munkák, kisebb vállalkozások arculata.',
-    tag: 'Mérföldkő',
+    year: '2020',
+    title: 'III. Béla Gimnázium',
+    description: 'Zirc — Művészeti Szakgimnázium, grafika szak. Ahol a kísérletezésből szakma lett.',
+    tag: 'Tanulmányok',
+  },
+  {
+    year: '2022',
+    title: 'Hang-Szín-Tér',
+    description: 'Bodajk — Művészeti Gimnázium. Vizuális kommunikáció, tervezőgrafika, az első komolyabb arculati munkák.',
+    tag: 'Tanulmányok',
   },
   {
     year: '2022',
     title: 'Kámfor',
-    description: 'Komplex arculati projekt — logo, nyomtatott anyagok, brand guidelines.',
+    description: 'Az első komplex brand identity projekt — logo, nyomtatott anyagok, teljes arculat. Innen már nem volt visszaút.',
     tag: 'Projekt',
   },
   {
-    year: '2024',
-    title: 'Nemzetközi',
-    description: 'Globális piacra lépés. Távoli együttműködések, többnyelvű brand rendszerek.',
-    tag: 'Mérföldkő',
+    year: '2025',
+    title: "Simon's Burger",
+    description: 'Brand redesign egy ismert budapesti étteremnek. Fotózás, social media, teljes vizuális megújulás.',
+    tag: 'Projekt',
   },
   {
     year: '2026',
     title: 'GASPAR Studio',
-    description: 'Saját stúdió. Modern brand identitások, stratégiai gondolkodás, minőség kompromisszum nélkül.',
+    description: 'Saját brand, saját szabályok. Stratégiai identitástervezés — minőség kompromisszum nélkül.',
     tag: 'Ma',
   },
 ];
 
 const tagStyles: Record<string, { bg: string; color: string }> = {
-  Kezdet:      { bg: 'rgba(99,102,241,0.15)',   color: '#818CF8' },
-  Mérföldkő:   { bg: 'rgba(155,109,255,0.15)',  color: '#B08FFF' },
-  Projekt:     { bg: 'rgba(255,112,67,0.15)',   color: '#FF7043' },
-  Ma:          { bg: 'rgba(155,109,255,0.15)',  color: 'var(--color-accent)' },
+  Kezdet:       { bg: 'rgba(99,102,241,0.15)',   color: '#818CF8' },
+  Tanulmányok:  { bg: 'rgba(34,197,94,0.15)',    color: '#4ADE80' },
+  Projekt:      { bg: 'rgba(255,112,67,0.15)',   color: '#FF7043' },
+  Ma:           { bg: 'rgba(155,109,255,0.15)',  color: 'var(--color-accent)' },
 };
 
 // ─── Page ─────────────────────────────────────────────────────

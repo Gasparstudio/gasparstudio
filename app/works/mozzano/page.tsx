@@ -382,10 +382,10 @@ export default function MozzanoPage() {
             ))}
           </div>
 
-          {/* Sor 3 — 3 kis kép */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 'clamp(10px, 1.5vw, 14px)' }}>
-            {['/works/mozzano/Artboard%204.png', '/works/mozzano/Artboard%205.png', '/works/mozzano/dobozos.png'].map(src => (
-              <img key={src} src={src} alt="" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }} />
+          {/* Sor 3 — bal kisebb, jobb nagy, egyforma magasság */}
+          <div style={{ display: 'grid', gridTemplateColumns: '2fr 3fr', gap: 'clamp(10px, 1.5vw, 14px)' }}>
+            {['/works/mozzano/Artboard%204.png', '/works/mozzano/Artboard%205.png'].map(src => (
+              <img key={src} src={src} alt="" style={{ width: '100%', height: 'clamp(260px, 32vw, 480px)', objectFit: 'cover', display: 'block', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }} />
             ))}
           </div>
 

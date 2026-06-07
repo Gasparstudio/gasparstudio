@@ -137,7 +137,7 @@ export default function SarkanyvolgyPage() {
       </div>
 
       {/* ── BRAND STATEMENT ─────────────────────────────────── */}
-      <div style={{ background: GREEN, padding: `clamp(64px,10vw,120px) ${PM}`, overflow: 'hidden', position: 'relative' }}>
+      <div style={{ background: GREEN, padding: `clamp(14px,5vw,70px) ${PM}`, overflow: 'hidden', position: 'relative' }}>
         <div style={{ position: 'absolute', right: '-4%', bottom: '-10%', opacity: 0.08 }}>
           <img src="/partners/sarkanyvolgy_2-02.png" alt="" style={{ width: 'clamp(280px,40vw,560px)', filter: 'invert(1)' }} />
         </div>
@@ -162,7 +162,7 @@ export default function SarkanyvolgyPage() {
       <div style={{ background: CREAM }}>
 
         {/* ── 01 LOGO ──────────────────────────────────────── */}
-        <section ref={logoRef as React.RefObject<HTMLElement>} style={{ padding: `clamp(80px,12vw,140px) ${PM}`, borderTop: `1px solid ${NAVY}10` }}>
+        <section ref={logoRef as React.RefObject<HTMLElement>} style={{ padding: `clamp(30px,8vw,90px) ${PM}`, borderTop: `1px solid ${NAVY}10` }}>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 'clamp(40px,6vw,72px)', flexWrap: 'wrap', gap: '12px' }}>
             <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: RED, margin: 0, fontWeight: 600 }}>01 — Logó</p>
             <p style={{ ...CG, fontSize: 'clamp(18px,2.5vw,28px)', fontWeight: 800, color: NAVY, margin: 0, letterSpacing: '-0.02em' }}>Védjegy és variációk</p>
@@ -209,7 +209,7 @@ export default function SarkanyvolgyPage() {
         </section>
 
         {/* ── 02 COLORS ────────────────────────────────────── */}
-        <section ref={colRef as React.RefObject<HTMLElement>} style={{ padding: `clamp(80px,12vw,140px) ${PM}`, borderTop: `1px solid ${NAVY}10` }}>
+        <section ref={colRef as React.RefObject<HTMLElement>} style={{ padding: `clamp(30px,8vw,90px) ${PM}`, borderTop: `1px solid ${NAVY}10` }}>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 'clamp(40px,6vw,72px)', flexWrap: 'wrap', gap: '12px' }}>
             <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: RED, margin: 0, fontWeight: 600 }}>02 — Színpaletta</p>
             <p style={{ ...CG, fontSize: 'clamp(18px,2.5vw,28px)', fontWeight: 800, color: NAVY, margin: 0, letterSpacing: '-0.02em' }}>Három szín, egy világ</p>
@@ -265,7 +265,7 @@ export default function SarkanyvolgyPage() {
 
         {/* ── 03 TYPOGRAPHY ────────────────────────────────── */}
         <section ref={typRef as React.RefObject<HTMLElement>} style={{ borderTop: `1px solid ${NAVY}10` }}>
-          <div style={{ padding: `clamp(80px,12vw,140px) ${PM}`, background: NAVY }}>
+          <div style={{ padding: `clamp(30px,8vw,90px) ${PM}`, background: NAVY }}>
             <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 'clamp(40px,6vw,72px)', flexWrap: 'wrap', gap: '12px' }}>
               <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: RED, margin: 0, fontWeight: 600 }}>03 — Tipográfia</p>
               <p style={{ ...CG, fontSize: 'clamp(18px,2.5vw,28px)', fontWeight: 800, color: CREAM, margin: 0, letterSpacing: '-0.02em' }}>Két betűtípus, tiszta hierarchia</p>
@@ -311,7 +311,7 @@ export default function SarkanyvolgyPage() {
         </section>
 
         {/* ── 04 APPLICATIONS ──────────────────────────────── */}
-        <section ref={appRef as React.RefObject<HTMLElement>} style={{ padding: `clamp(80px,12vw,140px) ${PM}`, borderTop: `1px solid ${NAVY}10` }}>
+        <section ref={appRef as React.RefObject<HTMLElement>} style={{ padding: `clamp(30px,8vw,90px) ${PM}`, borderTop: `1px solid ${NAVY}10` }}>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 'clamp(40px,6vw,72px)', flexWrap: 'wrap', gap: '12px' }}>
             <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: RED, margin: 0, fontWeight: 600 }}>04 — Alkalmazás</p>
             <p style={{ ...CG, fontSize: 'clamp(18px,2.5vw,28px)', fontWeight: 800, color: NAVY, margin: 0, letterSpacing: '-0.02em' }}>A márka működésben</p>
@@ -333,7 +333,7 @@ export default function SarkanyvolgyPage() {
         </section>
 
         {/* ── 05 BRIEF ─────────────────────────────────────── */}
-        <section ref={briefRef as React.RefObject<HTMLElement>} style={{ padding: `clamp(80px,12vw,140px) ${PM}`, borderTop: `1px solid ${NAVY}10` }}>
+        <section ref={briefRef as React.RefObject<HTMLElement>} style={{ padding: `clamp(30px,8vw,90px) ${PM}`, borderTop: `1px solid ${NAVY}10` }}>
           <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: RED, margin: '0 0 clamp(40px,6vw,72px)', fontWeight: 600 }}>05 — Brief</p>
 
           <div style={{ ...anim(briefV), display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'clamp(20px,3vw,40px)', marginBottom: 'clamp(48px,7vw,80px)' }}>
@@ -359,11 +359,11 @@ export default function SarkanyvolgyPage() {
 
       </div>
 
-      <div style={{ background: GREEN, padding: `clamp(64px,10vw,100px) ${PM}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
+      <div style={{ background: GREEN, padding: `clamp(14px,5vw,50px) ${PM}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
         <p style={{ ...CG, fontWeight: 900, fontSize: 'clamp(28px,5vw,64px)', color: CREAM, margin: 0, letterSpacing: '-0.03em', lineHeight: 1 }}>
           Mese.<br />Tűz.<br /><span style={{ color: RED }}>Völgy.</span>
         </p>
-        <img src="/partners/sarkanyvolgy_2-02.png" alt="" style={{ height: 'clamp(80px,12vw,140px)', opacity: 0.25, filter: 'invert(1)' }} />
+        <img src="/partners/sarkanyvolgy_2-02.png" alt="" style={{ height: 'clamp(30px,8vw,90px)', opacity: 0.25, filter: 'invert(1)' }} />
       </div>
 
       <Footer />

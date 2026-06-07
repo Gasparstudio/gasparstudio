@@ -90,12 +90,13 @@ export const projects: Project[] = [
     index: '04',
     title: 'Sárkányvölgy',
     category: 'Brand Identity',
-    year: '2023',
-    gradient: 'linear-gradient(135deg, #1a1200 0%, #2d2000 40%, #1a1a00 100%)',
-    accentColor: '#D4A017',
-    flashColor: '#C8441A',
+    year: '2026',
+    gradient: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 60%, #1a2e1a 100%)',
+    accentColor: '#F5F1E7',
+    flashColor: '#D34C2D',
     images: [
-      '/partners/sarkanyvolgy_2-02.png',
+      '/Sarkanyvolgy_logo_2026_v02_Page_1.png',
+      '/Sarkanyvolgy_logo_2026_v02_Page_8.png',
     ],
   },
   {

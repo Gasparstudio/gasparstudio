@@ -394,67 +394,27 @@ export default function MozzanoPage() {
           style={{ width: '100%', display: 'block', height: 'auto' }}
         />
 
-        {/* 02 — Szín */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '20px', alignItems: 'center', margin: 'clamp(48px, 7vw, 90px) 0' }}>
-          <img src="/works/mozzano/Artboard%203.png" alt=""
-            style={{ width: '100%', display: 'block', height: 'auto', borderRadius: '18px', transform: 'rotate(0.8deg)', boxShadow: '0 8px 36px rgba(0,0,0,0.07)' }} />
-          <div style={{ padding: '0 clamp(16px, 3vw, 40px)' }}>
-            <h2 style={{ fontFamily: 'CabinetGrotesk, var(--font-display)', fontSize: 'clamp(22px, 2.8vw, 44px)', fontWeight: 800, color: '#111', letterSpacing: '-0.04em', lineHeight: 0.95, margin: '0 0 12px' }}>
-              Meleg.<br />Nyers.
-            </h2>
-            <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: 'clamp(12px, 1.1vw, 15px)', color: 'rgba(17,17,17,0.4)', margin: 0, lineHeight: 1.5 }}>
-              Nem véletlenszerű.<br />Pontosan ez volt a cél.
-            </p>
-          </div>
+        {/* Képgrid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 340px), 1fr))',
+          gap: 'clamp(10px, 1.5vw, 16px)',
+          margin: 'clamp(48px, 7vw, 90px) 0',
+        }}>
+          {[
+            '/works/mozzano/Artboard%203.png',
+            '/works/mozzano/Artboard%207.png',
+            '/works/mozzano/Artboard%206.png',
+            '/works/mozzano/Artboard%208.png',
+            '/works/mozzano/Artboard%209.png',
+            '/works/mozzano/Artboard%204.png',
+            '/works/mozzano/Artboard%205.png',
+            '/works/mozzano/dobozos.png',
+          ].map((src) => (
+            <img key={src} src={src} alt=""
+              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '14px', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }} />
+          ))}
         </div>
-
-        {/* 03 — Betűtípus */}
-        <div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr', gap: '20px', alignItems: 'center', margin: 'clamp(48px, 7vw, 90px) 0' }}>
-          <div style={{ padding: '0 clamp(16px, 3vw, 40px)' }}>
-            <h2 style={{ fontFamily: 'CabinetGrotesk, var(--font-display)', fontSize: 'clamp(22px, 2.8vw, 44px)', fontWeight: 800, color: '#111', letterSpacing: '-0.04em', lineHeight: 0.95, margin: '0 0 12px' }}>
-              Cabinet<br />Grotesk.
-            </h2>
-            <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: 'clamp(12px, 1.1vw, 15px)', color: 'rgba(17,17,17,0.4)', margin: 0, lineHeight: 1.5 }}>
-              Nem kellett más.
-            </p>
-          </div>
-          <img src="/works/mozzano/Artboard%207.png" alt=""
-            style={{ width: '100%', display: 'block', height: 'auto', borderRadius: '18px', transform: 'rotate(-0.6deg)', boxShadow: '0 8px 36px rgba(0,0,0,0.07)' }} />
-        </div>
-
-        {/* 06 — széles kép */}
-        <img src="/works/mozzano/Artboard%206.png" alt=""
-          style={{ width: '60%', display: 'block', height: 'auto', borderRadius: '20px', margin: '0 auto', boxShadow: '0 10px 40px rgba(0,0,0,0.07)' }} />
-
-        {/* 04 — Identitás */}
-        <div style={{ paddingTop: 'clamp(56px, 8vw, 100px)', paddingBottom: '32px' }}>
-          <h2 style={{ fontFamily: 'CabinetGrotesk, var(--font-display)', fontSize: 'clamp(28px, 4.5vw, 64px)', fontWeight: 800, color: '#111', letterSpacing: '-0.04em', lineHeight: 0.95, margin: '0 0 10px', maxWidth: '680px' }}>
-            Minden felületen ugyanolyan magabiztos.
-          </h2>
-          <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: 'clamp(13px, 1.2vw, 16px)', color: 'rgba(17,17,17,0.4)', margin: 0 }}>
-            Nem kell magyarázni. Látszik.
-          </p>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', alignItems: 'end', maxWidth: '65%', margin: '0 auto' }}>
-          <img src="/works/mozzano/Artboard%208.png" alt=""
-            style={{ width: '100%', display: 'block', height: 'auto', borderRadius: '18px', transform: 'rotate(-1.2deg)', boxShadow: '0 8px 36px rgba(0,0,0,0.07)' }} />
-          <img src="/works/mozzano/Artboard%209.png" alt=""
-            style={{ width: '92%', display: 'block', height: 'auto', borderRadius: '18px', transform: 'rotate(1deg)', marginLeft: 'auto', boxShadow: '0 8px 36px rgba(0,0,0,0.07)' }} />
-        </div>
-
-        {/* 05 — Mockupok */}
-        <div style={{ paddingTop: 'clamp(56px, 8vw, 100px)', paddingBottom: '32px' }}>
-          <h2 style={{ fontFamily: 'CabinetGrotesk, var(--font-display)', fontSize: 'clamp(28px, 4.5vw, 64px)', fontWeight: 800, color: '#111', letterSpacing: '-0.04em', lineHeight: 0.95, margin: '0 0 10px' }}>
-            A végeredmény.
-          </h2>
-          <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: 'clamp(13px, 1.2vw, 16px)', color: 'rgba(17,17,17,0.4)', margin: 0 }}>
-            Tessék.
-          </p>
-        </div>
-        <img src="/works/mozzano/Artboard%204.png" alt=""
-          style={{ width: '65%', display: 'block', height: 'auto', borderRadius: '20px', boxShadow: '0 12px 48px rgba(0,0,0,0.08)', marginBottom: '16px', margin: '0 auto 16px' }} />
-        <img src="/works/mozzano/Artboard%205.png" alt=""
-          style={{ width: '60%', display: 'block', height: 'auto', borderRadius: '20px', boxShadow: '0 12px 48px rgba(0,0,0,0.08)', marginLeft: 'auto', marginBottom: 'clamp(56px, 8vw, 100px)' }} />
 
       </section>
 

@@ -81,7 +81,7 @@ export default function ProjectPage() {
           GASPAR
         </Link>
         <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-          <a href="/arajanlat" className="btn btn-primary" style={{ fontSize: '13px', padding: '10px 20px' }}>
+          <a href="/arajanlat" className="btn btn-primary hidden sm:inline-flex" style={{ fontSize: '13px', padding: '10px 20px' }}>
             Írj nekem →
           </a>
         </div>

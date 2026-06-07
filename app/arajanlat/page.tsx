@@ -84,6 +84,14 @@ const DIVIDER = <div style={{ height: '1px', background: 'rgba(255,255,255,0.06)
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 export default function ArajanlatPage() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   // Logo / Brand — mutually exclusive
   const [logoOrBrand, setLogoOrBrand] = useState<'logo' | 'brand' | null>(null);
   const [logoPkg, setLogoPkg] = useState('logo-m');
@@ -245,7 +253,7 @@ export default function ArajanlatPage() {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr clamp(320px, 32vw, 420px)', gap: '20px', alignItems: 'start' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr clamp(320px, 32vw, 420px)', gap: '20px', alignItems: 'start' }}>
 
           {/* ── LEFT ── */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -403,7 +411,7 @@ export default function ArajanlatPage() {
           </div>
 
           {/* ── RIGHT: summary ── */}
-          <div style={{ position: 'sticky', top: '88px' }}>
+          <div style={{ position: isMobile ? 'static' : 'sticky', top: '88px' }}>
             <div style={{ border: '1px solid rgba(255,255,255,0.14)', borderRadius: '16px', overflow: 'hidden', background: 'rgba(255,255,255,0.03)' }}>
               <div style={{ padding: '18px 22px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                 <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', fontWeight: 600 }}>Összesítő</span>

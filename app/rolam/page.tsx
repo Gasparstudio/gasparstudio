@@ -470,7 +470,7 @@ function BioSection() {
     <section
       ref={ref}
       className="page-container"
-      style={{ paddingTop: 'clamp(64px, 10vw, 120px)', paddingBottom: 'clamp(64px, 10vw, 120px)' }}
+      style={{ paddingTop: 'clamp(0px, 2vw, 20px)', paddingBottom: 'clamp(64px, 10vw, 120px)' }}
     >
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'clamp(40px, 6vw, 96px)', alignItems: 'center' }}>
 

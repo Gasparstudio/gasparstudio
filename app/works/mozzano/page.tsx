@@ -393,6 +393,89 @@ export default function MozzanoPage() {
 
       </section>
 
+      {/* ── TYPOGRAPHY ── */}
+      <section style={{ background: BG, padding: 'clamp(80px, 12vw, 160px) clamp(20px, 4vw, 56px)' }}>
+
+        {/* Label */}
+        <p style={{
+          fontFamily: 'ClashDisplay, var(--font-body)',
+          fontSize: '10px', letterSpacing: '0.18em',
+          textTransform: 'uppercase', color: 'rgba(17,17,17,0.35)',
+          margin: '0 0 clamp(48px, 7vw, 80px)',
+        }}>
+          Tipográfia
+        </p>
+
+        {/* Cabinet Grotesk */}
+        <div style={{ borderTop: '1px solid rgba(17,17,17,0.08)', paddingTop: 'clamp(36px, 5vw, 56px)', marginBottom: 'clamp(48px, 7vw, 80px)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 'clamp(24px, 4vw, 64px)', alignItems: 'start' }}>
+            <div>
+              <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: '11px', letterSpacing: '0.1em', color: 'rgba(17,17,17,0.35)', margin: '0 0 8px', textTransform: 'uppercase' }}>Display</p>
+              <h3 style={{ fontFamily: 'CabinetGrotesk, var(--font-display)', fontSize: 'clamp(16px, 1.8vw, 22px)', fontWeight: 700, color: '#111', margin: '0 0 4px', letterSpacing: '-0.01em' }}>Cabinet Grotesk</h3>
+              <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: '12px', color: 'rgba(17,17,17,0.4)', margin: 0 }}>Variable · 100–900</p>
+            </div>
+            <div>
+              <p style={{
+                fontFamily: 'CabinetGrotesk, var(--font-display)',
+                fontSize: 'clamp(48px, 8vw, 120px)',
+                fontWeight: 800,
+                color: '#111',
+                letterSpacing: '-0.04em',
+                lineHeight: 0.9,
+                margin: '0 0 clamp(20px, 3vw, 36px)',
+              }}>
+                Aa Bb Cc
+              </p>
+              <div style={{ display: 'flex', gap: 'clamp(16px, 3vw, 40px)', flexWrap: 'wrap' }}>
+                {[['Extrabold', 800], ['Semibold', 600], ['Regular', 400]].map(([label, w]) => (
+                  <div key={w}>
+                    <p style={{ fontFamily: 'CabinetGrotesk, var(--font-display)', fontSize: 'clamp(20px, 2.5vw, 32px)', fontWeight: Number(w), color: '#111', letterSpacing: '-0.02em', margin: '0 0 4px', lineHeight: 1 }}>
+                      Mozzano
+                    </p>
+                    <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: '10px', color: 'rgba(17,17,17,0.3)', letterSpacing: '0.08em', margin: 0, textTransform: 'uppercase' }}>{String(label)}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Clash Display */}
+        <div style={{ borderTop: '1px solid rgba(17,17,17,0.08)', paddingTop: 'clamp(36px, 5vw, 56px)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 'clamp(24px, 4vw, 64px)', alignItems: 'start' }}>
+            <div>
+              <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: '11px', letterSpacing: '0.1em', color: 'rgba(17,17,17,0.35)', margin: '0 0 8px', textTransform: 'uppercase' }}>Body</p>
+              <h3 style={{ fontFamily: 'ClashDisplay, var(--font-display)', fontSize: 'clamp(16px, 1.8vw, 22px)', fontWeight: 600, color: '#111', margin: '0 0 4px', letterSpacing: '-0.01em' }}>Clash Display</h3>
+              <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: '12px', color: 'rgba(17,17,17,0.4)', margin: 0 }}>Variable · 200–700</p>
+            </div>
+            <div>
+              <p style={{
+                fontFamily: 'ClashDisplay, var(--font-display)',
+                fontSize: 'clamp(48px, 8vw, 120px)',
+                fontWeight: 600,
+                color: WARM,
+                letterSpacing: '-0.03em',
+                lineHeight: 0.9,
+                margin: '0 0 clamp(20px, 3vw, 36px)',
+              }}>
+                Aa Bb Cc
+              </p>
+              <div style={{ display: 'flex', gap: 'clamp(16px, 3vw, 40px)', flexWrap: 'wrap' }}>
+                {[['Bold', 700], ['Medium', 500], ['Light', 300]].map(([label, w]) => (
+                  <div key={w}>
+                    <p style={{ fontFamily: 'ClashDisplay, var(--font-display)', fontSize: 'clamp(20px, 2.5vw, 32px)', fontWeight: Number(w), color: '#111', letterSpacing: '-0.02em', margin: '0 0 4px', lineHeight: 1 }}>
+                      Pizza.
+                    </p>
+                    <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: '10px', color: 'rgba(17,17,17,0.3)', letterSpacing: '0.08em', margin: 0, textTransform: 'uppercase' }}>{String(label)}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
       <Footer />
     </>
   );

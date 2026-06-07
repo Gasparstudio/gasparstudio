@@ -26,39 +26,33 @@ const tools = ['Figma', 'Illustrator', 'After Effects', 'Photoshop', 'Lightroom'
 
 const timeline = [
   {
-    year: '2018',
-    title: 'Az első vonalak',
-    description: '14 évesen kezdtem — logók, plakátok, az Adobe Creative Suite első lépései. Nem hobbi volt, hanem megszállottság.',
+    year: '5 évesen',
+    title: 'Eldöntöttem',
+    description: 'Grafikus leszek. Nem tudtam még mi az — de tudtam, hogy az.',
     tag: 'Kezdet',
   },
   {
-    year: '2020',
-    title: 'III. Béla Gimnázium',
-    description: 'Zirc — Művészeti Szakgimnázium, grafika szak. Ahol a kísérletezésből szakma lett.',
+    year: '2020–22',
+    title: 'Iskola',
+    description: 'Zirc, majd Bodajk — grafika és vizuális kommunikáció szakon.',
     tag: 'Tanulmányok',
   },
   {
-    year: '2022',
-    title: 'Hang-Szín-Tér',
-    description: 'Bodajk — Művészeti Gimnázium. Vizuális kommunikáció, tervezőgrafika, az első komolyabb arculati munkák.',
-    tag: 'Tanulmányok',
+    year: '2022–24',
+    title: 'Nyomda & ügynökség',
+    description: 'Grafikusként dolgoztam: nyomdai produkció, ügynökségi arculati munkák.',
+    tag: 'Munka',
   },
   {
-    year: '2022',
-    title: 'Kámfor',
-    description: 'Az első komplex brand identity projekt — logo, nyomtatott anyagok, teljes arculat. Innen már nem volt visszaút.',
+    year: '2022–24',
+    title: 'Kámfor, Kanvas…',
+    description: 'Érdekesebb projekteken is dolgoztam — puppet theatre, globális design platform.',
     tag: 'Projekt',
   },
   {
-    year: '2025',
-    title: "Simon's Burger",
-    description: 'Brand redesign egy ismert budapesti étteremnek. Fotózás, social media, teljes vizuális megújulás.',
-    tag: 'Projekt',
-  },
-  {
-    year: '2026',
-    title: 'GASPAR Studio',
-    description: 'Saját brand, saját szabályok. Stratégiai identitástervezés — minőség kompromisszum nélkül.',
+    year: 'Ma',
+    title: "Simon's Burger, Smashy, Travis Tenders, Buddy's",
+    description: 'Magyarországon ismert nevekkel dolgozom.',
     tag: 'Ma',
   },
 ];
@@ -66,6 +60,7 @@ const timeline = [
 const tagStyles: Record<string, { bg: string; color: string }> = {
   Kezdet:       { bg: 'rgba(99,102,241,0.15)',   color: '#818CF8' },
   Tanulmányok:  { bg: 'rgba(34,197,94,0.15)',    color: '#4ADE80' },
+  Munka:        { bg: 'rgba(59,130,246,0.15)',   color: '#60A5FA' },
   Projekt:      { bg: 'rgba(255,112,67,0.15)',   color: '#FF7043' },
   Ma:           { bg: 'rgba(155,109,255,0.15)',  color: 'var(--color-accent)' },
 };

@@ -171,7 +171,7 @@ export default function SarkanyvolgyPage() {
 
           <div style={{ ...anim(logoV), display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'clamp(12px,2vw,20px)' }}>
             {/* A — Védjegy */}
-            <div style={{ background: NAVY, borderRadius: '16px', padding: 'clamp(40px,6vw,64px) clamp(32px,4vw,48px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '320px' }}>
+            <div style={{ background: NAVY, borderRadius: '0', padding: 'clamp(40px,6vw,64px) clamp(32px,4vw,48px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '320px' }}>
               <div style={{ display: 'flex', justifyContent: 'center', flex: 1, alignItems: 'center' }}>
                 <img src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__white_icon.png" alt="Védjegy" style={{ width: '60%', maxWidth: '140px', objectFit: 'contain' }} />
               </div>
@@ -182,7 +182,7 @@ export default function SarkanyvolgyPage() {
             </div>
 
             {/* B — Vízszintes */}
-            <div style={{ background: GREEN, borderRadius: '16px', padding: 'clamp(40px,6vw,64px) clamp(32px,4vw,48px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '320px' }}>
+            <div style={{ background: GREEN, borderRadius: '0', padding: 'clamp(40px,6vw,64px) clamp(32px,4vw,48px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '320px' }}>
               <div style={{ display: 'flex', alignItems: 'center', flex: 1, justifyContent: 'center' }}>
                 <img src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__white_long.png" alt="Vízszintes" style={{ width: '90%', maxWidth: '320px', objectFit: 'contain' }} />
               </div>
@@ -193,7 +193,7 @@ export default function SarkanyvolgyPage() {
             </div>
 
             {/* C — Álló */}
-            <div style={{ background: CREAM, border: `1px solid ${NAVY}12`, borderRadius: '16px', padding: 'clamp(40px,6vw,64px) clamp(32px,4vw,48px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '320px' }}>
+            <div style={{ background: CREAM, border: `1px solid ${NAVY}12`, borderRadius: '0', padding: 'clamp(40px,6vw,64px) clamp(32px,4vw,48px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '320px' }}>
               <div style={{ display: 'flex', alignItems: 'center', flex: 1, justifyContent: 'center' }}>
                 <img src="/Sarkany_volgy_mese_fesztival_logo/PNG/sarkany_volgy__color.png" alt="Álló" style={{ width: '90%', maxWidth: '320px', objectFit: 'contain' }} />
               </div>
@@ -213,7 +213,7 @@ export default function SarkanyvolgyPage() {
           </div>
 
           {/* 60–30–10 bar */}
-          <div style={{ ...anim(colV), display: 'flex', borderRadius: '10px', overflow: 'hidden', height: '56px', marginBottom: 'clamp(32px,5vw,56px)' }}>
+          <div style={{ ...anim(colV), display: 'flex', borderRadius: '0', overflow: 'hidden', height: '56px', marginBottom: 'clamp(32px,5vw,56px)' }}>
             <div style={{ flex: 6, background: GREEN, display: 'flex', alignItems: 'center', paddingLeft: '20px', gap: '8px' }}>
               <span style={{ ...CG, fontWeight: 900, fontSize: '18px', color: CREAM }}>60%</span>
               <span style={{ fontFamily: 'system-ui, sans-serif', fontSize: '12px', color: `${CREAM}70` }}>Sárkány Zöld</span>
@@ -235,7 +235,7 @@ export default function SarkanyvolgyPage() {
               { name: 'Sárkány Tűz', role: 'Harmadlagos · 10%', hex: '#D34C2D', rgb: '211 / 76 / 45',  pantone: '' },
             ].map((c) => (
               <div key={c.hex}>
-                <div style={{ height: 'clamp(140px,18vw,220px)', borderRadius: '12px', background: c.hex, marginBottom: '16px' }} />
+                <div style={{ height: 'clamp(140px,18vw,220px)', borderRadius: '0', background: c.hex, marginBottom: '16px' }} />
                 <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', color: `${NAVY}40`, margin: '0 0 6px' }}>{c.role}</p>
                 <p style={{ ...CG, fontWeight: 800, fontSize: 'clamp(17px,2vw,22px)', color: NAVY, margin: '0 0 8px', letterSpacing: '-0.01em' }}>{c.name}</p>
                 <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '12px', color: `${NAVY}50`, margin: '0 0 2px' }}>{c.hex}</p>
@@ -251,7 +251,7 @@ export default function SarkanyvolgyPage() {
               { name: 'Mély Moha', role: 'Sötét variáns',  hex: '#1B4332', text: CREAM },
               { name: 'Páfrány',   role: 'Világos variáns', hex: '#52B788', text: NAVY },
             ].map((c) => (
-              <div key={c.hex} style={{ background: c.hex, borderRadius: '10px', padding: 'clamp(16px,2vw,24px)', border: c.hex === '#F5F1E7' ? `1px solid ${NAVY}12` : 'none' }}>
+              <div key={c.hex} style={{ background: c.hex, borderRadius: '0', padding: 'clamp(16px,2vw,24px)', border: c.hex === '#F5F1E7' ? `1px solid ${NAVY}12` : 'none' }}>
                 <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', color: `${c.text}50`, margin: '0 0 4px' }}>{c.role}</p>
                 <p style={{ ...CG, fontWeight: 800, fontSize: 'clamp(14px,1.6vw,18px)', color: c.text, margin: '0 0 4px', letterSpacing: '-0.01em' }}>{c.name}</p>
                 <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '11px', color: `${c.text}40`, margin: 0 }}>{c.hex}</p>
@@ -270,7 +270,7 @@ export default function SarkanyvolgyPage() {
 
             <div style={{ ...anim(typV), display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(12px,2vw,20px)' }}>
               {/* Cabinet Grotesk Black */}
-              <div style={{ background: '#0d1520', borderRadius: '16px', padding: 'clamp(32px,4vw,52px)' }}>
+              <div style={{ background: '#0d1520', borderRadius: '0', padding: 'clamp(32px,4vw,52px)' }}>
                 <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: RED, margin: '0 0 8px', fontWeight: 600 }}>Display · Címek</p>
                 <p style={{ ...CG, fontWeight: 900, fontSize: 'clamp(15px,1.8vw,20px)', color: CREAM, margin: '0 0 32px' }}>Cabinet Grotesk Black</p>
                 <p style={{ ...CG, fontWeight: 900, fontSize: 'clamp(52px,9vw,120px)', color: CREAM, lineHeight: 0.85, margin: '0 0 32px', letterSpacing: '-0.04em' }}>Aa</p>
@@ -278,7 +278,7 @@ export default function SarkanyvolgyPage() {
               </div>
 
               {/* Geist */}
-              <div style={{ background: `${CREAM}08`, border: `1px solid ${CREAM}08`, borderRadius: '16px', padding: 'clamp(32px,4vw,52px)' }}>
+              <div style={{ background: `${CREAM}08`, border: `1px solid ${CREAM}08`, borderRadius: '0', padding: 'clamp(32px,4vw,52px)' }}>
                 <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: RED, margin: '0 0 8px', fontWeight: 600 }}>Body · Folyószöveg</p>
                 <p style={{ fontFamily: 'system-ui, sans-serif', fontWeight: 500, fontSize: 'clamp(15px,1.8vw,20px)', color: CREAM, margin: '0 0 32px' }}>Geist Regular</p>
                 <p style={{ fontFamily: 'system-ui, sans-serif', fontWeight: 400, fontSize: 'clamp(52px,9vw,120px)', color: FERN, lineHeight: 0.85, margin: '0 0 32px', letterSpacing: '-0.04em' }}>Aa</p>
@@ -319,12 +319,12 @@ export default function SarkanyvolgyPage() {
             <img
               src="/Sarkanyvolgy_logo_2026_v02_Page_8.png"
               alt="Alkalmazások"
-              style={{ width: '100%', height: 'auto', borderRadius: '16px', display: 'block', boxShadow: `0 4px 32px ${NAVY}14` }}
+              style={{ width: '100%', height: 'auto', borderRadius: '0', display: 'block', boxShadow: `0 4px 32px ${NAVY}14` }}
             />
             {/* Row 2: two side by side */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(10px,1.5vw,14px)' }}>
-              <img src="/Sarkanyvolgy_logo_2026_v02_Page_5.png" alt="Színpaletta" style={{ width: '100%', height: 'auto', borderRadius: '12px', display: 'block', boxShadow: `0 4px 20px ${NAVY}10` }} />
-              <img src="/Sarkanyvolgy_logo_2026_v02_Page_6.png" alt="60-30-10 szabály" style={{ width: '100%', height: 'auto', borderRadius: '12px', display: 'block', boxShadow: `0 4px 20px ${NAVY}10` }} />
+              <img src="/Sarkanyvolgy_logo_2026_v02_Page_5.png" alt="Színpaletta" style={{ width: '100%', height: 'auto', borderRadius: '0', display: 'block', boxShadow: `0 4px 20px ${NAVY}10` }} />
+              <img src="/Sarkanyvolgy_logo_2026_v02_Page_6.png" alt="60-30-10 szabály" style={{ width: '100%', height: 'auto', borderRadius: '0', display: 'block', boxShadow: `0 4px 20px ${NAVY}10` }} />
             </div>
           </div>
         </section>

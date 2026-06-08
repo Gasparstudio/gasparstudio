@@ -216,7 +216,7 @@ export default function Nav() {
             {/* CTA button */}
             <a
               href="/arajanlat"
-              className="btn btn-primary hidden md:inline-flex"
+              className="btn btn-primary mob-hide"
               style={{ fontSize: '13px', padding: '10px 20px' }}
             >
               {t('nav.cta')}
@@ -232,7 +232,6 @@ export default function Nav() {
                 border: 'none',
                 padding: '8px',
                 cursor: 'pointer',
-                display: 'flex',
                 flexDirection: 'column',
                 gap: '5px',
                 alignItems: 'center',

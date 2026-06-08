@@ -83,7 +83,6 @@ export function LiquidGlassCard({
         boxShadow: hovered
           ? '0 8px 40px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.22)'
           : shadowMap[shadowIntensity],
-        transition: 'background 400ms cubic-bezier(0.16,1,0.3,1), box-shadow 400ms cubic-bezier(0.16,1,0.3,1), border-color 400ms ease',
         transform: `translate(${dragOffset.x}px, ${dragOffset.y}px)`,
         transition,
         willChange: draggable ? 'transform' : undefined,

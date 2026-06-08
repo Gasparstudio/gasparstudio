@@ -202,7 +202,6 @@ export default function About() {
               display: 'flex',
               gap: '40px',
               paddingTop: '24px',
-              paddingTop: '24px',
             }}
           >
             {statsConfig.map((stat, i) => (

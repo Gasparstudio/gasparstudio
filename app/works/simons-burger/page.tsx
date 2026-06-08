@@ -161,7 +161,7 @@ export default function SimonsBurgerPage() {
           }}>
             <img src="/partners/Simon_s_Burger_all_CMYK_simon_s_burger_green.webp" alt="Simon's Burger"
               style={{ height: '22px', width: 'auto' }} />
-            <div style={{ display: 'flex', gap: '2px' }}>
+            <div className="mob-hide" style={{ display: 'flex', gap: '2px' }}>
               {SECTIONS.map(({ id, label }) => (
                 <button key={id} onClick={() => scrollTo(id)}
                   style={{
@@ -209,7 +209,7 @@ export default function SimonsBurgerPage() {
 
         {/* ─── RATIONALE ─────────────────────────────────────────── */}
         <section id="social" style={{ padding: `clamp(48px, 6vw, 72px) ${PM} clamp(48px, 6vw, 72px)` }}>
-          <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(32px, 5vw, 64px)', alignItems: 'start' }}>
+          <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(32px, 5vw, 64px)', alignItems: 'start' }} className="mob-stack">
             <h2 style={{
               fontFamily: 'var(--font-inter)', fontSize: 'clamp(20px, 2.4vw, 32px)', fontWeight: 900,
               color: '#0a0a0a', lineHeight: 1.2, letterSpacing: '-0.02em', margin: 0,
@@ -232,7 +232,7 @@ export default function SimonsBurgerPage() {
           <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '20px' }}>
 
             {/* Régi sor */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '14px' }}>
+            <div className="mob-2col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '14px' }}>
               <div style={{ aspectRatio: '1', borderRadius: '12px', background: '#fff', border: '1px solid rgba(0,0,0,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <span style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 900, color: GREEN, letterSpacing: '-0.03em' }}>Régi</span>
               </div>
@@ -244,7 +244,7 @@ export default function SimonsBurgerPage() {
             </div>
 
             {/* Új sor */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '14px' }}>
+            <div className="mob-2col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '14px' }}>
               <div style={{ aspectRatio: '1', borderRadius: '12px', background: '#fff', border: '1px solid rgba(0,0,0,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <span style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 900, color: GREEN, letterSpacing: '-0.03em' }}>Új</span>
               </div>
@@ -270,7 +270,7 @@ export default function SimonsBurgerPage() {
 
         {/* ─── SMASH CHAMPS ──────────────────────────────────────── */}
         <section id="smashchamps" style={{ padding: `0 ${PM} ${SEC}` }}>
-          <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0', borderRadius: '16px', overflow: 'hidden', minHeight: 'clamp(320px, 40vw, 560px)' }}>
+          <div className="mob-stack" style={{ maxWidth: 'var(--max-width)', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0', borderRadius: '16px', overflow: 'hidden', minHeight: 'clamp(320px, 40vw, 560px)' }}>
 
             {/* Bal: logó fehér háttéren */}
             <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(32px, 5vw, 64px)' }}>
@@ -341,7 +341,7 @@ export default function SimonsBurgerPage() {
 
         {/* ─── BRIEF ─────────────────────────────────────────────── */}
         <section id="brief" style={{ padding: `clamp(48px, 6vw, 80px) ${PM}` }}>
-          <div ref={briefRef} style={{ maxWidth: 'var(--max-width)', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', alignItems: 'start' }}>
+          <div ref={briefRef} className="mob-stack" style={{ maxWidth: 'var(--max-width)', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', alignItems: 'start' }}>
 
             <div style={{ maxWidth: '92%' }}>
               {([

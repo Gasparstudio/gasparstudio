@@ -151,7 +151,7 @@ export default function FacePage() {
           }}>
             <img src="/works/face/face_logo-04_v2-04.png" alt="Face"
               style={{ height: '18px', width: 'auto' }} />
-            <div style={{ display: 'flex', gap: '2px' }}>
+            <div className="mob-hide" style={{ display: 'flex', gap: '2px' }}>
               {SECTIONS.map(({ id, label }) => (
                 <button key={id} onClick={() => scrollTo(id)}
                   style={{
@@ -169,7 +169,7 @@ export default function FacePage() {
 
         {/* ─── LOGO: KONSTRUKCIÓ + LEÍRÁS ────────────────────────── */}
         <section id="logo" style={{ padding: `0 ${PM} ${SEC}` }}>
-          <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto', display: 'grid', gridTemplateColumns: '55fr 45fr', gap: '14px', alignItems: 'stretch' }}>
+          <div className="mob-stack" style={{ maxWidth: 'var(--max-width)', margin: '0 auto', display: 'grid', gridTemplateColumns: '55fr 45fr', gap: '14px', alignItems: 'stretch' }}>
 
             <div style={{ borderRadius: '14px', overflow: 'hidden', background: '#000' }}>
               <img src="/works/face/face_logo_1.png" alt="Logó konstrukciós rács"
@@ -203,7 +203,7 @@ export default function FacePage() {
         <section id="colors" style={{ padding: `0 ${PM} ${SEC}` }}>
           <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '10px' }}>
 
-            <div ref={colorBlueRef} style={{ borderRadius: '14px', overflow: 'hidden', background: BLUE, display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 'clamp(220px, 28vw, 400px)' }}>
+            <div ref={colorBlueRef} className="mob-stack" style={{ borderRadius: '14px', overflow: 'hidden', background: BLUE, display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 'clamp(220px, 28vw, 400px)' }}>
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: 'clamp(24px, 3vw, 44px)' }}>
                 <div style={anim(colorBlueInView, 0)}>
                   <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase' }}>Face Blue</div>
@@ -218,9 +218,9 @@ export default function FacePage() {
               </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+            <div className="mob-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
 
-              <div ref={colorBlackRef} style={{ borderRadius: '14px', overflow: 'hidden', background: '#0a0a0a', display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 'clamp(160px, 18vw, 260px)' }}>
+              <div ref={colorBlackRef} className="mob-stack" style={{ borderRadius: '14px', overflow: 'hidden', background: '#0a0a0a', display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 'clamp(160px, 18vw, 260px)' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: 'clamp(20px, 2.5vw, 36px)' }}>
                   <div style={anim(colorBlackInView, 0)}>
                     <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>Fekete</div>
@@ -235,7 +235,7 @@ export default function FacePage() {
                 </div>
               </div>
 
-              <div ref={colorWhiteRef} style={{ borderRadius: '14px', overflow: 'hidden', background: '#fff', display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 'clamp(160px, 18vw, 260px)' }}>
+              <div ref={colorWhiteRef} className="mob-stack" style={{ borderRadius: '14px', overflow: 'hidden', background: '#fff', display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 'clamp(160px, 18vw, 260px)' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: 'clamp(20px, 2.5vw, 36px)' }}>
                   <div style={anim(colorWhiteInView, 0)}>
                     <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.12em', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase' }}>Fehér</div>
@@ -258,7 +258,7 @@ export default function FacePage() {
         <section id="type" style={{ padding: `0 ${PM} ${SEC}` }}>
           <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto' }}>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+            <div className="mob-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
 
               <div style={{ borderRadius: '14px', background: '#0a0a0a', padding: 'clamp(28px, 3vw, 48px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 'clamp(320px, 34vw, 500px)' }}>
                 <div>
@@ -328,7 +328,7 @@ export default function FacePage() {
             />
           </div>
 
-          <div style={{ maxWidth: 'var(--max-width)', margin: '12px auto 0', width: '100%', display: 'grid', gridTemplateColumns: '2fr 3fr', gap: '12px', alignItems: 'center' }}>
+          <div className="mob-stack" style={{ maxWidth: 'var(--max-width)', margin: '12px auto 0', width: '100%', display: 'grid', gridTemplateColumns: '2fr 3fr', gap: '12px', alignItems: 'center' }}>
 
             <div ref={mockupCopyRef} style={{ padding: 'clamp(16px, 2vw, 32px) 0' }}>
               <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2.8vw, 38px)', fontWeight: 700, letterSpacing: '-0.03em', color: '#fff', lineHeight: 1.15, ...anim(mockupCopyInView, 200) }}>
@@ -348,7 +348,7 @@ export default function FacePage() {
 
           </div>
 
-          <div style={{ maxWidth: 'var(--max-width)', margin: '10px auto 0', width: '100%', display: 'grid', gridTemplateColumns: '8fr 8fr 3fr', gap: '12px' }}>
+          <div className="mob-stack" style={{ maxWidth: 'var(--max-width)', margin: '10px auto 0', width: '100%', display: 'grid', gridTemplateColumns: '8fr 8fr 3fr', gap: '12px' }}>
             <div style={{ borderRadius: '12px', overflow: 'hidden', aspectRatio: '3/2' }}>
               <img src="/works/face/mockup_05.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
@@ -375,7 +375,7 @@ export default function FacePage() {
 
         {/* ─── BRIEF ─────────────────────────────────────────────── */}
         <section id="brief" style={{ padding: `clamp(48px, 6vw, 80px) ${PM}` }}>
-          <div ref={briefRef} style={{ maxWidth: 'var(--max-width)', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', alignItems: 'start' }}>
+          <div ref={briefRef} className="mob-stack" style={{ maxWidth: 'var(--max-width)', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', alignItems: 'start' }}>
 
             <div style={{ maxWidth: '92%' }}>
               {([

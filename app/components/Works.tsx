@@ -196,8 +196,7 @@ function LogofolioCard({ project }: { project: { index: string; title: string; c
             height: '50%',
             objectFit: 'contain',
             opacity: i === idx ? 1 : 0,
-            filter: hovered ? 'grayscale(0)' : 'grayscale(1)',
-            transition: 'opacity 500ms ease, filter 500ms ease',
+            transition: 'opacity 500ms ease',
           }}
         />
       ))}
@@ -309,11 +308,10 @@ function ProjectCard({ project }: ProjectCardProps) {
             height: '100%',
             objectFit: 'cover',
             opacity: visible ? 1 : 0,
-            filter: hovered ? 'grayscale(0)' : 'grayscale(1)',
-            transition: 'opacity 600ms ease, filter 500ms ease',
+            transition: 'opacity 600ms ease',
           };
           return isVideo ? (
-            <VideoSlide key={src} src={src} visible={visible} grayscale={!hovered} />
+            <VideoSlide key={src} src={src} visible={visible} grayscale={false} />
           ) : (
             <img key={src} src={src} alt="" style={mediaStyle} />
           );

@@ -252,7 +252,7 @@ export default function SarkanyvolgyPage() {
           </div>
 
           {/* Secondary row */}
-          <div style={{ ...anim(colV, 160), display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(12px,2vw,20px)' }}>
+          <div style={{ ...anim(colV, 160), display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 'clamp(12px,2vw,20px)' }}>
             {[
               { name: 'Pergamen',  role: 'Háttér',         hex: '#F5F1E7', text: NAVY },
               { name: 'Mély Moha', role: 'Sötét variáns',  hex: '#1B4332', text: CREAM },
@@ -275,7 +275,7 @@ export default function SarkanyvolgyPage() {
               <p style={{ ...CG, fontSize: 'clamp(18px,2.5vw,28px)', fontWeight: 800, color: CREAM, margin: 0, letterSpacing: '-0.02em' }}>Két betűtípus, tiszta hierarchia</p>
             </div>
 
-            <div style={{ ...anim(typV), display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(12px,2vw,20px)' }}>
+            <div className="mob-stack" style={{ ...anim(typV), display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(12px,2vw,20px)' }}>
               {/* Cabinet Grotesk Black */}
               <div style={{ background: '#0d1520', borderRadius: '0', padding: 'clamp(32px,4vw,52px)' }}>
                 <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: RED, margin: '0 0 8px', fontWeight: 600 }}>Display · Címek</p>
@@ -305,7 +305,7 @@ export default function SarkanyvolgyPage() {
                 { label: 'Body · 9pt',        text: 'Gyere te is a völgybe, ahol a tűz nem éget, csak mesél. Helyszín: Zirci Arborétum. Időpont: 2026. augusztus.', style: { fontFamily: 'system-ui, sans-serif', fontSize: 'clamp(12px,1.2vw,15px)', color: `${CREAM}60`, lineHeight: 1.45 } },
                 { label: 'Caps · 7pt',        text: 'SÁRKÁNYVÖLGY · 2026 · MESE FESZTIVÁL', style: { fontFamily: 'system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: RED } },
               ].map(({ label, text, style }) => (
-                <div key={label} style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: '24px', borderBottom: `1px solid ${CREAM}06`, padding: '16px 0', alignItems: 'center' }}>
+                <div key={label} style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: '16px', borderBottom: `1px solid ${CREAM}06`, padding: '16px 0', alignItems: 'center' }}>
                   <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '10px', color: `${CREAM}25`, margin: 0, letterSpacing: '0.06em' }}>{label}</p>
                   <p style={{ ...style, margin: 0 }}>{text}</p>
                 </div>
@@ -329,7 +329,7 @@ export default function SarkanyvolgyPage() {
           <div style={{ ...anim(appV), display: 'flex', flexDirection: 'column', gap: 'clamp(8px,1.2vw,12px)' }}>
 
             {/* Sor 1: Zöld plakát (bal) + két kártya (jobb) */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 'clamp(8px,1.2vw,12px)', alignItems: 'stretch' }}>
+            <div className="mob-stack" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 'clamp(8px,1.2vw,12px)', alignItems: 'stretch' }}>
 
               {/* Zöld plakátkártya */}
               <div style={{ background: GREEN, padding: 'clamp(28px,4vw,44px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 'clamp(420px,55vw,580px)' }}>
@@ -377,7 +377,7 @@ export default function SarkanyvolgyPage() {
             </div>
 
             {/* Sor 2: Piros kártya (ikon) + Krém vízjel kártya */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(8px,1.2vw,12px)' }}>
+            <div className="mob-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(8px,1.2vw,12px)' }}>
 
               {/* Piros: fehér ikon középen */}
               <div style={{ background: RED, padding: 'clamp(36px,5vw,56px)', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 'clamp(140px,18vw,220px)' }}>

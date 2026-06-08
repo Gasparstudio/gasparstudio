@@ -200,7 +200,8 @@ export default function About() {
             ref={statsRef}
             style={{
               display: 'flex',
-              gap: '40px',
+              flexWrap: 'wrap',
+              gap: 'clamp(20px, 4vw, 40px)',
               paddingTop: '24px',
             }}
           >

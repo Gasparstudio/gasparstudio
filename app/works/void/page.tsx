@@ -110,7 +110,7 @@ export default function VoidPage() {
           {/* Offer link */}
           {showBadge && (
             <div style={{ marginTop: '4px', animation: 'fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both' }}>
-              <Link href="/#contact" style={{ color: 'rgba(255,255,255,0.3)', fontSize: 12, letterSpacing: '0.1em', textDecoration: 'none', fontFamily: 'monospace' }}>
+              <Link href="/arajanlat?void=1" style={{ color: 'rgba(255,255,255,0.3)', fontSize: 12, letterSpacing: '0.1em', textDecoration: 'none', fontFamily: 'monospace' }}>
                 ajánlat kérése →
               </Link>
             </div>

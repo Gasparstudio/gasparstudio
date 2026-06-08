@@ -36,6 +36,11 @@ const FONTS = `
     0%, 100% { transform: translateY(0);   opacity: 0.3; }
     50%       { transform: translateY(8px); opacity: 0.6; }
   }
+  @media (max-width: 767px) {
+    .mozz-logo-img { width: clamp(100px, 28vw, 160px) !important; }
+    .mozz-pizza    { width: clamp(240px, 70vw, 320px) !important; height: clamp(240px, 70vw, 320px) !important; }
+    .mozz-polaroid-wrap { overflow-x: auto !important; justify-content: flex-start !important; padding-left: var(--page-margin) !important; padding-right: var(--page-margin) !important; }
+  }
 `;
 
 const POLAROIDS = [
@@ -66,10 +71,10 @@ function SocialStatement() {
   }, []);
 
   return (
-    <div style={{
+    <div className="mob-stack" style={{
       display: 'grid', gridTemplateColumns: '1fr 3fr', gap: 'clamp(32px, 5vw, 80px)',
       alignItems: 'center', padding: 'clamp(56px, 10vw, 130px) 0',
-      borderTop: '1px solid rgba(17,17,17,0.07)',
+      borderTop: '1px solid rgba(17,17,17,0.07)'
     }}>
       {/* Left — cycling image frame */}
       <div style={{
@@ -133,7 +138,7 @@ function PolaroidSection() {
   }, []);
 
   return (
-    <div ref={ref} style={{
+    <div ref={ref} className="mozz-polaroid-wrap" style={{
       display: 'flex', justifyContent: 'center', alignItems: 'flex-end',
       margin: 'clamp(56px, 9vw, 120px) 0',
     }}>
@@ -259,13 +264,15 @@ export default function MozzanoPage() {
             <img
               src="/works/mozzano/mozzano_logo.png"
               alt="Mozzano"
-              style={{ width: 'clamp(180px, 24vw, 380px)', height: 'auto', objectFit: 'contain', display: 'block' }}
+              className="mozz-logo-img"
+            style={{ width: 'clamp(180px, 24vw, 380px)', height: 'auto', objectFit: 'contain', display: 'block' }}
             />
           </div>
 
           {/* CENTER — Pizza */}
           <img
             ref={pizzaRef}
+            className="mozz-pizza"
             src="/works/mozzano/piza.png"
             alt="Mozzano pizza"
             style={{
@@ -333,10 +340,10 @@ export default function MozzanoPage() {
       </div>
 
       {/* ── GALLERY ── */}
-      <section style={{ background: BG, padding: '0 clamp(20px, 4vw, 56px)' }}>
+      <section style={{ background: BG, padding: '0 clamp(20px, 4vw, 56px) clamp(48px, 7vw, 90px)' }}>
 
         {/* 01 — Logo */}
-        <div style={{
+        <div className="mob-stack" style={{
           display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(32px, 5vw, 80px)',
           alignItems: 'center', paddingTop: 'clamp(56px, 8vw, 100px)',
         }}>
@@ -366,24 +373,24 @@ export default function MozzanoPage() {
         />
 
         {/* Képgrid */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(10px, 1.5vw, 14px)', margin: 'clamp(48px, 7vw, 90px) 0' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(10px, 1.5vw, 14px)', marginTop: 'clamp(48px, 7vw, 90px)' }}>
 
           {/* Sor 1 — 3 kis kép */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 'clamp(10px, 1.5vw, 14px)' }}>
+          <div className="mob-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 'clamp(10px, 1.5vw, 14px)' }}>
             {['/works/mozzano/Artboard%203.png', '/works/mozzano/Artboard%207.png', '/works/mozzano/Artboard%206.png'].map(src => (
               <img key={src} src={src} alt="" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }} />
             ))}
           </div>
 
           {/* Sor 2 — 2 nagy dobozos kép */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(10px, 1.5vw, 14px)' }}>
+          <div className="mob-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(10px, 1.5vw, 14px)' }}>
             {['/works/mozzano/Artboard%208.png', '/works/mozzano/Artboard%209.png'].map(src => (
               <img key={src} src={src} alt="" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }} />
             ))}
           </div>
 
           {/* Sor 3 — bal kisebb, jobb nagy, egyforma magasság */}
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 3fr', gap: 'clamp(10px, 1.5vw, 14px)' }}>
+          <div className="mob-stack" style={{ display: 'grid', gridTemplateColumns: '2fr 3fr', gap: 'clamp(10px, 1.5vw, 14px)' }}>
             {['/works/mozzano/Artboard%204.png', '/works/mozzano/Artboard%205.png'].map(src => (
               <img key={src} src={src} alt="" style={{ width: '100%', height: 'clamp(260px, 32vw, 480px)', objectFit: 'cover', display: 'block', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }} />
             ))}
@@ -408,7 +415,7 @@ export default function MozzanoPage() {
 
         {/* Cabinet Grotesk */}
         <div style={{ borderTop: '1px solid rgba(17,17,17,0.08)', paddingTop: 'clamp(36px, 5vw, 56px)', marginBottom: 'clamp(48px, 7vw, 80px)' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 'clamp(24px, 4vw, 64px)', alignItems: 'start' }}>
+          <div className="mob-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 'clamp(24px, 4vw, 64px)', alignItems: 'start' }}>
             <div>
               <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: '11px', letterSpacing: '0.1em', color: 'rgba(17,17,17,0.35)', margin: '0 0 8px', textTransform: 'uppercase' }}>Display</p>
               <h3 style={{ fontFamily: 'CabinetGrotesk, var(--font-display)', fontSize: 'clamp(16px, 1.8vw, 22px)', fontWeight: 700, color: '#111', margin: '0 0 4px', letterSpacing: '-0.01em' }}>Cabinet Grotesk</h3>
@@ -442,7 +449,7 @@ export default function MozzanoPage() {
 
         {/* Clash Display */}
         <div style={{ borderTop: '1px solid rgba(17,17,17,0.08)', paddingTop: 'clamp(36px, 5vw, 56px)' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 'clamp(24px, 4vw, 64px)', alignItems: 'start' }}>
+          <div className="mob-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 'clamp(24px, 4vw, 64px)', alignItems: 'start' }}>
             <div>
               <p style={{ fontFamily: 'ClashDisplay, var(--font-body)', fontSize: '11px', letterSpacing: '0.1em', color: 'rgba(17,17,17,0.35)', margin: '0 0 8px', textTransform: 'uppercase' }}>Body</p>
               <h3 style={{ fontFamily: 'ClashDisplay, var(--font-display)', fontSize: 'clamp(16px, 1.8vw, 22px)', fontWeight: 600, color: '#111', margin: '0 0 4px', letterSpacing: '-0.01em' }}>Clash Display</h3>

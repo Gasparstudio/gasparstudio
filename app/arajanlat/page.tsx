@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import CustomCursor from '../components/CustomCursor';
 import Nav from '../components/Nav';
@@ -84,7 +85,9 @@ const DIVIDER = <div style={{ height: '1px', background: 'rgba(255,255,255,0.06)
 
 // ── Page ─────────────────────────────────────────────────────────────────────
 
-export default function ArajanlatPage() {
+function ArajanlatInner() {
+  const searchParams = useSearchParams();
+  const voidDiscount = searchParams.get('void') === '1';
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -188,7 +191,8 @@ export default function ArajanlatPage() {
     if (logoOrBrand === 'brand') sum += BRAND_PACKAGES.find(p => p.id === brandPkg)?.price ?? 0;
     if (webOn) sum += WEB_PACKAGES.find(p => p.id === webPkg)?.price ?? 0;
     if (socialOn) sum += SOCIAL_PACKAGES.find(p => p.id === socialPkg)?.price ?? 0;
-    return Math.round(sum * mult * (1 - bundleDiscount));
+    const voidMult = voidDiscount ? 0.9 : 1;
+    return Math.round(sum * mult * (1 - bundleDiscount) * voidMult);
   }
 
   const baseBeforeDiscount = (() => {
@@ -458,6 +462,22 @@ export default function ArajanlatPage() {
                 </div>
               )}
 
+              {hasSelection && !custom && voidDiscount && (
+                <div style={{ padding: '12px 22px', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: '#E8F04D', fontWeight: 600 }}>
+                      VOID10 — titkos kedvezmény -10%
+                    </span>
+                    <div style={{ fontFamily: 'var(--font-body)', fontSize: '10px', color: 'rgba(255,255,255,0.3)', marginTop: '2px' }}>
+                      Void oldalról érkező ajánlat
+                    </div>
+                  </div>
+                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: '#E8F04D', fontWeight: 600 }}>
+                    -{fmt(Math.round(calcTotal() / 0.9 * 0.1))}
+                  </span>
+                </div>
+              )}
+
               {hasSelection && !custom && (
                 <div style={{ padding: '16px 22px', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                   <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600 }}>Becsült összeg</span>
@@ -537,6 +557,14 @@ export default function ArajanlatPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ArajanlatPage() {
+  return (
+    <Suspense fallback={null}>
+      <ArajanlatInner />
+    </Suspense>
   );
 }
 

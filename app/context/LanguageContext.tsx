@@ -121,7 +121,7 @@ const translations = {
     // About
     'about.label':   '04 · About',
     'about.heading': 'Where it all comes together.',
-    'about.body':    'I studied graphic design, then worked in print and at an agency. Now I work with brands like Simon\'s Burger, Smashy and Travis Tenders. You don\'t just get a logo from me, you get the full picture of what your brand looks like in real life.',
+    'about.body':    'Eight years in brand design taught me one thing. The best brands don\'t just look good, they make people feel something. Your whole brand comes together with me, and it hits from the very first glance.',
     'about.tools':   'Tools',
     'about.cv':      'Download CV ↓',
     'about.stat.exp':      'Years experience',

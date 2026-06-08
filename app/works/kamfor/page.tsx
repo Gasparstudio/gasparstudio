@@ -163,7 +163,7 @@ export default function KamforPage() {
           </div>
 
           {/* Logo showcase */}
-          <div ref={logoRef as unknown as React.RefObject<HTMLDivElement>} style={{ ...anim(logoInView), display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(12px, 2vw, 24px)' }}>
+          <div ref={logoRef as unknown as React.RefObject<HTMLDivElement>} className="mob-stack" style={{ ...anim(logoInView), display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(12px, 2vw, 24px)' }}>
             {/* Dark bg */}
             <div style={{
               background: BG, border: `1px solid rgba(245,240,232,0.08)`,
@@ -212,7 +212,7 @@ export default function KamforPage() {
           <div style={{ ...anim(typeInView), display: 'flex', flexDirection: 'column', gap: 'clamp(48px, 7vw, 80px)' }}>
             {/* Playfair Display */}
             <div style={{ borderTop: `1px solid rgba(245,240,232,0.08)`, paddingTop: 'clamp(32px, 4vw, 48px)' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 'clamp(24px, 4vw, 64px)', alignItems: 'start' }}>
+              <div className="mob-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 'clamp(24px, 4vw, 64px)', alignItems: 'start' }}>
                 <div>
                   <p style={{ fontFamily: 'var(--font-body)', fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(245,240,232,0.3)', margin: '0 0 8px' }}>Display</p>
                   <h3 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(16px, 1.8vw, 20px)', fontWeight: 700, color: CREAM, margin: '0 0 4px' }}>Playfair Display</h3>
@@ -236,7 +236,7 @@ export default function KamforPage() {
 
             {/* Lato */}
             <div style={{ borderTop: `1px solid rgba(245,240,232,0.08)`, paddingTop: 'clamp(32px, 4vw, 48px)' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 'clamp(24px, 4vw, 64px)', alignItems: 'start' }}>
+              <div className="mob-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 'clamp(24px, 4vw, 64px)', alignItems: 'start' }}>
                 <div>
                   <p style={{ fontFamily: 'var(--font-body)', fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(245,240,232,0.3)', margin: '0 0 8px' }}>Body</p>
                   <h3 style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(16px, 1.8vw, 20px)', fontWeight: 600, color: CREAM, margin: '0 0 4px' }}>Lato</h3>
@@ -269,7 +269,7 @@ export default function KamforPage() {
             <img src="/works/kamfor/1.png" alt="" style={{ width: '100%', height: 'auto', borderRadius: '16px', display: 'block' }} />
 
             {/* 3-up */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 'clamp(10px, 1.5vw, 16px)' }}>
+            <div className="mob-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 'clamp(10px, 1.5vw, 16px)' }}>
               {['/works/kamfor/001.png', '/works/kamfor/002.png', '/works/kamfor/003.png'].map((src) => (
                 <img key={src} src={src} alt="" style={{ width: '100%', height: 'auto', borderRadius: '12px', display: 'block' }} />
               ))}

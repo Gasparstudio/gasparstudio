@@ -16,9 +16,9 @@
   --font-display: var(--font-sora), 'Sora', sans-serif;
   --font-body: var(--font-dm-sans), 'DM Sans', sans-serif;
 
-  --text-hero:   clamp(72px, 8vw, 96px);
-  --text-h2:     clamp(48px, 5vw, 64px);
-  --text-h3:     clamp(32px, 3.5vw, 40px);
+  --text-hero:   clamp(40px, 8vw, 96px);
+  --text-h2:     clamp(30px, 5vw, 64px);
+  --text-h3:     clamp(22px, 3.5vw, 40px);
   --text-body:   18px;
   --text-small:  14px;
   --text-micro:  12px;
@@ -336,6 +336,13 @@ body {
   align-items: stretch;
   gap: 24px;
   will-change: transform;
+}
+
+/* ─── Mobile Layout Utilities ────────────────────────────── */
+@media (max-width: 767px) {
+  .mob-stack { grid-template-columns: 1fr !important; }
+  .mob-2col  { grid-template-columns: repeat(2, 1fr) !important; }
+  .mob-hide  { display: none !important; }
 }
 
 /* ─── Noise texture overlay ──────────────────────────────── */

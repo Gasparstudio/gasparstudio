@@ -149,6 +149,7 @@ function LogoRow({ logo, index }: { logo: (typeof LOGOS)[0]; index: number }) {
       )}
       <div
         id={`logo-row-${index}`}
+        className="mob-stack"
         style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',

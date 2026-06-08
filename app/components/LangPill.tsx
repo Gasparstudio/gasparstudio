@@ -71,7 +71,6 @@ export default function LangPill() {
         top: '20px',
         right: '24px',
         zIndex: 1001,
-        display: 'flex',
         alignItems: 'center',
         gap: '8px',
       }}

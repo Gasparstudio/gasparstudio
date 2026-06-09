@@ -38,6 +38,10 @@ export const metadata: Metadata = {
   description: "Brand designer creating visual identities that feel before they speak. Budapest-based, globally thinking.",
   keywords: ["brand designer", "visual identity", "logo design", "Budapest", "graphic design"],
   authors: [{ name: "Gáspár Bálint" }],
+  icons: {
+    icon: '/gaspar_logo_v1-01.png',
+    apple: '/gaspar_logo_v1-01.png',
+  },
   openGraph: {
     title: "GASPAR · Brand Designer",
     description: "Brands that feel before they speak.",

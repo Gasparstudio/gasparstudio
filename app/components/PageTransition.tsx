@@ -17,7 +17,7 @@ export default function PageTransition({ children }: { children: React.ReactNode
   const pathname = usePathname();
   const contentRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
-  const labelRef = useRef<HTMLSpanElement>(null);
+  const labelRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const content = contentRef.current;
@@ -107,21 +107,18 @@ export default function PageTransition({ children }: { children: React.ReactNode
           justifyContent: 'center',
         }}
       >
-        <span
+        <img
           ref={labelRef}
+          src="/gaspar_logo_v1-01.png"
+          alt="Gaspar"
           style={{
             opacity: 0,
-            color: '#fff',
-            fontFamily: 'var(--font-sans, sans-serif)',
-            fontSize: 'clamp(1.25rem, 3vw, 2rem)',
-            fontWeight: 500,
-            letterSpacing: '0.15em',
-            textTransform: 'uppercase',
+            width: 'clamp(80px, 10vw, 140px)',
+            filter: 'brightness(0) invert(1)',
             userSelect: 'none',
+            pointerEvents: 'none',
           }}
-        >
-          Gaspar Design
-        </span>
+        />
       </div>
       <div ref={contentRef}>
         {children}

@@ -44,31 +44,8 @@ export default function ValueProp() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (isMobile) {
-    return (
-      <section
-        id="value-prop"
-        style={{
-          padding: 'clamp(60px, 12vw, 120px) var(--page-margin)',
-        }}
-      >
-        <div style={{ maxWidth: '600px' }}>
-          <p style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 'clamp(20px, 5.5vw, 30px)',
-            lineHeight: 1.4,
-            letterSpacing: '-0.02em',
-            color: 'var(--color-text-primary)',
-          }}>
-            {t('vp.text')}
-          </p>
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <div ref={wrapperRef} style={{ height: '300vh' }}>
+    <div ref={wrapperRef} style={{ height: isMobile ? '200vh' : '300vh' }}>
       <section
         id="value-prop"
         style={{
@@ -93,8 +70,8 @@ export default function ValueProp() {
             <p
               style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: 'clamp(22px, 3.5vw, 42px)',
-                lineHeight: 1.35,
+                fontSize: 'clamp(20px, 5vw, 42px)',
+                lineHeight: 1.4,
                 letterSpacing: '-0.02em',
               }}
             >

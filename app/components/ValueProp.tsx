@@ -59,6 +59,33 @@ export default function ValueProp() {
       >
         <div
           style={{
+            position: 'absolute',
+            right: 'var(--page-margin)',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '6px',
+            color: 'var(--color-text-muted)',
+          }}
+        >
+          <svg
+            className="scroll-hint-arrow"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          <span style={{ fontSize: '10px', letterSpacing: '0.08em', textTransform: 'lowercase', fontFamily: 'var(--font-body)' }}>
+            görgess
+          </span>
+        </div>
+        <div
+          style={{
             maxWidth: 'var(--max-width)',
             margin: '0 auto',
             paddingLeft: 'var(--page-margin)',

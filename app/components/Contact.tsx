@@ -6,6 +6,7 @@ import { useLang } from '../context/LanguageContext';
 const socials = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/gáspár-bálint-042721195/', icon: 'in' },
   { label: 'Behance', href: 'https://www.behance.net/gasparbalint', icon: 'Be' },
+  { label: 'Instagram', href: 'https://www.instagram.com/gaspar_design', icon: 'Ig' },
 ];
 
 export default function Contact() {

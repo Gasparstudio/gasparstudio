@@ -4,7 +4,10 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { createRoot } from 'react-dom/client'
 import Link from 'next/link'
 import { slides as faceSlides } from './slides/face'
+import { slides as stresszSlides } from './slides/stresszteszt'
 import { slides as svSlides } from './slides/sarkanyvolgy'
+import { slides as svPosterSlides } from './slides/sarkany_plakatok'
+import { slides as svMeseSlides } from './slides/sarkany_mese'
 import { slides as sbSlides } from './slides/simons'
 
 const SCALE = 0.25
@@ -21,12 +24,36 @@ const PROJECTS = [
     prefix: 'face_slide_',
   },
   {
+    id: 'face-stresszteszt',
+    title: 'FACE — 16px vs 16m stresszteszt',
+    link: '/works/face',
+    slides: stresszSlides,
+    accent: '#1A7BFF',
+    prefix: 'face_stressz_slide_',
+  },
+  {
     id: 'sarkanyvolgy',
     title: 'Sárkány Völgy — Brand Identity',
     link: '/works/sarkanyvolgy',
     slides: svSlides,
     accent: '#2D6A4F',
     prefix: 'sarkanyvolgy_slide_',
+  },
+  {
+    id: 'sarkany-plakatok',
+    title: 'Sárkány Völgy — A mese plakátjai',
+    link: '/works/sarkanyvolgy',
+    slides: svPosterSlides,
+    accent: '#D34C2D',
+    prefix: 'sarkany_plakat_slide_',
+  },
+  {
+    id: 'sarkany-mese',
+    title: 'Sárkány Völgy — Egy népmeséből brand',
+    link: '/works/sarkanyvolgy',
+    slides: svMeseSlides,
+    accent: '#2D6A4F',
+    prefix: 'sarkany_mese_slide_',
   },
   {
     id: 'simons',

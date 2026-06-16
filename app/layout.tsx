@@ -60,10 +60,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://gasparstudio.hu",
   },
-  icons: {
-    icon: '/gaspar_logo_v1-01.png',
-    apple: '/gaspar_logo_v1-01.png',
-  },
   openGraph: {
     title: "GasparStudio – Gáspár Bálint | Brand Designer",
     description:

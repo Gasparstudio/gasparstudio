@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import { LanguageProvider } from "./context/LanguageContext";
 import PageTransition from "./components/PageTransition";
 import LangPill from "./components/LangPill";
@@ -130,6 +131,7 @@ export default function RootLayout({
             {children}
           </PageTransition>
         </LanguageProvider>
+        <Analytics />
       </body>
     </html>
   );

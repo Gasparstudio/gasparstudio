@@ -40,13 +40,18 @@ const Foot = ({ num, ink = NAVY }: { num: string; ink?: string }) => (
 
 // Pontos konstrukció a jel TÉNYLEGES geometriájából (1800x1800 koord-tér,
 // pixelpontosan kimérve a logó PNG alfa-csatornájából).
-const EYE = { cx: 939.5, cy: 514.5, r: 38.5 }      // valódi kör (a szem), pixelpontosan
+const EYE = { cx: 939.7, cy: 514.3, r: 39.9 }      // valódi kör (a szem), pixelpontosan
 const BB  = { x: 214, y: 36, w: 1377, h: 1727 }    // tartalmi befoglaló doboz
 const AX  = 902.5                                    // függőleges középtengely
-const CR  = 174                                      // a kimért, konzisztens saroksugár
-const RIGHT = 1591                                   // a test függőleges jobb éle
-// A test jobb oldali lekerekített sarkai (ugyanaz a 174-es sugár):
-const CORNERS = [{ cx: 1417, cy: 900 }, { cx: 1417, cy: 1240 }]
+// A jel íveire pixelpontosan illesztett körök (Kasa-fit, err < 0.3):
+const CIRCLES = [
+  { cx: 1419, cy: 899, r: 171 },   // test, jobb felső sarok
+  { cx: 1420, cy: 1240, r: 171 },  // test, jobb alsó sarok
+  { cx: 812, cy: 554, r: 172 },    // pofa / száj íve
+  { cx: 602, cy: 1490, r: 185 },   // alsó U kanyar
+  { cx: 767, cy: 600, r: 383 },    // nagy nyak / hát ív
+  { cx: 1266, cy: 108, r: 360 },   // orr / fej felső íve
+]
 
 const Construction = ({ ink }: { ink: string }) => {
   const guide = `${ink}45`
@@ -67,12 +72,11 @@ const Construction = ({ ink }: { ink: string }) => {
       {g}
       <rect x={BB.x} y={BB.y} width={BB.w} height={BB.h} fill="none" stroke={guide} strokeWidth={3} />
       <line x1={AX} y1={0} x2={AX} y2={1800} stroke={guide} strokeWidth={2} strokeDasharray="10 10" />
-      {/* a test jobb éle + a konzisztens 174-es sarokív körei */}
-      <line x1={RIGHT} y1={CORNERS[0].cy} x2={RIGHT} y2={CORNERS[1].cy} stroke={guide} strokeWidth={3} />
-      {CORNERS.map((c, i) => (
+      {/* az ívekre illesztett körök */}
+      {CIRCLES.map((c, i) => (
         <g key={i}>
-          <circle cx={c.cx} cy={c.cy} r={CR} fill="none" stroke={guide} strokeWidth={3} />
-          <circle cx={c.cx} cy={c.cy} r={4} fill={guide} />
+          <circle cx={c.cx} cy={c.cy} r={c.r} fill="none" stroke={guide} strokeWidth={3} />
+          <circle cx={c.cx} cy={c.cy} r={5} fill={guide} />
         </g>
       ))}
       {/* a valódi szem-kör, kiemelve */}

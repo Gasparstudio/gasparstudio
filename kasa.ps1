@@ -9,15 +9,12 @@ $st=$d.Stride;$by=New-Object byte[] ($st*$h)
 function A([int]$x,[int]$y){ if($x -lt 0 -or $y -lt 0 -or $x -ge $w -or $y -ge $h){return 0}; return $by[$y*$st+$x*4+3] }
 # regions: name x0 x1 y0 y1
 $regions = @(
- @('bodyBotR',1500,1591,1180,1300),
- @('headDomeTop',1300,1430,330,360),
- @('headDomeCorner',1430,1525,360,470),
- @('noseScoop',1040,1250,405,478),
- @('snoutRightTop',1430,1530,455,560),
- @('upperRightTop',1490,1591,745,870),
- @('lowerCurlInner',1150,1420,1085,1185),
- @('footL2',330,470,1630,1692),
- @('legRightCurve',640,900,1330,1460)
+ @('headDome',1335,1500,338,415),
+ @('neck',300,520,770,930),
+ @('jawLower',660,905,650,720),
+ @('bellyTop',1180,1430,1090,1180),
+ @('upperBodyTopL',300,520,742,800),
+ @('lowerCurlLeftInner',640,840,1300,1440)
 )
 foreach($r in $regions){
  $nm=$r[0];$x0=[int]$r[1];$x1=[int]$r[2];$y0=[int]$r[3];$y1=[int]$r[4]

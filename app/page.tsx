@@ -5,7 +5,7 @@ import Works from './components/Works';
 import Testimonials from './components/Testimonials';
 import About from './components/About';
 import Contact from './components/Contact';
-import InstagramFeedSection from './components/InstagramFeedSection';
+// import InstagramFeedSection from './components/InstagramFeedSection'; // ideiglenesen kikapcsolva
 import Footer from './components/Footer';
 import StickyClientsFooter from './components/StickyClientsFooter';
 import ScrollProgress from './components/ScrollProgress';
@@ -45,8 +45,7 @@ export default function Home() {
         {/* 06 · Contact */}
         <Contact />
 
-        {/* 07 · Instagram hírfolyam — a public/instagram-feed/ mappából */}
-        <InstagramFeedSection />
+        {/* 07 · Instagram hírfolyam — ideiglenesen kikapcsolva */}
       </main>
 
       {/* Page footer — sits above the sticky clients bar when scrolled to bottom */}

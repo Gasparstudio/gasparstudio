@@ -134,10 +134,9 @@ export default function Hero() {
             alt=""
             style={{
               position: 'absolute', inset: 0, width: '100%', height: '100%',
-              objectFit: 'cover', filter: 'blur(14px)',
+              objectFit: 'cover', filter: 'blur(8px)',
               opacity: transitioning ? 0 : 0.8,
-              transform: transitioning ? 'scale(0.96)' : 'scale(1)',
-              transition: 'opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1), transform 1200ms cubic-bezier(0.16, 1, 0.3, 1)',
+              transition: 'opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1)',
             }}
           />
         )}
@@ -147,10 +146,9 @@ export default function Hero() {
           alt=""
           style={{
             position: 'absolute', inset: 0, width: '100%', height: '100%',
-            objectFit: 'cover', filter: 'blur(14px)',
+            objectFit: 'cover', filter: 'blur(8px)',
             opacity: 0.8,
-            transform: transitioning ? 'scale(1.06)' : 'scale(1.0)',
-            transition: 'opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1), transform 7000ms cubic-bezier(0.16, 1, 0.3, 1)',
+            transition: 'opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1)',
           }}
         />
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.88) 100%)' }} />

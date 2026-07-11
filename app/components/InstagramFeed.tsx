@@ -48,7 +48,7 @@ export default function InstagramFeed({ posts }: { posts: string[] }) {
           }}
         >
           <img
-            src="/photo/gaspar-portrait.png"
+            src="/photo/gaspar-portrait.webp"
             alt=""
             style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
           />

@@ -48,13 +48,13 @@ export const SBSlide02 = () => (
     <div style={{ flex: 1, display: 'flex', gap: 20, minHeight: 0, alignItems: 'center' }}>
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 16 }}>
         <span style={{ fontFamily: INTER, fontSize: 44, fontWeight: 900, color: `${INK}35`, letterSpacing: '-1.5px' }}>Régi</span>
-        <img src="/works/Simon's%20Burger/social/old/K%C3%A9perny%C5%91k%C3%A9p%202026-06-01%20185734.png" alt="" style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', borderRadius: 14 }} />
-        <img src="/works/Simon's%20Burger/social/old/K%C3%A9perny%C5%91k%C3%A9p%202026-06-01%20185740.png" alt="" style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', borderRadius: 14 }} />
+        <img src="/works/Simon's%20Burger/social/old/K%C3%A9perny%C5%91k%C3%A9p%202026-06-01%20185734.webp" alt="" style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', borderRadius: 14 }} />
+        <img src="/works/Simon's%20Burger/social/old/K%C3%A9perny%C5%91k%C3%A9p%202026-06-01%20185740.webp" alt="" style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', borderRadius: 14 }} />
       </div>
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 16 }}>
         <span style={{ fontFamily: INTER, fontSize: 44, fontWeight: 900, color: GREEN, letterSpacing: '-1.5px' }}>Új</span>
-        <img src="/works/Simon's%20Burger/social/new/simon%27s_burger_koki_1x1_burger.png" alt="" style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', borderRadius: 14 }} />
-        <img src="/works/Simon's%20Burger/social/new/simon%27s_burger_koki_1x1_fagyi.png" alt="" style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', borderRadius: 14 }} />
+        <img src="/works/Simon's%20Burger/social/new/simon%27s_burger_koki_1x1_burger.webp" alt="" style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', borderRadius: 14 }} />
+        <img src="/works/Simon's%20Burger/social/new/simon%27s_burger_koki_1x1_fagyi.webp" alt="" style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', borderRadius: 14 }} />
       </div>
     </div>
   </div>
@@ -64,8 +64,8 @@ export const SBSlide02 = () => (
 export const SBSlide03 = () => (
   <div style={{ width: W, height: H, background: '#fff', padding: P, display: 'flex', boxSizing: 'border-box' }}>
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16, minHeight: 0 }}>
-      <img src="/works/Simon's%20Burger/social/new/Simon%27s_catering_1x1_v2.png" alt="" style={{ flex: 1, minHeight: 0, aspectRatio: '1 / 1', maxWidth: '100%', objectFit: 'cover', borderRadius: 16 }} />
-      <img src="/works/Simon's%20Burger/social/new/Simon%27s_catering_1x1_v4.png" alt="" style={{ flex: 1, minHeight: 0, aspectRatio: '1 / 1', maxWidth: '100%', objectFit: 'cover', borderRadius: 16 }} />
+      <img src="/works/Simon's%20Burger/social/new/Simon%27s_catering_1x1_v2.webp" alt="" style={{ flex: 1, minHeight: 0, aspectRatio: '1 / 1', maxWidth: '100%', objectFit: 'cover', borderRadius: 16 }} />
+      <img src="/works/Simon's%20Burger/social/new/Simon%27s_catering_1x1_v4.webp" alt="" style={{ flex: 1, minHeight: 0, aspectRatio: '1 / 1', maxWidth: '100%', objectFit: 'cover', borderRadius: 16 }} />
     </div>
   </div>
 )

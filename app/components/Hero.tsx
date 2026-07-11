@@ -7,9 +7,11 @@ import { projects } from '../data/projects';
 import { useLang } from '../context/LanguageContext';
 import ExplodeButton from './ExplodeButton';
 
+// Projektenként max 2 kép — a háttér csak elmosva látszik, nem kell az összes
+// artboardot letölteni hozzá (ez korábban 40+ nagy képet jelentett induláskor).
 const allImages = projects
   .filter((p) => p.slug !== 'logofolio')
-  .flatMap((p) => (p.images ?? []).filter((src) => !src.endsWith('.mp4')));
+  .flatMap((p) => (p.images ?? []).filter((src) => !src.endsWith('.mp4')).slice(0, 2));
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];

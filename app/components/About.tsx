@@ -116,7 +116,7 @@ export default function About() {
             }}
           >
             <img
-              src="/photo/gaspar-portrait.png"
+              src="/photo/gaspar-portrait.webp"
               alt="Gáspár Bálint brand designer portré"
               style={{
                 width: '100%',

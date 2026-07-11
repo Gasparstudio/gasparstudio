@@ -105,12 +105,12 @@ export const SlideText = () => {
 
 // 01 — 16 px / kis lépték: hímzett jel pólón (csak kép)
 export const Slide01 = () => (
-  <PlainImage src="/works/face/mockup_04.png" objectPosition="center" />
+  <PlainImage src="/works/face/mockup_04.webp" objectPosition="center" />
 )
 
 // 02 — 16 méter / nagy lépték: irodaépület (csak kép, 30px feljebb)
 export const Slide02 = () => (
-  <PlainImage src="/works/face/face_mockup_07.png" objectPosition="50% 38%" shiftY={-30} />
+  <PlainImage src="/works/face/face_mockup_07.webp" objectPosition="50% 38%" shiftY={-30} />
 )
 
 // 03 — Záró / CTA

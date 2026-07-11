@@ -20,12 +20,12 @@ const MONO: React.CSSProperties = {
 
 const SEC = '8px';
 const ARTBOARDS = [
-  '/works/face/Artboard%201-03.png', '/works/face/Artboard%201-04.png',
-  '/works/face/Artboard%201-05.png', '/works/face/Artboard%201-06.png',
-  '/works/face/Artboard%201-07.png', '/works/face/Artboard%201-08.png',
-  '/works/face/Artboard%201-09.png', '/works/face/Artboard%201-10.png',
-  '/works/face/Artboard%201-11.png', '/works/face/Artboard%201-12.png',
-  '/works/face/Artboard%201-13.png', '/works/face/Artboard%201-14.png',
+  '/works/face/Artboard%201-03.webp', '/works/face/Artboard%201-04.webp',
+  '/works/face/Artboard%201-05.webp', '/works/face/Artboard%201-06.webp',
+  '/works/face/Artboard%201-07.webp', '/works/face/Artboard%201-08.webp',
+  '/works/face/Artboard%201-09.webp', '/works/face/Artboard%201-10.webp',
+  '/works/face/Artboard%201-11.webp', '/works/face/Artboard%201-12.webp',
+  '/works/face/Artboard%201-13.webp', '/works/face/Artboard%201-14.png',
 ];
 const EASE = 'cubic-bezier(0.16,1,0.3,1)';
 const SECTIONS = [
@@ -343,17 +343,17 @@ export default function FacePage() {
             </div>
 
             <div style={{ borderRadius: '12px', overflow: 'hidden' }}>
-              <img src="/works/face/mockup_01.png" alt="" style={{ width: '100%', height: 'auto', display: 'block' }} />
+              <img src="/works/face/mockup_01.webp" alt="" style={{ width: '100%', height: 'auto', display: 'block' }} />
             </div>
 
           </div>
 
           <div className="mob-stack" style={{ maxWidth: 'var(--max-width)', margin: '10px auto 0', width: '100%', display: 'grid', gridTemplateColumns: '8fr 8fr 3fr', gap: '12px' }}>
             <div style={{ borderRadius: '12px', overflow: 'hidden', aspectRatio: '3/2' }}>
-              <img src="/works/face/mockup_05.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <img src="/works/face/mockup_05.webp" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
             <div style={{ borderRadius: '12px', overflow: 'hidden', aspectRatio: '3/2' }}>
-              <img src="/works/face/mockup_06.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <img src="/works/face/mockup_06.webp" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
             <div style={{ borderRadius: '12px', overflow: 'hidden', aspectRatio: '9/16', position: 'relative' }}>
               {ARTBOARDS.map((src, i) => (
@@ -368,7 +368,7 @@ export default function FacePage() {
           </div>
 
           <div style={{ maxWidth: 'var(--max-width)', margin: '10px auto 0', width: '100%', borderRadius: '14px', overflow: 'hidden' }}>
-            <img src="/works/face/mockup_03.png?v=3" alt="" style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <img src="/works/face/mockup_03.webp?v=3" alt="" style={{ width: '100%', height: 'auto', display: 'block' }} />
           </div>
 
         </section>

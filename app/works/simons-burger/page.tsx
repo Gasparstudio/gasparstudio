@@ -49,13 +49,13 @@ const STORY = [
 ] as const;
 
 const SMASH_MEDIA = [
-  "/works/Simon's%20Burger/smashchamps/01.png",
+  "/works/Simon's%20Burger/smashchamps/01.webp",
   "/works/Simon's%20Burger/smashchamps/_DSC4835.jpg",
-  "/works/Simon's%20Burger/smashchamps/02.png",
+  "/works/Simon's%20Burger/smashchamps/02.webp",
   "/works/Simon's%20Burger/smashchamps/_DSC5002.jpg",
-  "/works/Simon's%20Burger/smashchamps/03.png",
+  "/works/Simon's%20Burger/smashchamps/03.webp",
   "/works/Simon's%20Burger/smashchamps/_DSC5178.jpg",
-  "/works/Simon's%20Burger/smashchamps/04.png",
+  "/works/Simon's%20Burger/smashchamps/04.webp",
   "/works/Simon's%20Burger/smashchamps/_DSC5349.jpg",
   "/works/Simon's%20Burger/smashchamps/_DSC5391.jpg",
   "/works/Simon's%20Burger/smashchamps/_DSC9149.jpg",
@@ -66,16 +66,16 @@ const SMASH_MEDIA = [
 ];
 
 const OLD_SOCIAL = [
-  "/works/Simon's%20Burger/social/old/K%C3%A9perny%C5%91k%C3%A9p%202026-06-01%20185734.png",
-  "/works/Simon's%20Burger/social/old/K%C3%A9perny%C5%91k%C3%A9p%202026-06-01%20185740.png",
-  "/works/Simon's%20Burger/social/old/K%C3%A9perny%C5%91k%C3%A9p%202026-06-01%20185850.png",
+  "/works/Simon's%20Burger/social/old/K%C3%A9perny%C5%91k%C3%A9p%202026-06-01%20185734.webp",
+  "/works/Simon's%20Burger/social/old/K%C3%A9perny%C5%91k%C3%A9p%202026-06-01%20185740.webp",
+  "/works/Simon's%20Burger/social/old/K%C3%A9perny%C5%91k%C3%A9p%202026-06-01%20185850.webp",
 ];
 const NEW_SOCIAL = [
-  "/works/Simon's%20Burger/social/new/simon%27s_burger_koki_1x1_burger.png",
-  "/works/Simon's%20Burger/social/new/simon%27s_burger_koki_1x1_fagyi.png",
-  "/works/Simon's%20Burger/social/new/Simon%27s_catering_1x1_v2.png",
-  "/works/Simon's%20Burger/social/new/Simon%27s_catering_1x1_v4.png",
-  "/works/Simon's%20Burger/social/new/Simon%27s_catering_1x1_v5.png",
+  "/works/Simon's%20Burger/social/new/simon%27s_burger_koki_1x1_burger.webp",
+  "/works/Simon's%20Burger/social/new/simon%27s_burger_koki_1x1_fagyi.webp",
+  "/works/Simon's%20Burger/social/new/Simon%27s_catering_1x1_v2.webp",
+  "/works/Simon's%20Burger/social/new/Simon%27s_catering_1x1_v4.webp",
+  "/works/Simon's%20Burger/social/new/Simon%27s_catering_1x1_v5.webp",
 ];
 
 const anim = (inView: boolean, delay = 0): React.CSSProperties => ({

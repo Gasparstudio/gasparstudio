@@ -46,7 +46,7 @@ const Frame = ({ num, title, children, bg = BG, arrow = true }: { num: string; t
 export const Slide00 = () => (
   <div style={{ width: W, height: H, background: '#000', position: 'relative', overflow: 'hidden', boxSizing: 'border-box' }}>
     <img
-      src="/works/face/mockup_02.png"
+      src="/works/face/mockup_02.webp"
       alt=""
       style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'calc(50% + 45px) center', display: 'block' }}
     />
@@ -198,9 +198,9 @@ export const Slide07 = () => (
     <Badge num="06" title="Evolúció" />
     <div style={{ flex: 1, display: 'flex', gap: 10, marginTop: 28, marginBottom: 28 }}>
       {[
-        '/works/face/Artboard%201-03.png',
-        '/works/face/Artboard%201-07.png',
-        '/works/face/Artboard%201-11.png',
+        '/works/face/Artboard%201-03.webp',
+        '/works/face/Artboard%201-07.webp',
+        '/works/face/Artboard%201-11.webp',
       ].map(src => (
         <img key={src} src={src} alt="" style={{ flex: 1, minWidth: 0, height: '100%', objectFit: 'cover', borderRadius: 10 }} />
       ))}
@@ -213,8 +213,8 @@ export const Slide08 = () => (
   <div style={{ width: W, height: H, background: BG, padding: P, display: 'flex', flexDirection: 'column', boxSizing: 'border-box' }}>
     <Badge num="07" title="Alkalmazás" />
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10, paddingTop: 20, paddingBottom: 20, minHeight: 0 }}>
-      <img src="/works/face/mockup_01.png" alt="" style={{ flex: 1, minHeight: 0, width: '100%', objectFit: 'cover', objectPosition: '50% calc(50% + 20px)', borderRadius: 12 }} />
-      <img src="/works/face/mockup_02.png" alt="" style={{ flex: 1, minHeight: 0, width: '100%', objectFit: 'cover', objectPosition: '50% 50%', borderRadius: 12 }} />
+      <img src="/works/face/mockup_01.webp" alt="" style={{ flex: 1, minHeight: 0, width: '100%', objectFit: 'cover', objectPosition: '50% calc(50% + 20px)', borderRadius: 12 }} />
+      <img src="/works/face/mockup_02.webp" alt="" style={{ flex: 1, minHeight: 0, width: '100%', objectFit: 'cover', objectPosition: '50% 50%', borderRadius: 12 }} />
     </div>
     <Footer />
   </div>
@@ -224,8 +224,8 @@ export const Slide09 = () => (
   <div style={{ width: W, height: H, background: '#000000', padding: P, display: 'flex', flexDirection: 'column', boxSizing: 'border-box' }}>
     <Badge num="08" title="Végeredmény" />
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10, paddingTop: 20, paddingBottom: 20, minHeight: 0 }}>
-      <img src="/works/face/mockup_05.png" alt="" style={{ flex: 1, minHeight: 0, width: '100%', objectFit: 'cover', objectPosition: '50% calc(50% - 30px)', borderRadius: 12 }} />
-      <img src="/works/face/mockup_06.png" alt="" style={{ flex: 1, minHeight: 0, width: '100%', objectFit: 'cover', objectPosition: '50% 50%', borderRadius: 12 }} />
+      <img src="/works/face/mockup_05.webp" alt="" style={{ flex: 1, minHeight: 0, width: '100%', objectFit: 'cover', objectPosition: '50% calc(50% - 30px)', borderRadius: 12 }} />
+      <img src="/works/face/mockup_06.webp" alt="" style={{ flex: 1, minHeight: 0, width: '100%', objectFit: 'cover', objectPosition: '50% 50%', borderRadius: 12 }} />
     </div>
     <Footer />
   </div>
@@ -235,7 +235,7 @@ export const Slide10 = () => (
   <div style={{ width: W, height: H, background: BG, padding: P, display: 'flex', flexDirection: 'column', boxSizing: 'border-box' }}>
     <Badge num="09" title="FACE · Brand Identity" arrow={false} />
     <img
-      src="/works/face/mockup_03.png"
+      src="/works/face/mockup_03.webp"
       alt=""
       style={{ width: '100%', height: 'auto', borderRadius: 12, marginTop: 28, flexShrink: 0 }}
     />

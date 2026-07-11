@@ -13,7 +13,7 @@ const bio = {
   location: 'Budapest',
   summary:
     '14 évesen rajzoltam az első logómat — azóta nem hagytam abba. Nem díszítő vagyok, hanem gondolkodó: minden vonalnak, színnek és betűnek oka van.',
-  photo: '/works/Void/void1.png',
+  photo: '/works/Void/void1.webp',
 };
 
 const stats = [

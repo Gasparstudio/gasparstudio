@@ -44,15 +44,15 @@ const FONTS = `
 `;
 
 const POLAROIDS = [
-  { src: '/works/mozzano/Artboard%201.png', rotate: '-5deg',  delay: 0   },
-  { src: '/works/mozzano/Artboard%208.png', rotate: '2.5deg', delay: 80  },
-  { src: '/works/mozzano/dobozos.png',       rotate: '-2deg',  delay: 160 },
+  { src: '/works/mozzano/Artboard%201.webp', rotate: '-5deg',  delay: 0   },
+  { src: '/works/mozzano/Artboard%208.webp', rotate: '2.5deg', delay: 80  },
+  { src: '/works/mozzano/dobozos.webp',       rotate: '-2deg',  delay: 160 },
 ];
 
 const SOCIAL_IMGS = [
-  '/works/mozzano/Artboard%203.png',
-  '/works/mozzano/Artboard%206.png',
-  '/works/mozzano/Artboard%207.png',
+  '/works/mozzano/Artboard%203.webp',
+  '/works/mozzano/Artboard%206.webp',
+  '/works/mozzano/Artboard%207.webp',
 ];
 
 function SocialStatement() {
@@ -273,7 +273,7 @@ export default function MozzanoPage() {
           <img
             ref={pizzaRef}
             className="mozz-pizza"
-            src="/works/mozzano/piza.png"
+            src="/works/mozzano/piza.webp"
             alt="Mozzano pizza"
             style={{
               width:  'clamp(340px, 78vmin, 900px)',
@@ -377,21 +377,21 @@ export default function MozzanoPage() {
 
           {/* Sor 1 — 3 kis kép */}
           <div className="mob-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 'clamp(10px, 1.5vw, 14px)' }}>
-            {['/works/mozzano/Artboard%203.png', '/works/mozzano/Artboard%207.png', '/works/mozzano/Artboard%206.png'].map(src => (
+            {['/works/mozzano/Artboard%203.webp', '/works/mozzano/Artboard%207.webp', '/works/mozzano/Artboard%206.webp'].map(src => (
               <img key={src} src={src} alt="" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }} />
             ))}
           </div>
 
           {/* Sor 2 — 2 nagy dobozos kép */}
           <div className="mob-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(10px, 1.5vw, 14px)' }}>
-            {['/works/mozzano/Artboard%208.png', '/works/mozzano/Artboard%209.png'].map(src => (
+            {['/works/mozzano/Artboard%208.webp', '/works/mozzano/Artboard%209.webp'].map(src => (
               <img key={src} src={src} alt="" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }} />
             ))}
           </div>
 
           {/* Sor 3 — bal kisebb, jobb nagy, egyforma magasság */}
           <div className="mob-stack" style={{ display: 'grid', gridTemplateColumns: '2fr 3fr', gap: 'clamp(10px, 1.5vw, 14px)' }}>
-            {['/works/mozzano/Artboard%204.png', '/works/mozzano/Artboard%205.png'].map(src => (
+            {['/works/mozzano/Artboard%204.webp', '/works/mozzano/Artboard%205.webp'].map(src => (
               <img key={src} src={src} alt="" style={{ width: '100%', height: 'clamp(260px, 32vw, 480px)', objectFit: 'cover', display: 'block', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }} />
             ))}
           </div>

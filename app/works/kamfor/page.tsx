@@ -266,11 +266,11 @@ export default function KamforPage() {
 
           <div style={{ ...anim(galleryInView), display: 'flex', flexDirection: 'column', gap: 'clamp(10px, 1.5vw, 16px)' }}>
             {/* Full-width */}
-            <img src="/works/kamfor/1.png" alt="" style={{ width: '100%', height: 'auto', borderRadius: '16px', display: 'block' }} />
+            <img src="/works/kamfor/1.webp" alt="" style={{ width: '100%', height: 'auto', borderRadius: '16px', display: 'block' }} />
 
             {/* 3-up */}
             <div className="mob-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 'clamp(10px, 1.5vw, 16px)' }}>
-              {['/works/kamfor/001.png', '/works/kamfor/002.png', '/works/kamfor/003.png'].map((src) => (
+              {['/works/kamfor/001.webp', '/works/kamfor/002.webp', '/works/kamfor/003.webp'].map((src) => (
                 <img key={src} src={src} alt="" style={{ width: '100%', height: 'auto', borderRadius: '12px', display: 'block' }} />
               ))}
             </div>

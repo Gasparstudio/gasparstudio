@@ -10,7 +10,7 @@ import Footer from './components/Footer';
 import StickyClientsFooter from './components/StickyClientsFooter';
 import ScrollProgress from './components/ScrollProgress';
 import CustomCursor from './components/CustomCursor';
-import BackgroundOrb from './components/BackgroundOrb';
+// import BackgroundOrb from './components/BackgroundOrb'; // ideiglenesen kikapcsolva — folyamatos, végtelen animáció, GPU-terhelés
 
 export default function Home() {
   return (
@@ -24,9 +24,6 @@ export default function Home() {
 
       {/* Main content */}
       <main style={{ position: 'relative' }}>
-        {/* Background blobs — hero only */}
-        <BackgroundOrb />
-
         {/* 01 · Hero */}
         <Hero />
 

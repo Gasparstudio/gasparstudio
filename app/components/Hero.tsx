@@ -6,12 +6,17 @@ import SplitType from 'split-type';
 import { projects } from '../data/projects';
 import { useLang } from '../context/LanguageContext';
 import ExplodeButton from './ExplodeButton';
+import heroBgMap from '../data/hero-bg-map.json';
 
 // Projektenként max 2 kép — a háttér csak elmosva látszik, nem kell az összes
 // artboardot letölteni hozzá (ez korábban 40+ nagy képet jelentett induláskor).
 const allImages = projects
   .filter((p) => p.slug !== 'logofolio')
   .flatMap((p) => (p.images ?? []).filter((src) => !src.endsWith('.mp4')).slice(0, 2));
+
+// A homályos háttérhez külön, 480px-es, erősen tömörített mini-verziók —
+// egy full-res kép elmosva/kitöltve dekódolása/festése volt a fő terhelés.
+const bgImages = allImages.map((src) => (heroBgMap as Record<string, string>)[src] ?? src);
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -45,7 +50,7 @@ export default function Hero() {
   const [cards, setCards]           = useState<string[]>(() => allImages.slice(0, 3));
   const [activeCard, setActiveCard] = useState(0);
 
-  const [queue, setQueue]     = useState<string[]>(() => allImages);
+  const [queue, setQueue]     = useState<string[]>(() => bgImages);
   const [current, setCurrent] = useState(0);
   const [prev, setPrev]       = useState<number | null>(null);
   const [transitioning, setTransitioning] = useState(false);
@@ -53,7 +58,7 @@ export default function Hero() {
   // Keverés csak mountolás után, a böngésző-festés előtt — nincs hydration mismatch,
   // nincs látható villanás.
   useIsomorphicLayoutEffect(() => {
-    setQueue(shuffle(allImages));
+    setQueue(shuffle(bgImages));
     setCards(shuffle(allImages).slice(0, 3));
   }, []);
 

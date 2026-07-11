@@ -62,7 +62,7 @@ const tagStyles: Record<string, { bg: string; color: string }> = {
   Tanulmányok:  { bg: 'rgba(34,197,94,0.15)',    color: '#4ADE80' },
   Munka:        { bg: 'rgba(59,130,246,0.15)',   color: '#60A5FA' },
   Projekt:      { bg: 'rgba(255,112,67,0.15)',   color: '#FF7043' },
-  Ma:           { bg: 'rgba(155,109,255,0.15)',  color: 'var(--color-accent)' },
+  Ma:           { bg: 'rgba(212,162,74,0.15)',   color: 'var(--color-accent)' },
 };
 
 // ─── Page ─────────────────────────────────────────────────────
@@ -299,7 +299,7 @@ export default function RolamPage() {
                       style={{
                         width: '16px', height: '16px', borderRadius: '50%',
                         background: 'var(--color-accent-gradient)',
-                        boxShadow: '0 0 0 5px rgba(155,109,255,0.12), 0 0 16px rgba(155,109,255,0.3)',
+                        boxShadow: '0 0 0 5px rgba(212,162,74,0.12), 0 0 16px rgba(212,162,74,0.3)',
                         flexShrink: 0, zIndex: 1, position: 'relative',
                       }}
                     />
@@ -601,7 +601,7 @@ function MobileItem({ event, index }: { event: typeof timeline[0]; index: number
         <div style={{
           width: '13px', height: '13px', borderRadius: '50%',
           background: 'var(--color-accent-gradient)',
-          boxShadow: '0 0 0 3px rgba(155,109,255,0.15)',
+          boxShadow: '0 0 0 3px rgba(212,162,74,0.15)',
         }} />
       </div>
       <div style={{

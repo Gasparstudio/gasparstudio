@@ -45,7 +45,7 @@ export default function ValueProp() {
   }, []);
 
   return (
-    <div ref={wrapperRef} style={{ height: isMobile ? '200vh' : '300vh' }}>
+    <div ref={wrapperRef} style={{ height: isMobile ? '140vh' : '180vh' }}>
       <section
         id="value-prop"
         style={{

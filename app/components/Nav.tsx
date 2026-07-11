@@ -11,8 +11,10 @@ export default function Nav() {
   const isHome = pathname === '/';
   const backHref = pathname.startsWith('/works/') ? '/works' : '/';
   const [scrolled, setScrolled] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const lastYRef = useRef(0);
 
 
   const navLinks = [
@@ -22,7 +24,18 @@ export default function Nav() {
   ];
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    // Outcrowd-minta: lefelé görgetve a nav összecsukódik (csak logó + CTA),
+    // felfelé görgetve minden visszajön
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 60);
+      const delta = y - lastYRef.current;
+      if (Math.abs(delta) > 4) {
+        if (delta > 0 && y > 120) setCollapsed(true);
+        else if (delta < 0) setCollapsed(false);
+        lastYRef.current = y;
+      }
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -139,21 +152,36 @@ export default function Nav() {
               padding: '10px 10px 10px 24px',
             }}
           >
-            {/* Logo */}
-            <span
+            {/* Logo — mindig a főoldalra vezet */}
+            <Link
+              href="/"
               style={{
                 fontFamily: 'var(--font-display)',
                 fontSize: '16px',
                 color: 'var(--color-text-primary)',
                 letterSpacing: '0.08em',
                 marginRight: '8px',
+                textDecoration: 'none',
+                cursor: 'none',
               }}
             >
               GASPAR
-            </span>
+            </Link>
 
-            {/* Nav links — hidden on mobile */}
-            <div className="hidden md:flex" style={{ alignItems: 'center', gap: '4px' }}>
+            {/* Nav links — hidden on mobile; lefelé görgetve összecsukódnak */}
+            <div
+              className="hidden md:flex"
+              style={{
+                alignItems: 'center',
+                gap: '4px',
+                maxWidth: collapsed ? '0px' : '360px',
+                opacity: collapsed ? 0 : 1,
+                overflow: 'hidden',
+                transition: collapsed
+                  ? 'max-width 1100ms cubic-bezier(0.22,1,0.36,1), opacity 600ms ease 100ms'
+                  : 'max-width 1100ms cubic-bezier(0.22,1,0.36,1), opacity 700ms ease 250ms',
+              }}
+            >
               {navLinks.map((link) =>
                 link.isPage ? (
                   <Link

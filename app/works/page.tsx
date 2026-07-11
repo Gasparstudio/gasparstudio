@@ -46,76 +46,59 @@ function ProjectCard({ project, onClick, imgIndex }: { project: Project; onClick
   return (
     <div
       onClick={onClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       data-cursor-expand
-      style={{
-        aspectRatio: '4 / 5',
-        borderRadius: 'var(--card-radius-lg)',
-        overflow: 'hidden',
-        border: '1px solid var(--color-border)',
-        background: project.gradient,
-        cursor: 'none',
-        position: 'relative',
-        transition: 'transform 400ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 400ms ease',
-        transform: hovered ? 'scale(1.02)' : 'scale(1)',
-        boxShadow: hovered ? '0 24px 64px rgba(0,0,0,0.6)' : 'none',
-      }}
+      style={{ cursor: 'none', display: 'flex', flexDirection: 'column', gap: '14px' }}
     >
-      {project.images?.map((src, i) => {
-        const isVideo = src.endsWith('.mp4');
-        const visible = i === imgIndex;
-        return isVideo ? (
-          <VideoSlide key={src} src={src} visible={visible} />
-        ) : (
-          <img
-            key={src}
-            src={src}
-            alt=""
-            style={{
-              position: 'absolute',
-              top:    isLogofolio ? '22%'  : 0,
-              left:   isLogofolio ? '18%'  : 0,
-              width:  isLogofolio ? '63%'  : '100%',
-              height: isLogofolio ? '56%'  : '100%',
-              objectFit: isLogofolio ? 'contain' : 'cover',
-              opacity: visible ? 1 : 0,
-              transition: 'opacity 600ms ease',
-            }}
-          />
-        );
-      })}
-
+      {/* Kép — nincs rajta szöveg/nyíl */}
       <div
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.82) 100%)',
-        }}
-      />
-
-      <span
-        style={{
-          position: 'absolute',
-          top: '20px',
-          right: '24px',
-          fontSize: '18px',
-          color: 'rgba(255,255,255,0.65)',
-          transform: hovered ? 'translateX(4px)' : 'translateX(0)',
-          transition: 'transform 300ms cubic-bezier(0.16, 1, 0.3, 1)',
+          aspectRatio: '4 / 5',
+          borderRadius: 'var(--card-radius-lg)',
+          overflow: 'hidden',
+          border: '1px solid var(--color-border)',
+          background: project.gradient,
+          position: 'relative',
+          transition: 'transform 400ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 400ms ease',
+          transform: hovered ? 'scale(1.02)' : 'scale(1)',
+          boxShadow: hovered ? '0 24px 64px rgba(0,0,0,0.6)' : 'none',
         }}
       >
-        →
-      </span>
+        {project.images?.map((src, i) => {
+          const isVideo = src.endsWith('.mp4');
+          const visible = i === imgIndex;
+          return isVideo ? (
+            <VideoSlide key={src} src={src} visible={visible} />
+          ) : (
+            <img
+              key={src}
+              src={src}
+              alt=""
+              style={{
+                position: 'absolute',
+                top:    isLogofolio ? '22%'  : 0,
+                left:   isLogofolio ? '18%'  : 0,
+                width:  isLogofolio ? '63%'  : '100%',
+                height: isLogofolio ? '56%'  : '100%',
+                objectFit: isLogofolio ? 'contain' : 'cover',
+                opacity: visible ? 1 : 0,
+                transition: 'opacity 600ms ease',
+              }}
+            />
+          );
+        })}
+      </div>
 
-      <div style={{ position: 'absolute', bottom: '24px', left: '24px', right: '24px' }}>
+      {/* Felirat — a kép alatt */}
+      <div>
         <h3
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(20px, 2vw, 26px)',
+            fontSize: 'clamp(17px, 1.6vw, 21px)',
             fontWeight: 650,
-            color: '#fff',
-            margin: '0 0 6px',
+            color: 'var(--color-text-primary)',
+            margin: '0 0 4px',
             lineHeight: 1.1,
             letterSpacing: '-0.02em',
           }}
@@ -126,7 +109,7 @@ function ProjectCard({ project, onClick, imgIndex }: { project: Project; onClick
           style={{
             fontFamily: 'var(--font-body)',
             fontSize: 'var(--text-small)',
-            color: 'rgba(255,255,255,0.55)',
+            color: 'var(--color-text-secondary)',
             margin: 0,
           }}
         >

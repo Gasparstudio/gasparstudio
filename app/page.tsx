@@ -2,8 +2,10 @@ import Nav from './components/Nav';
 import Hero from './components/Hero';
 import ValueProp from './components/ValueProp';
 import Works from './components/Works';
+import Testimonials from './components/Testimonials';
 import About from './components/About';
 import Contact from './components/Contact';
+import InstagramFeedSection from './components/InstagramFeedSection';
 import Footer from './components/Footer';
 import StickyClientsFooter from './components/StickyClientsFooter';
 import ScrollProgress from './components/ScrollProgress';
@@ -28,17 +30,23 @@ export default function Home() {
         {/* 01 · Hero */}
         <Hero />
 
-        {/* 02 · Value Prop */}
-        <ValueProp />
-
-        {/* 03 · Works — full width for sticky scroll */}
+        {/* 02 · Works — full width for sticky scroll */}
         <Works />
 
-        {/* 04 · About */}
+        {/* 03 · Value Prop */}
+        <ValueProp />
+
+        {/* 04 · Testimonials */}
+        <Testimonials />
+
+        {/* 05 · About */}
         <About />
 
-        {/* 05 · Contact */}
+        {/* 06 · Contact */}
         <Contact />
+
+        {/* 07 · Instagram hírfolyam — a public/instagram-feed/ mappából */}
+        <InstagramFeedSection />
       </main>
 
       {/* Page footer — sits above the sticky clients bar when scrolled to bottom */}

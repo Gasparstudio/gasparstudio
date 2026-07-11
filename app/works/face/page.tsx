@@ -85,14 +85,14 @@ export default function FacePage() {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
-    const y = el.getBoundingClientRect().top + window.scrollY - 152;
+    const y = el.getBoundingClientRect().top + window.scrollY - 90;
     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
   };
 
   useEffect(() => {
     const ids = ['logo', 'colors', 'type', 'mockups', 'brief'];
     const update = () => {
-      const offset = 152;
+      const offset = 90;
       let current = ids[0];
       for (const id of ids) {
         const el = document.getElementById(id);
@@ -139,7 +139,7 @@ export default function FacePage() {
       <main style={{ paddingTop: '68px', background: '#000' }}>
 
         {/* ─── FLOATING TOC BANNER ───────────────────────────────── */}
-        <div style={{ position: 'sticky', top: '76px', zIndex: 900, padding: `12px ${PM}`, pointerEvents: 'none' }}>
+        <div style={{ position: 'fixed', bottom: '20px', left: 0, right: 0, zIndex: 900, padding: `12px ${PM}`, pointerEvents: 'none' }}>
           <div style={{
             maxWidth: 'var(--max-width)', margin: '0 auto',
             background: 'rgba(8,8,8,0.9)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',

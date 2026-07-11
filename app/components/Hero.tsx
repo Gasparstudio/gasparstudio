@@ -1,8 +1,11 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import SplitType from 'split-type';
 import { projects } from '../data/projects';
 import { useLang } from '../context/LanguageContext';
+import ExplodeButton from './ExplodeButton';
 
 const allImages = projects
   .filter((p) => p.slug !== 'logofolio')
@@ -17,6 +20,10 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
+// SSR-ren és az első kliens-renderen ugyanazt kell adnia (nincs Math.random itt),
+// a tényleges keverés useLayoutEffect-ben fut le, mountolás után.
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
 const slotStyles = [
   { top: '0px',   right: '15px',  rotate: '-3deg',  zIndex: 3 },
   { top: '60px',  right: '-55px', rotate: '9deg',   zIndex: 2 },
@@ -27,18 +34,26 @@ export default function Hero() {
   const { t } = useLang();
 
   const containerRef = useRef<HTMLElement>(null);
-  const line1Ref     = useRef<HTMLDivElement>(null);
-  const line2Ref     = useRef<HTMLDivElement>(null);
-  const taglineRef   = useRef<HTMLParagraphElement>(null);
+  const h1aRef       = useRef<HTMLHeadingElement>(null);
+  const h1bRef       = useRef<HTMLHeadingElement>(null);
+  const subRef       = useRef<HTMLParagraphElement>(null);
   const badgeRef     = useRef<HTMLDivElement>(null);
+  const ctaRef       = useRef<HTMLDivElement>(null);
 
-  const [cards]      = useState<string[]>(() => shuffle(allImages).slice(0, 3));
+  const [cards, setCards]           = useState<string[]>(() => allImages.slice(0, 3));
   const [activeCard, setActiveCard] = useState(0);
 
-  const [queue]      = useState<string[]>(() => shuffle(allImages));
+  const [queue, setQueue]     = useState<string[]>(() => allImages);
   const [current, setCurrent] = useState(0);
   const [prev, setPrev]       = useState<number | null>(null);
   const [transitioning, setTransitioning] = useState(false);
+
+  // Keverés csak mountolás után, a böngésző-festés előtt — nincs hydration mismatch,
+  // nincs látható villanás.
+  useIsomorphicLayoutEffect(() => {
+    setQueue(shuffle(allImages));
+    setCards(shuffle(allImages).slice(0, 3));
+  }, []);
 
   useEffect(() => {
     if (queue.length < 2) return;
@@ -61,11 +76,25 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
+    // Címsorok: karakterenkénti felúszás (Outcrowd-minta, betöltéskor)
+    const heads = [h1aRef.current, h1bRef.current].filter(Boolean) as HTMLElement[];
+    const splits = heads.map((el) => new SplitType(el, { types: 'chars', tagName: 'span' }));
+    heads.forEach((el) => { el.style.opacity = '1'; });
+    const chars = splits.flatMap((s) => s.chars ?? []);
+    gsap.from(chars, {
+      yPercent: 115,
+      opacity: 0,
+      duration: 1.1,
+      ease: 'power4.out',
+      stagger: 0.035,
+      delay: 0.15,
+    });
+
+    // Kísérő elemek: fade-up sorban
     const elements = [
-      { el: line1Ref.current,   delay: 0.1  },
-      { el: line2Ref.current,   delay: 0.25 },
-      { el: taglineRef.current, delay: 0.45 },
-      { el: badgeRef.current,   delay: 0.6  },
+      { el: badgeRef.current, delay: 0.55 },
+      { el: subRef.current,   delay: 0.7  },
+      { el: ctaRef.current,   delay: 0.85 },
     ];
     elements.forEach(({ el }) => {
       if (!el) return;
@@ -81,6 +110,8 @@ export default function Hero() {
         el.style.transform = 'translateY(0)';
       }, delay * 1000);
     });
+
+    return () => splits.forEach((s) => s.revert());
   }, []);
 
   return (
@@ -143,8 +174,17 @@ export default function Hero() {
       >
         {/* Left: text */}
         <div style={{ flex: '1 1 auto' }}>
-          <div ref={line1Ref} style={{ overflow: 'hidden' }}>
+          {/* Availability badge */}
+          <div ref={badgeRef} style={{ marginBottom: 'clamp(16px, 2vw, 24px)' }}>
+            <span className="hero-badge">
+              <span className="hero-badge-dot" aria-hidden="true" />
+              {t('hero.badge')}
+            </span>
+          </div>
+
+          <div style={{ overflow: 'hidden' }}>
             <h1
+              ref={h1aRef}
               className="font-display text-hero"
               style={{
                 fontFamily: 'var(--font-display)',
@@ -153,41 +193,68 @@ export default function Hero() {
                 letterSpacing: 'var(--tracking-tight)',
                 color: 'var(--color-text-primary)',
                 margin: 0,
+                opacity: 0,
               }}
             >
               Gáspár Bálint
             </h1>
           </div>
-          <div ref={line2Ref} style={{ overflow: 'hidden' }}>
+          <div style={{ overflow: 'hidden' }}>
             <h1
+              ref={h1bRef}
               className="font-display text-hero"
               style={{
                 fontFamily: 'var(--font-display)',
                 fontSize: 'var(--text-hero)',
                 lineHeight: 'var(--leading-tight)',
                 letterSpacing: 'var(--tracking-tight)',
-                color: 'var(--color-accent)',
+                color: 'var(--color-text-secondary)',
                 margin: 0,
+                opacity: 0,
               }}
             >
               Brand Designer
             </h1>
           </div>
           <p
-            ref={taglineRef}
+            ref={subRef}
             style={{
               fontFamily: 'var(--font-body)',
-              fontSize: 'clamp(16px, 2vw, 22px)',
+              fontSize: 'clamp(14px, 1.4vw, 17px)',
               color: 'var(--color-text-secondary)',
-              maxWidth: '400px',
+              maxWidth: '440px',
               lineHeight: 'var(--leading-normal)',
-              letterSpacing: '-0.01em',
               marginTop: 'clamp(16px, 2vw, 28px)',
               marginBottom: 0,
             }}
           >
-            {t('hero.tagline')}
+            {t('hero.sub')}
           </p>
+
+          {/* CTA-k */}
+          <div
+            ref={ctaRef}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '20px',
+              flexWrap: 'wrap',
+              marginTop: 'clamp(24px, 3vw, 40px)',
+            }}
+          >
+            <ExplodeButton href="/arajanlat">{t('hero.cta1')}</ExplodeButton>
+            <a
+              href="/works"
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: '15px',
+                color: 'var(--color-text-secondary)',
+                textDecoration: 'none',
+              }}
+            >
+              {t('hero.works')}
+            </a>
+          </div>
         </div>
 
         {/* Right: floating cards + dots */}
@@ -200,36 +267,47 @@ export default function Hero() {
               position: 'relative',
               width: 'clamp(200px, 22vw, 300px)',
               height: 'clamp(280px, 34vw, 430px)',
+              perspective: '1400px',
             }}
           >
-            {cards.map((src, i) => {
-              const slot = (i - activeCard + 3) % 3;
-              const s = slotStyles[slot];
-              return (
-                <div
-                  key={src}
-                  style={{
-                    position: 'absolute',
-                    top: s.top,
-                    right: s.right,
-                    zIndex: s.zIndex,
-                    width: '78%',
-                    borderRadius: '14px',
-                    overflow: 'hidden',
-                    boxShadow: '0 20px 48px rgba(0,0,0,0.65)',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    transform: `rotate(${s.rotate})`,
-                    transition: 'all 700ms cubic-bezier(0.16, 1, 0.3, 1)',
-                  }}
-                >
-                  <img
-                    src={src}
-                    alt=""
-                    style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', display: 'block' }}
-                  />
-                </div>
-              );
-            })}
+            <div
+              style={{
+                position: 'relative',
+                width: '100%',
+                height: '100%',
+                transformStyle: 'preserve-3d',
+                transform: 'rotateY(-18deg) rotateX(9deg)',
+                transition: 'transform 700ms cubic-bezier(0.16, 1, 0.3, 1)',
+              }}
+            >
+              {cards.map((src, i) => {
+                const slot = (i - activeCard + 3) % 3;
+                const s = slotStyles[slot];
+                return (
+                  <div
+                    key={src}
+                    style={{
+                      position: 'absolute',
+                      top: s.top,
+                      right: s.right,
+                      zIndex: s.zIndex,
+                      width: '78%',
+                      borderRadius: '14px',
+                      overflow: 'hidden',
+                      boxShadow: `0 24px 55px rgba(0,0,0,0.6), 0 10px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.08)`,
+                      transform: `rotate(${s.rotate}) translateZ(${s.zIndex * 50}px)`,
+                      transition: 'all 700ms cubic-bezier(0.16, 1, 0.3, 1)',
+                    }}
+                  >
+                    <img
+                      src={src}
+                      alt=""
+                      style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', display: 'block' }}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           {/* Indicator dots */}
@@ -239,7 +317,7 @@ export default function Hero() {
               to   { width: 100%; }
             }
           `}</style>
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginLeft: '30%' }}>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginLeft: '30%', transform: 'translate(-50px, -20px)' }}>
             {[0, 1, 2].map((i) => (
               <div
                 key={i}

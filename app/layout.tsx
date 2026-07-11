@@ -6,6 +6,8 @@ import { Analytics } from "@vercel/analytics/next";
 import { LanguageProvider } from "./context/LanguageContext";
 import PageTransition from "./components/PageTransition";
 import LangPill from "./components/LangPill";
+import SmoothScroll from "./components/SmoothScroll";
+import TextReveal from "./components/TextReveal";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -126,6 +128,8 @@ export default function RootLayout({
           }}
         />
         <LanguageProvider>
+          <SmoothScroll />
+          <TextReveal />
           <LangPill />
           <PageTransition>
             {children}

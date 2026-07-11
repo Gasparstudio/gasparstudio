@@ -15,12 +15,13 @@ const translations = {
 
     // Hero
     'hero.badge':   'Elérhető projektre',
-    'hero.tagline': 'Brands that feel before they speak.',
+    'hero.sub':     'Arculat, logó és komplett vizuális rendszer vállalkozásoknak, amelyek első ránézésre hatni akarnak.',
     'hero.works':   'Munkáim ↓',
     'hero.cta':     'Írj nekem →',
+    'hero.cta1':    'Kérj árajánlatot →',
 
     // ValueProp
-    'vp.label': '02 · Miért én',
+    'vp.label': '03 · Miért én',
     'vp.text':  'Nyolc éve csinálom ezt és egy tanulságot biztosan levontam. A legjobb márkák nem csak jól néznek ki, hanem azonnal érzést keltenek. Nálam az egész brand összeáll, és egyből látszik kik vagytok.',
     'vp.stat1.value': '8+',
     'vp.stat1.label': 'Év tapasztalat',
@@ -30,7 +31,7 @@ const translations = {
     'vp.stat3.label': 'Elégedett ügyfél',
 
     // Works
-    'works.label':   '03 · Munkák',
+    'works.label':   '02 · Munkák',
     'works.heading': 'Válogatott projektek',
     'works.all':     'Összes munka →',
     'works.scroll':  'Scroll →',
@@ -39,8 +40,14 @@ const translations = {
     // Clients
     'clients.label': 'Ügyfelek',
 
+    // Testimonials — ⚠️ PLACEHOLDER idézetek, valósra cserélendők
+    'testi.heading': 'Mit mondanak az ügyfelek',
+    'testi.1.quote': 'Bálint pontosan értette, mit képvisel a márkánk. Az új arculat minden helyszínen és felületen egységesen működik.',
+    'testi.2.quote': 'Gyors, precíz és önállóan gondolkodik. A logótól a teljes vizuális rendszerig mindent egy kézből kaptunk.',
+    'testi.3.quote': 'Volt egy elképzelésünk, de nem tudtuk szavakba önteni. Bálint pár beszélgetés után pontosan visszaadta vizuálisan, és azóta minden anyagunkon ez fut.',
+
     // About
-    'about.label':   '04 · Rólam',
+    'about.label':   '05 · Rólam',
     'about.heading': 'Ahol a brand összeáll.',
     'about.body':    'Grafikusként végeztem, aztán nyomdán és ügynökségnél is megfordultam. Ma olyan brandeknek dolgozom mint a Simon\'s Burger, a Smashy és a Travis Tenders. Nem csak egy logót kapsz tőlem, hanem egy egész képet a brandedről.',
     'about.tools':   'Eszközök',
@@ -50,10 +57,13 @@ const translations = {
     'about.stat.clients':  'Ügyfél',
 
     // Contact
-    'contact.label':    '05 · Kapcsolat',
+    'contact.label':    '06 · Kapcsolat',
     'contact.question': 'Van egy projekted?',
     'contact.desc':     'Velem a munka egyszerű és közös. Segítek együtt gondolkodni. Legyen szó brand identitásról, logóról vagy komplett vizuális rendszerről, nézzük meg mit hozhatunk ki a márkádból.',
     'contact.cta':      'Írj nekem →',
+
+    // Instagram feed
+    'ig.heading': 'Friss a hírfolyamból',
 
     // Footer
     'footer.copy': '© 2026 GASPAR · Brand Designer · Budapest',
@@ -94,12 +104,13 @@ const translations = {
 
     // Hero
     'hero.badge':   'Available for projects',
-    'hero.tagline': 'Brands that feel before they speak.',
+    'hero.sub':     'Brand identity, logo and complete visual systems for businesses that want to make an impact at first glance.',
     'hero.works':   'My work ↓',
     'hero.cta':     'Get in touch →',
+    'hero.cta1':    'Get a quote →',
 
     // ValueProp
-    'vp.label': '02 · Why me',
+    'vp.label': '03 · Why me',
     'vp.text':  'Eight years in brand design taught me one thing. The best brands don\'t just look good, they make people feel something. Your whole brand comes together with me, and it hits from the very first glance.',
     'vp.stat1.value': '8+',
     'vp.stat1.label': 'Years experience',
@@ -109,7 +120,7 @@ const translations = {
     'vp.stat3.label': 'Happy clients',
 
     // Works
-    'works.label':   '03 · Works',
+    'works.label':   '02 · Works',
     'works.heading': 'Selected projects',
     'works.all':     'All work →',
     'works.scroll':  'Scroll →',
@@ -118,8 +129,14 @@ const translations = {
     // Clients
     'clients.label': 'Clients',
 
+    // Testimonials — ⚠️ PLACEHOLDER quotes, replace with real ones
+    'testi.heading': 'What clients say',
+    'testi.1.quote': 'Bálint understood exactly what our brand stands for. The new identity works consistently across every location and surface.',
+    'testi.2.quote': 'Fast, precise and thinks independently. From the logo to the full visual system, everything came from one hand.',
+    'testi.3.quote': 'We had an idea but couldn\'t put it into words. After a couple of conversations Bálint nailed it visually, and it\'s been running on everything we put out since.',
+
     // About
-    'about.label':   '04 · About',
+    'about.label':   '05 · About',
     'about.heading': 'Where it all comes together.',
     'about.body':    'Eight years in brand design taught me one thing. The best brands don\'t just look good, they make people feel something. Your whole brand comes together with me, and it hits from the very first glance.',
     'about.tools':   'Tools',
@@ -129,10 +146,13 @@ const translations = {
     'about.stat.clients':  'Clients',
 
     // Contact
-    'contact.label':    '05 · Contact',
+    'contact.label':    '06 · Contact',
     'contact.question': 'Got a project?',
     'contact.desc':     'Working with me is easy and collaborative. I help you think it through. Whether it\'s a brand identity, logo, or complete visual system, let\'s find what\'s best for your brand.',
     'contact.cta':      'Get in touch →',
+
+    // Instagram feed
+    'ig.heading': 'Fresh from the feed',
 
     // Footer
     'footer.copy': '© 2026 GASPAR · Brand Designer · Budapest',

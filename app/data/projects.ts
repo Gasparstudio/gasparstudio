@@ -54,20 +54,21 @@ export const projects: Project[] = [
       '/works/face/Artboard%201-14.png',
     ],
   },
-  {
-    slug: 'void',
-    index: '03',
-    title: 'Void',
-    category: 'ERR_0x4F · [REDACTED]',
-    year: '????',
-    gradient: 'linear-gradient(135deg, #0a0a0a 0%, #111111 100%)',
-    accentColor: '#F0EDE8',
-    flashColor: '#E8F04D',
-    images: [
-      '/works/Void/void1.png',
-      '/works/Void/kez2.mp4',
-    ],
-  },
+  // Void — ideiglenesen kivéve (2026-07-11), route is letiltva: app/works/_void
+  // {
+  //   slug: 'void',
+  //   index: '03',
+  //   title: 'Void',
+  //   category: 'ERR_0x4F · [REDACTED]',
+  //   year: '????',
+  //   gradient: 'linear-gradient(135deg, #0a0a0a 0%, #111111 100%)',
+  //   accentColor: '#F0EDE8',
+  //   flashColor: '#E8F04D',
+  //   images: [
+  //     '/works/Void/void1.png',
+  //     '/works/Void/kez2.mp4',
+  //   ],
+  // },
   {
     slug: 'kamfor',
     index: '04',
@@ -109,9 +110,9 @@ export const projects: Project[] = [
     accentColor: '#E8631A',
     flashColor: '#0da64f',
     images: [
-      "/works/Simon's%20Burger/_DSC5942.jpg",
-      "/works/Simon's%20Burger/_DSC6041.jpg",
-      "/works/Simon's%20Burger/_DSC6340.jpg",
+      "/works/Simon's%20Burger/scratch-and-win-1.png",
+      "/works/Simon's%20Burger/scratch-and-win-2.png",
+      "/works/Simon's%20Burger/scratch-and-win-3.png",
     ],
   },
   {

@@ -92,34 +92,37 @@ export default function About() {
         margin: '0 auto',
       }}
     >
-      {/* 2-column layout */}
+      {/* 2-column layout — a fotó-oszlop csak a fotó szélességét veszi fel, hogy a szöveg közel maradjon hozzá */}
       <div
+        className="about-grid"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: 'clamp(40px, 6vw, 96px)',
+          gridTemplateColumns: 'minmax(260px, 340px) minmax(260px, 1fr)',
+          gap: 'clamp(20px, 3vw, 40px)',
           alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
-        {/* Left: photo placeholder */}
+        {/* Left: photo */}
         <div ref={leftRef}>
           <div
             style={{
               width: '100%',
               aspectRatio: '4 / 5',
-              maxWidth: '400px',
+              maxWidth: '340px',
               borderRadius: 'var(--card-radius-lg)',
               border: '1px solid var(--color-border)',
               overflow: 'hidden',
             }}
           >
             <img
-              src="/works/Void/void1.png"
-              alt=""
+              src="/photo/gaspar-portrait.png"
+              alt="Gáspár Bálint brand designer portré"
               style={{
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
+                objectPosition: 'center top',
                 display: 'block',
               }}
             />
@@ -132,10 +135,11 @@ export default function About() {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '32px',
+            gap: '24px',
           }}
         >
           <h2
+            data-animate
             style={{
               fontFamily: 'var(--font-display)',
               fontSize: 'var(--text-h2)',
@@ -201,8 +205,8 @@ export default function About() {
             style={{
               display: 'flex',
               flexWrap: 'wrap',
-              gap: 'clamp(20px, 4vw, 40px)',
-              paddingTop: '24px',
+              gap: 'clamp(16px, 3vw, 32px)',
+              paddingTop: '16px',
             }}
           >
             {statsConfig.map((stat, i) => (
@@ -210,7 +214,7 @@ export default function About() {
                 <p
                   style={{
                     fontFamily: 'var(--font-display)',
-                    fontSize: 'clamp(28px, 3vw, 40px)',
+                    fontSize: 'clamp(24px, 2.6vw, 34px)',
                     color: 'var(--color-accent)',
                     margin: 0,
                     lineHeight: 1,

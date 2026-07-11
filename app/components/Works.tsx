@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
@@ -47,7 +47,7 @@ function VoidCard({ index }: { index: string }) {
     <div
       style={{
         flexShrink: 0,
-        width: 'clamp(280px, 34vw, 480px)',
+        width: 'clamp(150px, 17.5vw, 248px)',
         aspectRatio: '4 / 5',
         borderRadius: 'var(--card-radius-lg)',
         border: '1px dashed var(--color-border)',
@@ -56,21 +56,21 @@ function VoidCard({ index }: { index: string }) {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: '12px',
+        gap: '10px',
         position: 'relative',
       }}
     >
       <div
         style={{
-          width: '32px',
-          height: '32px',
+          width: '26px',
+          height: '26px',
           borderRadius: '50%',
           border: '1px solid var(--color-border)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           color: 'var(--color-text-muted)',
-          fontSize: '18px',
+          fontSize: '15px',
           lineHeight: 1,
         }}
       >
@@ -122,7 +122,7 @@ function CTACard({ wordIndex }: { wordIndex: number }) {
     <div
       style={{
         flexShrink: 0,
-        width: 'clamp(280px, 34vw, 480px)',
+        width: 'clamp(150px, 17.5vw, 248px)',
         aspectRatio: '4 / 5',
         borderRadius: 'var(--card-radius-lg)',
         border: '1px solid var(--color-border)',
@@ -137,7 +137,7 @@ function CTACard({ wordIndex }: { wordIndex: number }) {
         key={word}
         style={{
           fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(36px, 5vw, 64px)',
+          fontSize: 'clamp(20px, 2.6vw, 34px)',
           fontWeight: 700,
           color: 'var(--color-text-primary)',
           letterSpacing: '-0.02em',
@@ -150,18 +150,32 @@ function CTACard({ wordIndex }: { wordIndex: number }) {
   );
 }
 
-function LogofolioCard({ project }: { project: { index: string; title: string; category: string | null; year: string | null; images: string[] } }) {
+function LogofolioCard({ project, cycleSlot, cycleTotal, cycleTick }: {
+  project: { index: string; title: string; category: string | null; year: string | null; images: string[] };
+  cycleSlot?: number;
+  cycleTotal?: number;
+  cycleTick?: number;
+}) {
   const [idx, setIdx] = useState(0);
   const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     const imgs = project.images;
     if (!imgs || imgs.length < 2) return;
+    // Sorban egymás után váltás a többi kártyával körben
+    if (cycleTick !== undefined && cycleSlot !== undefined && cycleTotal) {
+      if (cycleTick > 0 && cycleTick % cycleTotal === cycleSlot) {
+        setIdx(prev => (prev + 1) % imgs.length);
+      }
+      return;
+    }
+    // Fallback: önálló ciklus
     const id = setInterval(() => {
       setIdx(prev => (prev + 1) % imgs.length);
     }, 1000);
     return () => clearInterval(id);
-  }, [project.images]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [project.images, cycleTick]);
 
   return (
     <Link
@@ -170,50 +184,58 @@ function LogofolioCard({ project }: { project: { index: string; title: string; c
       onMouseLeave={() => setHovered(false)}
       style={{
         flexShrink: 0,
-        width: 'clamp(280px, 34vw, 480px)',
-        aspectRatio: '4 / 5',
-        borderRadius: 'var(--card-radius-lg)',
-        overflow: 'hidden',
-        border: '1px solid var(--color-border)',
-        position: 'relative',
-        background: '#000000',
-        display: 'block',
+        width: 'clamp(150px, 17.5vw, 248px)',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '14px',
         textDecoration: 'none',
         cursor: 'none',
       }}
       data-cursor-expand
     >
-      {project.images.map((src, i) => (
-        <img
-          key={src}
-          src={src}
-          alt=""
-          style={{
-            position: 'absolute',
-            top: '22%',
-            left: '18%',
-            width: '63%',
-            height: '50%',
-            objectFit: 'contain',
-            opacity: i === idx ? 1 : 0,
-            transition: 'opacity 500ms ease',
-          }}
-        />
-      ))}
+      {/* Kép — nincs rajta szöveg */}
+      <div
+        style={{
+          width: '100%',
+          aspectRatio: '4 / 5',
+          borderRadius: 'var(--card-radius-lg)',
+          overflow: 'hidden',
+          border: '1px solid var(--color-border)',
+          position: 'relative',
+          background: '#000000',
+        }}
+      >
+        {project.images.map((src, i) => (
+          <img
+            key={src}
+            src={src}
+            alt=""
+            style={{
+              position: 'absolute',
+              top: '22%',
+              left: '18%',
+              width: '63%',
+              height: '50%',
+              objectFit: 'contain',
+              opacity: i === idx ? 1 : 0,
+              transition: 'opacity 500ms ease',
+            }}
+          />
+        ))}
+      </div>
 
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.85) 100%)' }} />
-
-      <div style={{ position: 'absolute', bottom: '24px', left: '24px', right: '24px' }}>
+      {/* Felirat — a kép alatt */}
+      <div>
         <h3 style={{
-          fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2.5vw, 30px)',
-          fontWeight: 650, color: '#ffffff', margin: '0 0 6px',
+          fontFamily: 'var(--font-display)', fontSize: 'clamp(17px, 1.6vw, 20px)',
+          fontWeight: 650, color: 'var(--color-text-primary)', margin: '0 0 4px',
           lineHeight: 1.1, letterSpacing: '-0.02em',
         }}>
           {project.title}
         </h3>
         <p style={{
           fontFamily: 'var(--font-body)', fontSize: 'var(--text-small)',
-          fontWeight: 400, color: 'rgba(255,255,255,0.6)', margin: 0,
+          fontWeight: 400, color: 'var(--color-text-secondary)', margin: 0,
           letterSpacing: '0.02em',
         }}>
           {project.category} · {project.year}
@@ -236,183 +258,172 @@ interface ProjectCardProps {
     logo?: string;
     flashColor?: string;
   };
+  /** Körbejáró képváltás: ez a kártya hányadik a sorban */
+  cycleSlot?: number;
+  /** Hány kártya vesz részt a körben */
+  cycleTotal?: number;
+  /** Globális óra a szülőtől — akkor vált, amikor rá kerül a sor */
+  cycleTick?: number;
 }
 
-function ProjectCard({ project }: ProjectCardProps) {
-  const arrowRef = useRef<HTMLSpanElement>(null);
+function ProjectCard({ project, cycleSlot, cycleTotal, cycleTick }: ProjectCardProps) {
+  const imgBoxRef = useRef<HTMLDivElement>(null);
   const [imgIndex, setImgIndex] = useState(0);
   const [hovered, setHovered] = useState(false);
   useEffect(() => {
     if (!project.images || project.images.length <= 1) return;
+    // Sorban egymás után váltás: csak akkor lép, ha rá kerül a sor
+    if (cycleTick !== undefined && cycleSlot !== undefined && cycleTotal) {
+      if (cycleTick > 0 && cycleTick % cycleTotal === cycleSlot) {
+        setImgIndex(prev => (prev + 1) % project.images.length);
+      }
+      return;
+    }
+    // Fallback: önálló ciklus, ha nincs szülő-óra
     const id = setInterval(() => {
       setImgIndex(prev => (prev + 1) % project.images.length);
     }, 1800);
     return () => clearInterval(id);
-  }, [project.images]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [project.images, cycleTick]);
 
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseEnter = () => {
     setHovered(true);
-    const card = e.currentTarget;
-    card.style.transform = 'scale(1.02)';
-    card.style.boxShadow = '0 24px 64px rgba(0,0,0,0.6)';
-    if (arrowRef.current) {
-      arrowRef.current.style.transform = 'translateX(4px)';
+    if (imgBoxRef.current) {
+      imgBoxRef.current.style.transform = 'scale(1.02)';
+      imgBoxRef.current.style.boxShadow = '0 24px 64px rgba(0,0,0,0.6)';
     }
   };
 
-  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseLeave = () => {
     setHovered(false);
-    const card = e.currentTarget;
-    card.style.transform = 'scale(1)';
-    card.style.boxShadow = 'none';
-    if (arrowRef.current) {
-      arrowRef.current.style.transform = 'translateX(0)';
+    if (imgBoxRef.current) {
+      imgBoxRef.current.style.transform = 'scale(1)';
+      imgBoxRef.current.style.boxShadow = 'none';
     }
   };
 
   return (
     <Link
       href={`/works/${project.slug}`}
-      onMouseEnter={handleMouseEnter as unknown as React.MouseEventHandler<HTMLAnchorElement>}
-      onMouseLeave={handleMouseLeave as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       style={{
         flexShrink: 0,
-        width: 'clamp(280px, 34vw, 480px)',
-        aspectRatio: '4 / 5',
-        borderRadius: 'var(--card-radius-lg)',
-        overflow: 'hidden',
-        border: '1px solid var(--color-border)',
-        transition: 'transform 400ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 400ms ease',
+        width: 'clamp(150px, 17.5vw, 248px)',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '14px',
         cursor: 'none',
-        position: 'relative',
-        background: project.gradient,
-        display: 'block',
         textDecoration: 'none',
       }}
       data-cursor-expand
     >
-      {/* Black underlay — prevents gradient from flashing through during crossfade */}
-      {project.images && project.images.length > 0 && (
-        <div style={{ position: 'absolute', inset: 0, background: '#000' }} />
-      )}
-
-      {/* Images/videos (cycling) or placeholder */}
-      {project.images ? (
-        project.images.map((src: string, i: number) => {
-          const isVideo = src.endsWith('.mp4');
-          const visible = i === imgIndex;
-          const mediaStyle: React.CSSProperties = {
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            opacity: visible ? 1 : 0,
-            transition: 'opacity 600ms ease',
-          };
-          return isVideo ? (
-            <VideoSlide key={src} src={src} visible={visible} grayscale={false} />
-          ) : (
-            <img key={src} src={src} alt="" style={mediaStyle} />
-          );
-        })
-      ) : (
-        <>
-          <div
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '55%',
-              height: '55%',
-              borderRadius: '50%',
-              border: `1px solid ${project.accentColor}22`,
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '28%',
-              height: '28%',
-              borderRadius: '50%',
-              border: `1px solid ${project.accentColor}44`,
-            }}
-          />
-        </>
-      )}
-
-      {/* Dark overlay */}
+      {/* Kép — nincs rajta szöveg/nyíl, a felirat alá kerül */}
       <div
+        ref={imgBoxRef}
         style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'rgba(0,0,0,0.15)',
+          width: '100%',
+          aspectRatio: '4 / 5',
+          borderRadius: 'var(--card-radius-lg)',
+          overflow: 'hidden',
+          border: '1px solid var(--color-border)',
+          transition: 'transform 400ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 400ms ease',
+          position: 'relative',
+          background: project.gradient,
         }}
-      />
+      >
+        {/* Black underlay — prevents gradient from flashing through during crossfade */}
+        {project.images && project.images.length > 0 && (
+          <div style={{ position: 'absolute', inset: 0, background: '#000' }} />
+        )}
 
-      {/* Bottom gradient overlay */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.75) 100%)',
-        }}
-      />
+        {/* Images/videos (cycling) or placeholder */}
+        {project.images ? (
+          project.images.map((src: string, i: number) => {
+            const isVideo = src.endsWith('.mp4');
+            const visible = i === imgIndex;
+            const mediaStyle: React.CSSProperties = {
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              opacity: visible ? 1 : 0,
+              transition: 'opacity 600ms ease',
+            };
+            return isVideo ? (
+              <VideoSlide key={src} src={src} visible={visible} grayscale={false} />
+            ) : (
+              <img key={src} src={src} alt="" style={mediaStyle} />
+            );
+          })
+        ) : (
+          <>
+            <div
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '55%',
+                height: '55%',
+                borderRadius: '50%',
+                border: `1px solid ${project.accentColor}22`,
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '28%',
+                height: '28%',
+                borderRadius: '50%',
+                border: `1px solid ${project.accentColor}44`,
+              }}
+            />
+          </>
+        )}
 
-      {/* Center logo */}
-      {project.logo && (
-        <img
-          src={project.logo}
-          alt=""
+        {/* Dark overlay — enyhe tónusegység a képek között */}
+        <div
           style={{
             position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '52%',
-            objectFit: 'contain',
-            pointerEvents: 'none',
-            filter: 'brightness(0) invert(1)',
+            inset: 0,
+            background: 'rgba(0,0,0,0.15)',
           }}
         />
-      )}
 
-      {/* Arrow — top right */}
-      <span
-        ref={arrowRef}
-        style={{
-          position: 'absolute',
-          top: '20px',
-          right: '24px',
-          fontSize: '18px',
-          color: 'rgba(255,255,255,0.7)',
-          transition: 'transform 300ms cubic-bezier(0.16, 1, 0.3, 1)',
-          display: 'block',
-        }}
-      >
-        →
-      </span>
+        {/* Center logo */}
+        {project.logo && (
+          <img
+            src={project.logo}
+            alt=""
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '52%',
+              objectFit: 'contain',
+              pointerEvents: 'none',
+              filter: 'brightness(0) invert(1)',
+            }}
+          />
+        )}
+      </div>
 
-      {/* Text — bottom left */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '24px',
-          left: '24px',
-          right: '24px',
-        }}
-      >
+      {/* Felirat — a kép alatt */}
+      <div>
         <h3
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(22px, 2.5vw, 30px)',
+            fontSize: 'clamp(17px, 1.6vw, 20px)',
             fontWeight: 650,
-            color: '#ffffff',
-            margin: '0 0 6px',
+            color: 'var(--color-text-primary)',
+            margin: '0 0 4px',
             lineHeight: 1.1,
             letterSpacing: '-0.02em',
           }}
@@ -424,7 +435,7 @@ function ProjectCard({ project }: ProjectCardProps) {
             fontFamily: 'var(--font-body)',
             fontSize: 'var(--text-small)',
             fontWeight: 400,
-            color: 'rgba(255,255,255,0.6)',
+            color: 'var(--color-text-secondary)',
             margin: 0,
             letterSpacing: '0.02em',
           }}
@@ -454,6 +465,22 @@ export default function Works() {
     }, 1800);
     return () => clearInterval(interval);
   }, []);
+
+  // Globális óra a kártyák sorban egymás utáni képváltásához (1. → 2. → 3. → körbe)
+  const [cycleTick, setCycleTick] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setCycleTick(t => t + 1), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  // A képváltós kártyák (projektek + logofolio) körben, vizuális sorrendben
+  const cycleSlots = new Map<string, number>();
+  let slotCount = 0;
+  projects.forEach((p) => {
+    if (p.title !== null && p.title !== '__cta__') {
+      cycleSlots.set(p.index, slotCount++);
+    }
+  });
 
   // Set section height so CSS sticky has room to scroll
   useEffect(() => {
@@ -505,7 +532,8 @@ export default function Works() {
 
         const getCenterOffset = () => {
           const viewW = sticky.offsetWidth;
-          const approxCard = Math.min(Math.max(280, viewW * 0.34), 480);
+          // A kártya-szélesség clamp-jével szinkronban: clamp(150px, 17.5vw, 248px)
+          const approxCard = Math.min(Math.max(150, viewW * 0.175), 248);
           return Math.max(0, viewW / 2 - approxCard / 2 - 80);
         };
 
@@ -571,7 +599,7 @@ export default function Works() {
           style={{
             paddingLeft: 'var(--page-margin)',
             paddingRight: 'var(--page-margin)',
-            marginBottom: '40px',
+            marginBottom: '32px',
             flexShrink: 0,
           }}
         >
@@ -579,7 +607,7 @@ export default function Works() {
             <h2
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: 'var(--text-h2)',
+                fontSize: 'clamp(24px, 4vw, 52px)',
                 lineHeight: 'var(--leading-tight)',
                 color: 'var(--color-text-primary)',
                 letterSpacing: '-0.01em',
@@ -612,11 +640,27 @@ export default function Works() {
               paddingRight: 'var(--page-margin)',
             }}
           >
-            {projects.map((project, i) => {
+            {projects.map((project) => {
               if (project.title === null) return <VoidCard key={project.index} index={project.index} />;
               if (project.title === '__cta__') return <CTACard key={project.index} wordIndex={ctaWordIndex} />;
-              if (project.slug === 'logofolio') return <LogofolioCard key={project.index} project={project} />;
-              return <ProjectCard key={project.index} project={project} />;
+              if (project.slug === 'logofolio') return (
+                <LogofolioCard
+                  key={project.index}
+                  project={project}
+                  cycleSlot={cycleSlots.get(project.index)}
+                  cycleTotal={slotCount}
+                  cycleTick={cycleTick}
+                />
+              );
+              return (
+                <ProjectCard
+                  key={project.index}
+                  project={project}
+                  cycleSlot={cycleSlots.get(project.index)}
+                  cycleTotal={slotCount}
+                  cycleTick={cycleTick}
+                />
+              );
             })}
           </div>
         </div>
@@ -712,8 +756,18 @@ export default function Works() {
                   : project.title === '__cta__'
                     ? <CTACard wordIndex={ctaWordIndex} />
                     : project.slug === 'logofolio'
-                      ? <LogofolioCard project={project} />
-                      : <ProjectCard project={project} />
+                      ? <LogofolioCard
+                          project={project}
+                          cycleSlot={cycleSlots.get(project.index)}
+                          cycleTotal={slotCount}
+                          cycleTick={cycleTick}
+                        />
+                      : <ProjectCard
+                          project={project}
+                          cycleSlot={cycleSlots.get(project.index)}
+                          cycleTotal={slotCount}
+                          cycleTick={cycleTick}
+                        />
                 }
               </div>
             ))}

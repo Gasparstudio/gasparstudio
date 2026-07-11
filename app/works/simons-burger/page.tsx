@@ -19,9 +19,33 @@ const PHOTOS = [
 const EASE = 'cubic-bezier(0.16,1,0.3,1)';
 const SECTIONS = [
   { id: 'logo',         label: 'Logo'         },
+  { id: 'sztori',       label: 'Sztori'       },
   { id: 'social',       label: 'Social Media' },
   { id: 'smashchamps',  label: 'Smash Champs' },
   { id: 'brief',        label: 'Brief'        },
+] as const;
+
+// Case study metrikák (Outcrowd-minta: bizonyíték számokban)
+const METRICS = [
+  { value: '28+', label: 'helyszín' },
+  { value: '3',   label: 'ország' },
+  { value: '78',  label: 'oldalas kézikönyv' },
+  { value: '1',   label: 'egységes rendszer' },
+] as const;
+
+const STORY = [
+  {
+    title: 'A kihívás',
+    text: 'A Simon\'s Burger néhány év alatt 28+ éttermes lánccá nőtt három országban, de a vizuális megjelenés nem tartott lépést a növekedéssel. Helyszínenként és felületenként máshogy jelent meg a márka: következetlen logóhasználat, széttartó social media, egységes szabályrendszer nélkül.',
+  },
+  {
+    title: 'A megoldás',
+    text: 'Nem lerombolni kellett, hanem rendbe tenni. Újratervezett logó, letisztult szín- és tipográfiai rendszer, egységes social media nyelv, kampányarculatok (Smash Champs), és a működést lefedő kézikönyvek.',
+  },
+  {
+    title: 'Az eredmény',
+    text: 'Ma a brand minden helyszínen, minden országban és minden felületen ugyanazt mondja: az éttermektől a csomagoláson át a digitális felületekig. Az arculat skálázható, új helyszín nyitásakor kész rendszer várja.',
+  },
 ] as const;
 
 const SMASH_MEDIA = [
@@ -105,14 +129,14 @@ export default function SimonsBurgerPage() {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
-    const y = el.getBoundingClientRect().top + window.scrollY - 152;
+    const y = el.getBoundingClientRect().top + window.scrollY - 90;
     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
   };
 
   useEffect(() => {
     const ids = SECTIONS.map(s => s.id);
     const update = () => {
-      const offset = 152;
+      const offset = 90;
       let current = ids[0];
       for (const id of ids) {
         const el = document.getElementById(id);
@@ -149,7 +173,7 @@ export default function SimonsBurgerPage() {
       <main style={{ paddingTop: '68px', background: '#f8f8f6' }}>
 
         {/* ─── FLOATING TOC BANNER ───────────────────────────────── */}
-        <div style={{ position: 'sticky', top: '76px', zIndex: 900, padding: `12px ${PM}`, pointerEvents: 'none' }}>
+        <div style={{ position: 'fixed', bottom: '20px', left: 0, right: 0, zIndex: 900, padding: `12px ${PM}`, pointerEvents: 'none' }}>
           <div style={{
             maxWidth: 'var(--max-width)', margin: '0 auto',
             background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
@@ -192,6 +216,51 @@ export default function SimonsBurgerPage() {
             }}>
               Nem kellett mindent lerombolni. Egyetlen, jól átgondolt változtatás elég volt ahhoz, hogy az identitás végre azt mondja, amit a márka mindig is képviselt: tisztán, felesleges zaj nélkül.
             </p>
+          </div>
+        </section>
+
+        {/* ─── SZTORI: metrikák + kihívás → megoldás → eredmény ──── */}
+        <section id="sztori" style={{ padding: `clamp(32px, 5vw, 64px) ${PM} ${SEC}` }}>
+          <div style={{ maxWidth: 'var(--max-width)', margin: '0 auto' }}>
+            {/* Metrika sáv */}
+            <div
+              className="mob-2col"
+              style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: SEC, marginBottom: 'clamp(32px, 4vw, 56px)' }}
+            >
+              {METRICS.map((m) => (
+                <div
+                  key={m.label}
+                  style={{
+                    background: '#fff', borderRadius: '14px', padding: 'clamp(20px, 2.4vw, 36px)',
+                    border: '1px solid rgba(0,0,0,0.06)',
+                  }}
+                >
+                  <div style={{ fontFamily: 'var(--font-inter)', fontWeight: 900, fontSize: 'clamp(30px, 4vw, 56px)', letterSpacing: '-0.03em', color: GREEN, lineHeight: 1 }}>
+                    {m.value}
+                  </div>
+                  <div style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(12px, 1.1vw, 14px)', color: 'rgba(0,0,0,0.45)', marginTop: '10px' }}>
+                    {m.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Kihívás → Megoldás → Eredmény */}
+            <div
+              className="mob-stack"
+              style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(24px, 3vw, 48px)' }}
+            >
+              {STORY.map((s, i) => (
+                <div key={s.title}>
+                  <div style={{ fontFamily: 'var(--font-inter)', fontSize: '12px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: GREEN, marginBottom: '12px' }}>
+                    0{i + 1} · {s.title}
+                  </div>
+                  <p style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(13px, 1.2vw, 15px)', color: 'rgba(0,0,0,0.55)', lineHeight: 1.6, margin: 0 }}>
+                    {s.text}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 

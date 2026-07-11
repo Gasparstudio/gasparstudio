@@ -16,26 +16,31 @@ export default function CustomCursor() {
       cursor.style.opacity = '1';
     };
 
-    const onEnterHoverable = () => cursor.classList.add('expanded');
-    const onLeaveHoverable = () => cursor.classList.remove('expanded');
+    // Esemény-delegálás: egyetlen listener a document-en, nem kell
+    // MutationObserver-rel figyelni és minden elemre külön feliratkozni
+    // (az korábban minden DOM-változásnál végigpásztázta az oldalt és
+    // sok ezer listenert halmozott fel percek alatt).
+    const isHoverable = (el: Element | null) =>
+      el?.closest('a, button, [data-cursor-expand]') != null;
 
-    const addListeners = () => {
-      document.querySelectorAll('a, button, [data-cursor-expand]').forEach(el => {
-        el.addEventListener('mouseenter', onEnterHoverable);
-        el.addEventListener('mouseleave', onLeaveHoverable);
-      });
+    const onOver = (e: MouseEvent) => {
+      if (isHoverable(e.target as Element)) cursor.classList.add('expanded');
+    };
+    const onOut = (e: MouseEvent) => {
+      const related = e.relatedTarget as Element | null;
+      if (isHoverable(e.target as Element) && !isHoverable(related)) {
+        cursor.classList.remove('expanded');
+      }
     };
 
-    addListeners();
-
-    const observer = new MutationObserver(addListeners);
-    observer.observe(document.body, { childList: true, subtree: true });
-
     window.addEventListener('mousemove', onMove, { passive: true });
+    document.addEventListener('mouseover', onOver, { passive: true });
+    document.addEventListener('mouseout', onOut, { passive: true });
 
     return () => {
       window.removeEventListener('mousemove', onMove);
-      observer.disconnect();
+      document.removeEventListener('mouseover', onOver);
+      document.removeEventListener('mouseout', onOut);
     };
   }, []);
 

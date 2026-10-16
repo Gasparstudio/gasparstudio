@@ -2,7 +2,7 @@
 
 import { useLang } from '../context/LanguageContext';
 
-const IG_URL = 'https://www.instagram.com/gaspar_design';
+const IG_URL = 'https://www.instagram.com/gasparstudio.hu/';
 
 // A posztokat a szerver-oldali wrapper (InstagramFeedSection) olvassa be
 // a public/instagram-feed/ mappából — új poszthoz csak képet kell bedobni oda.

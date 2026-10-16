@@ -106,7 +106,7 @@ const jsonLd = {
   sameAs: [
     "https://www.linkedin.com/in/gáspár-bálint-042721195/",
     "https://www.behance.net/gasparbalint",
-    "https://www.instagram.com/gaspar_design",
+    "https://www.instagram.com/gasparstudio.hu/",
   ],
 };
 
